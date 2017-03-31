@@ -1,0 +1,118 @@
+.clan-paginacao {
+  height: 30px;
+}
+.item-paginacao {
+  float: left;
+}
+.itens-por-pagina {
+  height: 30px;
+  padding: 0;
+  margin-top: 20px;
+  margin-left: 5px;
+  color: #337ab7;
+  font-size: 12px;
+}
+.resumo-pagina {
+  height: 30px;
+  padding: 0;
+  margin-top: 26px;
+  margin-left: 5px;
+  color: #337ab7;
+  font-size: 13px;
+}
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+.bs-callout-primary {
+  border-left-color: #337ab7;
+}
+.bs-callout-success {
+  border-left-color: #5cb85c;
+}
+.bs-callout-info {
+  border-left-color: #5bc0de;
+}
+.bs-callout-warning {
+  border-left-color: #f0ad4e;
+}
+.bs-callout-danger {
+  border-left-color: #d9534f;
+}
+.bg-pri-gray {
+  background-color: #f6f6f6;
+}
+.thumb {
+  width: 140px;
+  float: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: solid 1px #e5e5e5;
+}
+.container-thumb {
+  height: 105px;
+}
+.box-thumb {
+  width: 142px;
+  height: 105px;
+  border: solid 1px #e5e5e5;
+  font-size: 16px;
+  font-weight: bold;
+  color: #767c7e;
+  font-family: Verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  padding: 28px 5px 0 5px;
+}
+.box-thumb-hover {
+  background-color: #e7fff8;
+}
+form .progress {
+  line-height: 15px;
+}
+.progress {
+  margin: 3px;
+  display: inline-block;
+  width: 300px;
+  border: 1px groove #f0f0f0;
+  height: 25px;
+}
+.progress div {
+  padding-top: 3px;
+  font-size: 14px;
+  background: #5cb85c;
+  color: #fff;
+  height: 23px;
+  width: 0;
+}
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+.width-pequeno {
+  max-width: 100px;
+}
+.width-medio {
+  max-width: 200px;
+}
+.width-grande {
+  max-width: 600px;
+}
