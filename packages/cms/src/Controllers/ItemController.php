@@ -20,7 +20,7 @@ class ItemController extends Controller
     {
         $this->item = new \App\Item;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'idioma_id', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/items';
         $this->sizesImagem = [
@@ -34,19 +34,20 @@ class ItemController extends Controller
         $this->pathArquivo = public_path().'/arquivos/items';
     }
 
-    function index()
+    function index($modulo_id)
     {
 
         $items = \App\Item::all();
-        $series = \App\Serie::lists('titulo', 'id')->all();
+        $idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::item.listar', ['items' => $items, 'series' => $series]);
+        return view('cms::item.listar', ['items' => $items, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
     {
 
         //Log::info('CAMPOS: '.$request->campos);
+        Log::info('modulo_id: '.$request->modulo_id);
 
         //Auth::loginUsingId(2);
 
@@ -56,44 +57,13 @@ class ItemController extends Controller
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                ['modulo_id', $request->modulo_id],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
         return $items;
     }
 
-    /*public function inserir(Request $request)
-    {
-
-        $data = $request->all();
-
-        $data['item'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
-
-        //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
-        foreach($this->campos as $campo){
-            if(!array_key_exists($campo, $data)){
-                $data['item'] += [$campo => ''];
-            }
-        }
-
-        $file = $request->file('file');
-
-        if($file!=null){
-            $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
-            $imagemCms = new ImagemCms();
-            $success = $imagemCms->inserir($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal);
-            
-            if($success){
-                $data['item']['imagem'] = $filename;
-                return $this->item->create($data['item']);
-            }else{
-                return "erro";
-            }
-        }
-
-        return $this->item->create($data['item']);
-
-    }*/
 
     public function inserir(Request $request)
     {
@@ -149,9 +119,11 @@ class ItemController extends Controller
         $item = $this->item->where([
             ['id', '=', $id],
         ])->firstOrFail();
-        $series = \App\Serie::lists('titulo', 'id')->all();
+        $idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::item.detalhar', ['item' => $item, 'series' => $series]);
+        $modulo_id = $item->modulo_id;
+
+        return view('cms::item.detalhar', ['item' => $item, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
     }
 
     /*public function alterar(Request $request, $id)

@@ -1,16 +1,16 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/itemCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/moduloCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="itemCtrl">
+    <div ng-controller="moduloCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Nova Item</button>
+            <h1><i class="fa fa-modulo" aria-hidden="true"></i>&nbsp;Modulos</h1>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Modulo</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">
@@ -40,7 +40,7 @@
 
 
                 <br><br>
-                @include('cms::item._form')
+                @include('cms::modulo._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
@@ -73,38 +73,39 @@
                 <div class="box-padrao">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                        <input class="form-control" type="text" ng-model="dadoItem" placeholder="Faça sua busca"/>
+                        <input class="form-control" type="text" ng-model="dadoModulo" placeholder="Faça sua busca"/>
                     </div>
                     <br>
-                    <div><% mensagemItemr %></div>
+                    <div><% mensagemModulor %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                     <h2 class="tabela_vazia" ng-show="!processandoListagem && totalItens==0">Nenhum registro encontrado!</h2>
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="itemr:pointer;">
+                            <th ng-click="ordernarPor('id')" style="modulor:pointer;">
                                 Id
                                 <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th>Imagem</th>
-                            <th ng-click="ordernarPor('item')" style="itemr:pointer;">
-                                Item
-                                <i ng-if="ordem=='item' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='item' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            <th ng-click="ordernarPor('modulo')" style="modulor:pointer;">
+                                Modulo
+                                <i ng-if="ordem=='modulo' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='modulo' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in items">
-                            <td><% item.id %></td>
-                            <td><img ng-show="item.imagem" ng-src="/imagens/items/xs-<% item.imagem %>" width="60"></td>
-                            <td><a href="cms/item/<% item.id %>"><% item.titulo %></a></td>
+                        <tr ng-repeat="modulo in modulos">
+                            <td><% modulo.id %></td>
+                            <td><img ng-show="modulo.imagem" ng-src="/imagens/modulos/xs-<% modulo.imagem %>" width="60"></td>
+                            <td><a href="cms/modulo/<% modulo.id %>"><% modulo.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    <a href="cms/item/<% item.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(item.id, item.titulo, item.imagem)"></i></a>
+                                    <a href="cms/items/<% modulo.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
+                                    <a href="cms/modulo/<% modulo.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(modulo.id, modulo.titulo, modulo.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -118,18 +119,18 @@
             <div class="col-md-12">
                 <!--<button class="btn btn-primary btn-block" ng-click="loadMore()" ng-hide="currentPage==lastPage">Load More</button>-->
                 <div ng-show="totalItens > 0" class="clan-paginacao">
-                    <div class="item-paginacao">
-                        <uib-pagination total-items="totalItens" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="itensPerPage" num-pages="numPages"></uib-pagination>
+                    <div class="modulo-paginacao">
+                        <uib-pagination total-modulos="totalItens" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" modulos-per-page="itensPerPage" num-pages="numPages"></uib-pagination>
                     </div>
-                    <div class="item-paginacao">
-                        <select class="form-control itens-por-pagina item-paginacao"  ng-model="itensPerPage">
+                    <div class="modulo-paginacao">
+                        <select class="form-control itens-por-pagina modulo-paginacao"  ng-model="itensPerPage">
                             <option ng-selected="true">10</option>
                             <option>25</option>
                             <option>50</option>
                             <option>100</option>
                         </select>
                     </div>
-                    <div class="item-paginacao">
+                    <div class="modulo-paginacao">
                         <div class="resumo-pagina">&nbsp; <% primeiroDaPagina %> - <% (ultimoDaPagina) %> de <% totalItens %></div>
                     </div>
                 </div>
@@ -148,7 +149,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img  ng-src="imagens/items/xs-<% imagemExcluir %>" width="100">
+                                <img  ng-src="imagens/modulos/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
                                 <p><% tituloExcluir %></p>

@@ -1,6 +1,11 @@
 {{--É NECESSÁRIO RODAR O COMANDO composer require illuminate/html E ALTERAR ACRESCENTAR LINHA NO ARQUIVO config/app.php--}}
 
 
+{!! Form::label('idioma_id', 'Idioma *') !!}<br>
+{!! Form::select('idioma_id',
+        $idiomas,
+null, ['class'=>"form-control width-medio <% validar(video.idioma_id) %>", 'ng-model'=>'video.idioma_id', 'ng-required'=>'true', 'init-model'=>'video.idioma_id', 'placeholder' => 'Selecione']) !!}<br>
+
 
 {!! Form::label('titulo', 'Título *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(video.titulo) %>", 'ng-model'=>'video.titulo', 'ng-required'=>'true', 'init-model'=>'video.titulo', 'placeholder' => '']) !!}<br>
@@ -12,6 +17,7 @@
 {!! Form::label('autor', 'Autor') !!}<br>
 {!! Form::text('autor', null, ['class'=>"form-control width-grande <% validar(video.autor) %>", 'ng-model'=>'video.autor', 'init-model'=>'video.autor', 'placeholder' => '']) !!}<br>
 --}}
+
 
 {!! Form::label('link_video', 'Video (link do youtube)') !!}<br>
 {!! Form::text('link_video', null, ['class'=>"form-control width-grande <% validar(video.link_video) %>", 'ng-model'=>'video.link_video', 'init-model'=>'video.link_video', 'placeholder' => '']) !!}<br>

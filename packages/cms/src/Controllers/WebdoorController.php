@@ -20,7 +20,7 @@ class WebdoorController extends Controller
     {
         $this->webdoor = new \App\Webdoor;
         $this->campos = [
-            'imagem', 'titulo', 'resumida', 'descricao', 'link', 'cmsuser_id',
+            'imagem', 'titulo', 'resumida', 'descricao', 'link', 'idioma_id', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/webdoors';
         $this->sizesImagem = [

@@ -1,4 +1,4 @@
-cmsApp.controller('alterarModuloCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('alterarItemCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
 
     $scope.processandoSalvar = false;
     
@@ -17,9 +17,9 @@ cmsApp.controller('alterarModuloCtrl', ['$scope', '$http', 'Upload', '$timeout',
 
         if(file==null && arquivo==null){
 
-            //console.log($scope.modulo);
-            $http.post("cms/alterar-modulo/"+$scope.id, {
-                'modulo': $scope.modulo,
+            //console.log($scope.item);
+            $http.post("cms/alterar-item/"+$scope.id, {
+                'item': $scope.item,
                 'removerImagem': $scope.removerImagem,
                 'removerArquivo': $scope.removerArquivo
             }).success(function (data){
@@ -36,7 +36,7 @@ cmsApp.controller('alterarModuloCtrl', ['$scope', '$http', 'Upload', '$timeout',
         }else{
 
             var data1 = {
-                modulo: $scope.modulo,
+                item: $scope.item,
                 'removerImagem': $scope.removerImagem,
                 'removerArquivo': $scope.removerArquivo
             };
@@ -49,7 +49,7 @@ cmsApp.controller('alterarModuloCtrl', ['$scope', '$http', 'Upload', '$timeout',
             }
 
             Upload.upload({
-                url: 'cms/alterar-modulo/'+$scope.id,
+                url: 'cms/alterar-item/'+$scope.id,
                 data: data1
             }).then(function (response) {
                 $timeout(function () {
@@ -59,7 +59,7 @@ cmsApp.controller('alterarModuloCtrl', ['$scope', '$http', 'Upload', '$timeout',
                 //$scope.fileArquivo = null;//limpa o file
                 $scope.mensagemSalvar =  "Gravado com sucesso!";
                 $scope.removerImagem = false;
-                $scope.imagemBD = '/imagens/modulos/'+response.data;
+                $scope.imagemBD = '/imagens/items/'+response.data;
                 $scope.processandoSalvar = false;
 
             }, function (response) {
@@ -91,7 +91,7 @@ cmsApp.controller('alterarModuloCtrl', ['$scope', '$http', 'Upload', '$timeout',
 
     $scope.carregaImagem  = function(img, arquivo) {
         if(img!=''){
-            $scope.imagemBD = 'imagens/modulos/xs-'+img;
+            $scope.imagemBD = 'imagens/items/xs-'+img;
             //console.log($scope.imagemBD);
         }
         if(arquivo!=''){

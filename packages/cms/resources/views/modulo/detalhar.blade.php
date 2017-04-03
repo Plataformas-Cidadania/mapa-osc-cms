@@ -1,14 +1,14 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/alterarItemCtrl.js') !!}
-    <div ng-controller="alterarItemCtrl">
+    {!! Html::script('assets-cms/js/controllers/alterarModuloCtrl.js') !!}
+    <div ng-controller="alterarModuloCtrl">
         <div class="box-padrao">
-            <h1><a href="../items"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Items</h1>
-            <?php //print_r($item);?>
-            <div ng-init="carregaImagem('{{$item->imagem}}', '{{$item->arquivo}}')">
+            <h1><a href="../modulos"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Modulos</h1>
+            <?php //print_r($modulo);?>
+            <div ng-init="carregaImagem('{{$modulo->imagem}}', '{{$modulo->arquivo}}')">
                 <span class="texto-obrigatorio">* campos obrigatórios</span><br><br>
-                {!! Form::model($item, ['name' =>'form']) !!}
+                {!! Form::model($modulo, ['name' =>'form']) !!}
                 <div class="container-thumb">
                     <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
                          ng-show="!picFile && !imagemBD" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
@@ -28,16 +28,16 @@
                     Escolher Arquivo Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
                 </span>
                 <button class="btn btn-danger" ng-click="limparArquivo()" ng-show="fileArquivo || arquivoBD" type="button">Remover Arquivo</button>
-                <a href="arquivos/items/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
+                <a href="arquivos/modulos/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
                 <a ng-show="fileArquivo"><% fileArquivo.name %></a>
                 <br><br>
 
                 <br><br>
-                @include('cms::item._form')
-                <input type="hidden" name="id" ng-model="id" ng-init="id='{{$item->id}}'"/>
+                @include('cms::modulo._form')
+                <input type="hidden" name="id" ng-model="id" ng-init="id='{{$modulo->id}}'"/>
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
-                        <button class="btn btn-info" type="button" ng-click="alterar(picFile, fileArquivo)" ng-disabled="form.$invalid && form.item.$dirty">Salvar</button>
+                        <button class="btn btn-info" type="button" ng-click="alterar(picFile, fileArquivo)" ng-disabled="form.$invalid && form.modulo.$dirty">Salvar</button>
                     </div>
                     <div class="col-md-2 col-lg-2 col-xs-6">
                         <span class="progress" ng-show="picFile.progress >= 0">

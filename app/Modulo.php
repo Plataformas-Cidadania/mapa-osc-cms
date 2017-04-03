@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Modulo extends Model
 {
     protected $fillable = [
-        'titulo', 'slug', 'cmsuser_id',
+        'imagem', 'titulo', 'descricao', 'arquivo', 'slug', 'idioma_id', 'cmsuser_id',
     ];
 }

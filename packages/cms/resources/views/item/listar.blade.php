@@ -10,7 +10,7 @@
     <div ng-controller="itemCtrl">
         <div class="box-padrao">
             <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Nova Item</button>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Item</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">

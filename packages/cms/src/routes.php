@@ -21,7 +21,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/excluir-webdoor/{id}', 'Cms\Controllers\WebdoorController@excluir');
 
         //ITEMS
-        Route::get('/cms/items', 'Cms\Controllers\ItemController@index');
+        Route::get('/cms/items/{modulo_id}', 'Cms\Controllers\ItemController@index');
         Route::get('/cms/listar-items', 'Cms\Controllers\ItemController@listar');
         Route::post('/cms/inserir-item', 'Cms\Controllers\ItemController@inserir');
         Route::get('/cms/item/{id}', 'Cms\Controllers\ItemController@detalhar');
