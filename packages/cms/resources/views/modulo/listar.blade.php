@@ -1,43 +1,49 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('/assets-cms/js/controllers/moduloCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/itemCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="moduloCtrl">
+    <div ng-controller="itemCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-fw fa-newspaper-o"></i>&nbsp;Modulos</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Modulo</button>
+            <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items</h1>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Nova Item</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">
                 <span class="texto-obrigatorio" ng-show="form.$invalid">* campos obrigatórios</span><br><br>
                 {!! Form::open(['name' =>'form']) !!}
-                <div style="display:none;">
-                    <div class="container-thumb">
-                        <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
-                             ng-show="!picFile" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
-                        <img  ngf-thumbnail="picFile" class="thumb">
-                    </div>
-                    <br>
-                    <span class="btn btn-primary btn-file" ng-show="!picFile">
+                <div class="container-thumb">
+                    <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
+                         ng-show="!picFile" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
+                    <img  ngf-thumbnail="picFile" class="thumb">
+                </div>
+                <br>
+                <span class="btn btn-primary btn-file" ng-show="!picFile">
                     Escolher imagem <input  type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
                 </span>
-                    <button class="btn btn-danger" ng-click="picFile = null" ng-show="picFile" type="button">Remover Imagem</button>
-                    <i ng-show="form.file.$error.maxSize || form.fileDrop.$error.maxSize" style="margin-left: 10px;">
-                        Arquivo muito grande <% errorFile.size / 1000000|number:1 %>MB: máximo 2MB
-                        <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
-                    </i>
-                </div>
+                <button class="btn btn-danger" ng-click="picFile = null" ng-show="picFile" type="button">Remover Imagem</button>
+                <i ng-show="form.file.$error.maxSize || form.fileDrop.$error.maxSize" style="margin-left: 10px;">
+                    Arquivo muito grande <% errorFile.size / 1000000|number:1 %>MB: máximo 2MB
+                    <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
+                </i>
 
                 <br><br>
-                @include('cms::modulo._form')
+
+                <span class="btn btn-primary btn-file" ng-show="!fileArquivo">
+                    Escolher Arquivo Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
+                </span>
+                <a ng-show="fileArquivo"><% fileArquivo.name %></a>
+
+
+                <br><br>
+                @include('cms::item._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
-                        <button class="btn btn-info" type="button" ng-click="inserir(picFile)" ng-disabled="form.$invalid">Salvar</button>
+                        <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
                     </div>
                     <div class="col-md-2 col-lg-2 col-xs-6">
                         <span class="progress" ng-show="picFile.progress >= 0">
@@ -67,38 +73,38 @@
                 <div class="box-padrao">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                        <input class="form-control" type="text" ng-model="dadoModulo" placeholder="Faça sua busca"/>
+                        <input class="form-control" type="text" ng-model="dadoItem" placeholder="Faça sua busca"/>
                     </div>
                     <br>
-                    <div><% mensagemModulor %></div>
+                    <div><% mensagemItemr %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                     <h2 class="tabela_vazia" ng-show="!processandoListagem && totalItens==0">Nenhum registro encontrado!</h2>
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="modulor:pointer;">
+                            <th ng-click="ordernarPor('id')" style="itemr:pointer;">
                                 Id
                                 <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
-                            {{--<th>Imagem</th>--}}
-                            <th ng-click="ordernarPor('modulo')" style="modulor:pointer;">
-                                Modulo
-                                <i ng-if="ordem=='modulo' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='modulo' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            <th>Imagem</th>
+                            <th ng-click="ordernarPor('item')" style="itemr:pointer;">
+                                Item
+                                <i ng-if="ordem=='item' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='item' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="modulo in modulos">
-                            <td><% modulo.id %></td>
-                            {{--<td><img ng-show="modulo.imagem" ng-src="imagens/modulos/xs-<% modulo.imagem %>" width="60"></td>--}}
-                            <td><a href="cms/modulo/<% modulo.id %>"><% modulo.titulo %></a></td>
+                        <tr ng-repeat="item in items">
+                            <td><% item.id %></td>
+                            <td><img ng-show="item.imagem" ng-src="/imagens/items/xs-<% item.imagem %>" width="60"></td>
+                            <td><a href="cms/item/<% item.id %>"><% item.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    <a href="cms/modulo/<% modulo.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(modulo.id, modulo.titulo, modulo.imagem)"></i></a>
+                                    <a href="cms/item/<% item.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(item.id, item.titulo, item.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -142,7 +148,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img  ng-src="imagens/modulos/xs-<% imagemExcluir %>" width="100">
+                                <img  ng-src="imagens/items/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
                                 <p><% tituloExcluir %></p>

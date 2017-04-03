@@ -1,14 +1,13 @@
-cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
     
-
-    $scope.modulos = [];
+    $scope.items = [];
     $scope.currentPage = 1;
     $scope.lastPage = 0;
     $scope.totalItens = 0;
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo";
+    $scope.campos = "id, titulo, imagem";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
@@ -18,24 +17,24 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
 
     $scope.$watch('currentPage', function(){
         if($listar){
-            listarModulos();
+            listarItems();
         }
     });
     $scope.$watch('itensPerPage', function(){
         if($listar){
-            listarModulos();
+            listarItems();
         }
     });
-    $scope.$watch('dadoModulo', function(){
+    $scope.$watch('dadoItem', function(){
         if($listar){
-            listarModulos();
+            listarItems();
         }
     });
 
-    var listarModulos = function(){
+    var listarItems = function(){
         $scope.processandoListagem = true;
         $http({
-            url: 'cms/listar-modulos',
+            url: 'cms/listar-items',
             method: 'GET',
             params: {
                 page: $scope.currentPage,
@@ -47,7 +46,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
                 sentido: $scope.sentidoOrdem
             }
         }).success(function(data, status, headers, config){
-            $scope.modulos = data.data;
+            $scope.items = data.data;
             $scope.lastPage = data.last_page;
             $scope.totalItens = data.total;
             $scope.primeiroDaPagina = data.from;
@@ -61,27 +60,6 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
         });
     };
 
-    /*$scope.loadMore = function() {
-     $scope.currentPage +=1;
-     $http({
-     url: '/api/modulos/'+$scope.itensPerPage,
-     method: 'GET',
-     params: {page:  $scope.currentPage}
-     }).success(function (data, status, headers, config) {
-     $scope.lastPage = data.last_page;
-     $scope.totalItens = data.total;
-
-     console.log("total: "+$scope.totalItens);
-     console.log("lastpage: "+$scope.lastPage);
-     console.log("currentpage: "+$scope.currentPage);
-
-     $scope.modulos = data.data;
-
-     //$scope.modulos = $scope.modulos.concat(data.data);
-
-     });
-     };*/
-
 
 
     $scope.ordernarPor = function(ordem){
@@ -93,7 +71,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             $scope.sentidoOrdem = "asc";
         }
 
-        listarModulos();
+        listarItems();
     };
 
     $scope.validar = function(){
@@ -101,27 +79,25 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     };
     
 
-    listarModulos();
+    listarItems();
 
     //INSERIR/////////////////////////////
 
-    $scope.tinymceOptions = tinymceOptions;    
-
+    $scope.tinymceOptions = tinymceOptions;
     $scope.mostrarForm = false;
-
     $scope.processandoInserir = false;
 
-    $scope.inserir = function (file){
+    $scope.inserir = function (file, arquivo){
 
         $scope.mensagemInserir = "";
 
-        if(file==null){
+        if(file==null && arquivo==null){
             $scope.processandoInserir = true;
 
-            //console.log($scope.modulo);
-            $http.post("cms/inserir-modulo", {modulo: $scope.modulo}).success(function (data){
-                 listarModulos();
-                 delete $scope.modulo;//limpa o form
+            //console.log($scope.item);
+            $http.post("cms/inserir-item", {item: $scope.item}).success(function (data){
+                 listarItems();
+                 delete $scope.item;//limpa o form
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -129,27 +105,30 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
                 $scope.processandoInserir = false;
              });
         }else{
-            file.upload = Upload.upload({
-                url: 'cms/inserir-modulo',
-                data: {modulo: $scope.modulo, file: file},
-            });
 
-            file.upload.then(function (response) {
+
+            Upload.upload({
+                url: 'cms/inserir-item',
+                data: {item: $scope.item, file: file, arquivo: arquivo},
+            }).then(function (response) {
                 $timeout(function () {
-                    file.result = response.data;
+                    $scope.result = response.data;
                 });
-                delete $scope.modulo;//limpa o form
+                console.log(response.data);
+                delete $scope.item;//limpa o form
                 $scope.picFile = null;//limpa o file
-                listarModulos();
+                $scope.fileArquivo = null;//limpa o file
+                listarItems();
                 $scope.mensagemInserir =  "Gravado com sucesso!";
             }, function (response) {
+                console.log(response.data);
                 if (response.status > 0){
                     $scope.errorMsg = response.status + ': ' + response.data;
                 }
             }, function (evt) {
                 //console.log(evt);
                 // Math.min is to fix IE which reports 200% sometimes
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                $scope.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
         }
 
@@ -181,14 +160,14 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-modulo/'+id,
+            url: 'cms/excluir-item/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);
             $scope.processandoExcluir = false;
             $scope.excluido = true;
             $scope.mensagemExcluido = "Excluído com sucesso!";
-            listarModulos();
+            listarItems();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoExcluir = false;
