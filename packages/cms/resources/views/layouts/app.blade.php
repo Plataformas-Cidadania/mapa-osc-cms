@@ -1,7 +1,7 @@
 <?php
     $base_href = $_SERVER['HTTP_HOST'];
     if(substr($base_href, 0,9)=='evbsb1052'){
-        $base_href .= '/atlasviolencia/';
+        $base_href .= '/mapa-osc-cms/';
     }
 ?>
 <!DOCTYPE html>
