@@ -120,7 +120,9 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
                     $scope.result = response.data;
                 });
                 console.log(response.data);
-                delete $scope.item;//limpa o form
+                //delete $scope.item;//limpa o form
+                $scope.item.titulo = '';
+                $scope.item.titulo = '';
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
                 listarItems();
