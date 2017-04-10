@@ -136,11 +136,9 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
                 // Math.min is to fix IE which reports 200% sometimes
                 $scope.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
-        }
-
+        }a
 
     };
-
 
     $scope.limparImagem = function(){
         delete $scope.picFile;
