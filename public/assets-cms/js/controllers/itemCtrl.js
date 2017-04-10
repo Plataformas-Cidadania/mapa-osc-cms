@@ -102,7 +102,10 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             //console.log($scope.item);
             $http.post("cms/inserir-item", {item: $scope.item}).success(function (data){
                  listarItems();
-                 delete $scope.item;//limpa o form
+                //delete $scope.item;//limpa o form
+                //deleta um por um para não excluir o id da tabela relacionada
+                $scope.item.titulo = '';
+                $scope.item.titulo = '';
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -120,6 +123,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
                 });
                 console.log(response.data);
                 //delete $scope.item;//limpa o form
+                //deleta um por um para não excluir o id da tabela relacionada
                 $scope.item.titulo = '';
                 $scope.item.titulo = '';
                 $scope.picFile = null;//limpa o file
