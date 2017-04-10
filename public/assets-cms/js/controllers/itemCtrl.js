@@ -111,7 +111,6 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
              });
         }else{
 
-
             Upload.upload({
                 url: 'cms/inserir-item',
                 data: {item: $scope.item, file: file, arquivo: arquivo},
@@ -139,7 +138,9 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             });
         }
 
+
     };
+
 
     $scope.limparImagem = function(){
         delete $scope.picFile;
