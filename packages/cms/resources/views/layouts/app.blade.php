@@ -75,6 +75,9 @@
                     <a href="cms"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
                 <li>
+                    <a href="cms/idiomas"><i class="fa fa-fw fa-building"></i> Idiomas</a>
+                </li>
+                <li>
                     <a href="cms/modulos"><i class="fa fa-fw fa-building"></i> Institucional</a>
                 </li>
                 <li>
