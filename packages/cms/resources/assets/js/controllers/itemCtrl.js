@@ -105,7 +105,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
                 //delete $scope.item;//limpa o form
                 //deleta um por um para não excluir o id da tabela relacionada
                 $scope.item.titulo = '';
-                $scope.item.titulo = '';
+                $scope.item.descricao = '';
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -125,7 +125,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
                 //delete $scope.item;//limpa o form
                 //deleta um por um para não excluir o id da tabela relacionada
                 $scope.item.titulo = '';
-                $scope.item.titulo = '';
+                $scope.item.descricao = '';
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
                 listarItems();
