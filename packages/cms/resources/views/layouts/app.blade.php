@@ -81,6 +81,9 @@
                     <a href="cms/modulos"><i class="fa fa-fw fa-building"></i> Institucional</a>
                 </li>
                 <li>
+                    <a href="cms/mroscs"><i class="fa fa-fw fa-desktop"></i> MROSC</a>
+                </li>
+                <li>
                     <a href="cms/webdoors"><i class="fa fa-fw fa-desktop"></i> Webdoor</a>
                 </li>
                 <li>

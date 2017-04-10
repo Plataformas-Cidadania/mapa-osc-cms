@@ -58,9 +58,17 @@ elixir(function(mix) {
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/moduloCtrl.js', 'public/assets-cms/js/controllers/moduloCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarModuloCtrl.js', 'public/assets-cms/js/controllers/alterarModuloCtrl.js');
 
+    //Mroscs
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/mroscCtrl.js', 'public/assets-cms/js/controllers/mroscCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarMroscCtrl.js', 'public/assets-cms/js/controllers/alterarMroscCtrl.js');
+
     //Items
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/itemCtrl.js', 'public/assets-cms/js/controllers/itemCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarItemCtrl.js', 'public/assets-cms/js/controllers/alterarItemCtrl.js');
+
+    //Items
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/itemMroscCtrl.js', 'public/assets-cms/js/controllers/itemMroscCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarItemMroscCtrl.js', 'public/assets-cms/js/controllers/alterarItemMroscCtrl.js');
 
     //CmsUsers
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/cmsUserCtrl.js', 'public/assets-cms/js/controllers/cmsUserCtrl.js');

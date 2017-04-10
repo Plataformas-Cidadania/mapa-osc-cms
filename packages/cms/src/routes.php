@@ -39,6 +39,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-modulo/{id}', 'Cms\Controllers\ModuloController@alterar');
         Route::get('/cms/excluir-modulo/{id}', 'Cms\Controllers\ModuloController@excluir');
 
+        //MROSCS
+        Route::get('/cms/mroscs', 'Cms\Controllers\MroscController@index');
+        Route::get('/cms/listar-mroscs', 'Cms\Controllers\MroscController@listar');
+        Route::post('/cms/inserir-mrosc', 'Cms\Controllers\MroscController@inserir');
+        Route::get('/cms/mrosc/{id}', 'Cms\Controllers\MroscController@detalhar');
+        Route::post('/cms/alterar-mrosc/{id}', 'Cms\Controllers\MroscController@alterar');
+        Route::get('/cms/excluir-mrosc/{id}', 'Cms\Controllers\MroscController@excluir');
+
         //IDIOMAS
         Route::get('/cms/idiomas', 'Cms\Controllers\IdiomaController@index');
         Route::get('/cms/listar-idiomas', 'Cms\Controllers\IdiomaController@listar');
