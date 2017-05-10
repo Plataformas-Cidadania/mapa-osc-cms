@@ -28,6 +28,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-item/{id}', 'Cms\Controllers\ItemController@alterar');
         Route::get('/cms/excluir-item/{id}', 'Cms\Controllers\ItemController@excluir');
 
+        //ITEMS MROSC
+        Route::get('/cms/items-mrosc/{modulo_id}', 'Cms\Controllers\ItemMroscController@index');
+        Route::get('/cms/listar-items-mrosc', 'Cms\Controllers\ItemMroscController@listar');
+        Route::post('/cms/inserir-item-mrosc', 'Cms\Controllers\ItemMroscController@inserir');
+        Route::get('/cms/item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@detalhar');
+        Route::post('/cms/alterar-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@alterar');
+        Route::get('/cms/excluir-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@excluir');
+
         //Route::get('/cms/teste-excel', 'Cms\Controllers\SerieController@testeExcel');
         Route::get('/cms/teste-excel/{id}/{arquivo}', 'Cms\Controllers\SerieController@testeExcel');
 

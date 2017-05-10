@@ -1,4 +1,4 @@
-cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
     
     $scope.items = [];
     $scope.currentPage = 1;
@@ -38,7 +38,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
     var listarItems = function(){
         $scope.processandoListagem = true;
         $http({
-            url: 'cms/listar-items',
+            url: 'cms/listar-items-mrosc',
             method: 'GET',
             params: {
                 page: $scope.currentPage,
@@ -100,7 +100,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             $scope.processandoInserir = true;
 
             //console.log($scope.item);
-            $http.post("cms/inserir-item", {item: $scope.item}).success(function (data){
+            $http.post("cms/inserir-item-mrosc", {item: $scope.item}).success(function (data){
                  listarItems();
                 //delete $scope.item;//limpa o form
                 //deleta um por um para não excluir o id da tabela relacionada
@@ -115,7 +115,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
         }else{
 
             Upload.upload({
-                url: 'cms/inserir-item',
+                url: 'cms/inserir-item-mrosc',
                 data: {item: $scope.item, file: file, arquivo: arquivo},
             }).then(function (response) {
                 $timeout(function () {
@@ -170,7 +170,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-item/'+id,
+            url: 'cms/excluir-item-mrosc/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);

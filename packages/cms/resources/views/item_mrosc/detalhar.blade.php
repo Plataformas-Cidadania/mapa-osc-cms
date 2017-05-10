@@ -1,8 +1,8 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/alterarItemCtrl.js') !!}
-    <div ng-controller="alterarItemCtrl">
+    {!! Html::script('assets-cms/js/controllers/alterarItemMroscCtrl.js') !!}
+    <div ng-controller="alterarItemMroscCtrl">
         <div class="box-padrao">
             <h1><a href="../items"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Items</h1>
             <?php //print_r($item);?>
@@ -28,7 +28,7 @@
                     Escolher Arquivo Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
                 </span>
                 <button class="btn btn-danger" ng-click="limparArquivo()" ng-show="fileArquivo || arquivoBD" type="button">Remover Arquivo</button>
-                <a href="arquivos/items/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
+                <a href="arquivos/items-mrosc/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
                 <a ng-show="fileArquivo"><% fileArquivo.name %></a>
                 <br><br>
 

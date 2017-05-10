@@ -1,7 +1,7 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/itemCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/itemMroscCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
@@ -9,7 +9,7 @@
 </script>
     <div ng-controller="itemCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items</h1>
+            <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items MROSC</h1>
             <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Item</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
@@ -40,7 +40,7 @@
 
 
                 <br><br>
-                @include('cms::item._form')
+                @include('cms::item_mrosc._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>

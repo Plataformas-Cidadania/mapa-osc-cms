@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
-class ItemController extends Controller
+class ItemMroscController extends Controller
 {
     
     
@@ -31,7 +31,7 @@ class ItemController extends Controller
         ];
         $this->widthOriginal = true;
 
-        $this->pathArquivo = public_path().'/arquivos/items';
+        $this->pathArquivo = public_path().'/arquivos/items-mrosc';
     }
 
     function index($modulo_id)
@@ -40,7 +40,7 @@ class ItemController extends Controller
         $items = \App\Item::all();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::item.listar', ['items' => $items, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
+        return view('cms::item_mrosc.listar', ['items' => $items, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
@@ -123,7 +123,7 @@ class ItemController extends Controller
 
         $modulo_id = $item->modulo_id;
 
-        return view('cms::item.detalhar', ['item' => $item, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
+        return view('cms::item_mrosc.detalhar', ['item' => $item, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
     }
 
     /*public function alterar(Request $request, $id)
