@@ -22,7 +22,7 @@ class ItemMroscController extends Controller
         $this->campos = [
             'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'idioma_id', 'cmsuser_id',
         ];
-        $this->pathImagem = public_path().'/imagens/items';
+        $this->pathImagem = public_path().'/imagens/items-mrosc';
         $this->sizesImagem = [
             'xs' => ['width' => 140, 'height' => 79],
             'sm' => ['width' => 480, 'height' => 270],

@@ -7,7 +7,7 @@
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="itemCtrl">
+    <div ng-controller="itemMroscCtrl">
         <div class="box-padrao">
             <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items MROSC</h1>
             <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Item</button>

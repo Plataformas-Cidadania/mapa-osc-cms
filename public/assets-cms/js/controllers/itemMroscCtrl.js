@@ -140,7 +140,7 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
                 // Math.min is to fix IE which reports 200% sometimes
                 $scope.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
-        }a
+        }
 
     };
 
