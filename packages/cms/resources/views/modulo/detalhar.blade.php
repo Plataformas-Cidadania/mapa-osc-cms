@@ -4,7 +4,7 @@
     {!! Html::script('assets-cms/js/controllers/alterarModuloCtrl.js') !!}
     <div ng-controller="alterarModuloCtrl">
         <div class="box-padrao">
-            <h1><a href="../modulos"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Modulos</h1>
+            <h1><a href="javascript:history.back();"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Modulos</h1>
             <?php //print_r($modulo);?>
             <div ng-init="carregaImagem('{{$modulo->imagem}}', '{{$modulo->arquivo}}')">
                 <span class="texto-obrigatorio">* campos obrigatórios</span><br><br>

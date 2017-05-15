@@ -4,7 +4,7 @@
     {!! Html::script('assets-cms/js/controllers/alterarItemMroscCtrl.js') !!}
     <div ng-controller="alterarItemMroscCtrl">
         <div class="box-padrao">
-            <h1><a href="../items"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Items</h1>
+            <h1><a href="javascript:history.back();"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Items (MROSC)</h1>
             <?php //print_r($item);?>
             <div ng-init="carregaImagem('{{$item->imagem}}', '{{$item->arquivo}}')">
                 <span class="texto-obrigatorio">* campos obrigatórios</span><br><br>
