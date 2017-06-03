@@ -13,8 +13,8 @@ class AlterMroscsTable extends Migration
     public function up()
     {
         Schema::table('mroscs', function (Blueprint $table) {
-            $table->string('subtitulo');
-            $table->integer('posicao');
+            $table->string('subtitulo')->default('');
+            $table->integer('posicao')->default(0);
         });
     }
 
