@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Mrosc extends Model
 {
     protected $fillable = [
-        'imagem', 'titulo', 'descricao', 'arquivo', 'slug', 'idioma_id', 'cmsuser_id',
+        'imagem', 'titulo', 'subtitulo', 'descricao', 'arquivo', 'slug', 'posicao', 'idioma_id', 'cmsuser_id',
     ];
 }

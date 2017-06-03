@@ -20,7 +20,8 @@ class MroscController extends Controller
     {
         $this->mrosc = new \App\Mrosc;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'idioma_id', 'cmsuser_id',
+            //'imagem', 'titulo', 'descricao', 'arquivo', 'idioma_id', 'cmsuser_id',
+            'imagem', 'titulo', 'subtitulo', 'descricao', 'arquivo', 'slug', 'posicao', 'idioma_id', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/mroscs';
         $this->sizesImagem = [
