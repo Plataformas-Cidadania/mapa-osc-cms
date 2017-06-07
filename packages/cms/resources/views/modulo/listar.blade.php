@@ -99,7 +99,7 @@
                         <tbody>
                         <tr ng-repeat="modulo in modulos">
                             <td><% modulo.id %></td>
-                            <td><img ng-show="modulo.imagem" ng-src="/imagens/modulos/xs-<% modulo.imagem %>" width="60"></td>
+                            <td><img ng-show="modulo.imagem" ng-src="imagens/modulos/xs-<% modulo.imagem %>" width="60"></td>
                             <td><a href="cms/modulo/<% modulo.id %>"><% modulo.titulo %></a></td>
                             <td class="text-right">
                                 <div>
