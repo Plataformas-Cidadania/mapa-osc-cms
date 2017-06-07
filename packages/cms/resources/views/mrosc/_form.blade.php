@@ -39,7 +39,6 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
 {!! Form::label('posicao', 'Posição *') !!}<br>
 {!! Form::text('posicao', null, ['class'=>"form-control width-pequeno <% validar(mrosc.posicao) %>", 'ng-model'=>'mrosc.posicao', 'ng-required'=>'true', 'init-model'=>'mrosc.posicao', 'placeholder' => '']) !!}<br>
 
-
 <!-- Modal -->
 <div class="modal fade" id="myModalImagem" tabindex="-1" role="dialog" aria-labelledby="myModalLabelImagem">
     <div class="modal-dialog" role="document">
