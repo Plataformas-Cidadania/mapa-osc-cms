@@ -1,4 +1,8 @@
 {{--É NECESSÁRIO RODAR O COMANDO composer require illuminate/html E ALTERAR ACRESCENTAR LINHA NO ARQUIVO config/app.php--}}
+
+
+
+
 {!! Form::label('idioma_id', 'Idioma *') !!}<br>
 {!! Form::select('idioma_id',
         $idiomas,
@@ -12,6 +16,44 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
 
 {!! Form::label('slug', 'slug *') !!}<br>
 {!! Form::text('slug', null, ['class'=>"form-control width-medio <% validar(mrosc.slug) %>", 'ng-model'=>'mrosc.slug', 'ng-required'=>'true', 'init-model'=>'mrosc.slug', 'placeholder' => '']) !!}<br>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;">
+    exibir imagens
+</button>
+<br>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Título do modal</h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                $types = array( 'png', 'jpg', 'jpeg', 'gif' );
+                if ( $handle = opendir('../public/imagens/mroscs') ) {
+                    while ( $entry = readdir( $handle ) ) {
+                        $ext = strtolower( pathinfo( $entry, PATHINFO_EXTENSION) );
+                        echo "<div style='float: left;'>";
+                        if( in_array( $ext, $types ) ) echo "<img src='imagens/mroscs/".$entry."' width='105'><br>";
+                        if( in_array( $ext, $types ) ) echo $entry."<br>";
+                        echo "</div>";
+
+                    }
+                    closedir($handle);
+                }
+                ?>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {!! Form::label('descricao', 'Descrição *') !!}<br>
 {!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(mrosc.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-model'=>'mrosc.descricao', 'init-model'=>'mrosc.descricao']) !!}<br>
