@@ -47,6 +47,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-modulo/{id}', 'Cms\Controllers\ModuloController@alterar');
         Route::get('/cms/excluir-modulo/{id}', 'Cms\Controllers\ModuloController@excluir');
 
+        //NOTICIAS
+        Route::get('/cms/noticias', 'Cms\Controllers\NoticiaController@index');
+        Route::get('/cms/listar-noticias', 'Cms\Controllers\NoticiaController@listar');
+        Route::post('/cms/inserir-noticia', 'Cms\Controllers\NoticiaController@inserir');
+        Route::get('/cms/noticia/{id}', 'Cms\Controllers\NoticiaController@detalhar');
+        Route::post('/cms/alterar-noticia/{id}', 'Cms\Controllers\NoticiaController@alterar');
+        Route::get('/cms/excluir-noticia/{id}', 'Cms\Controllers\NoticiaController@excluir');
+
         //MROSCS
         Route::get('/cms/mroscs', 'Cms\Controllers\MroscController@index');
         Route::get('/cms/listar-mroscs', 'Cms\Controllers\MroscController@listar');
