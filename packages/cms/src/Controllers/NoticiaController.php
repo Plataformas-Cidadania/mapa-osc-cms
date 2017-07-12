@@ -20,7 +20,7 @@ class NoticiaController extends Controller
     {
         $this->noticia = new \App\Noticia;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'idioma_id', 'cmsuser_id',
+            'imagem', 'titulo', 'resumida', 'descricao', 'arquivo', 'slug', 'data', 'idioma_id', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/noticias';
         $this->sizesImagem = [
