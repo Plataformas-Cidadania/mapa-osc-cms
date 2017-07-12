@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterNoticiasTable extends Migration
+class AlterVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,11 @@ class AlterNoticiasTable extends Migration
      */
     public function up()
     {
-        Schema::table('noticias', function (Blueprint $table) {
-            $table->date('data')->nullable();
+        Schema::table('videos', function (Blueprint $table) {
+            $table->date('data')->default('0000-00-00');
             $table->text('resumida')->default('');
+            $table->text('descricao')->default('');
+            $table->string('imagem')->default('');
         });
     }
 
@@ -25,7 +27,7 @@ class AlterNoticiasTable extends Migration
      */
     public function down()
     {
-        Schema::table('noticias', function (Blueprint $table) {
+        Schema::table('videos', function (Blueprint $table) {
             //
         });
     }
