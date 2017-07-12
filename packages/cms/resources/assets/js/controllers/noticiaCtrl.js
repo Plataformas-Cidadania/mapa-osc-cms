@@ -98,7 +98,12 @@ cmsApp.controller('noticiaCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
             //console.log($scope.noticia);
             $http.post("cms/inserir-noticia", {noticia: $scope.noticia}).success(function (data){
                  listarNoticias();
-                 delete $scope.noticia;//limpa o form
+                //delete $scope.noticia;//limpa o form
+                delete $scope.noticia.data;
+                delete $scope.noticia.titulo;
+                delete $scope.noticia.resumida;
+                delete $scope.noticia.slug;
+                delete $scope.noticia.descricao;
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -115,8 +120,13 @@ cmsApp.controller('noticiaCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
                 $timeout(function () {
                     $scope.result = response.data;
                 });
-                console.log(response.data);
-                delete $scope.noticia;//limpa o form
+                //console.log(response.data);
+                //delete $scope.noticia;//limpa o form
+                delete $scope.noticia.data;
+                delete $scope.noticia.titulo;
+                delete $scope.noticia.resumida;
+                delete $scope.noticia.slug;
+                delete $scope.noticia.descricao;
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
                 listarNoticias();

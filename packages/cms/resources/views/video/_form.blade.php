@@ -1,4 +1,4 @@
-<div style="display: none;">
+<div style="display: block;">
 {!! Form::label('idioma_id', 'Idioma *') !!}<br>
 {!! Form::select('idioma_id',
         $idiomas,
@@ -6,8 +6,8 @@ null, ['class'=>"form-control width-medio <% validar(video.idioma_id) %>", 'ng-m
 
 </div>
 
-{!! Form::label('data', 'Data') !!}<br>
-{!! Form::date('data', null, ['class'=>"form-control width-medio <% validar(video.data) %>", 'ng-model'=>'video.data',  'init-model'=>'video.data', 'placeholder' => '']) !!}<br>
+{!! Form::label('data', 'Data *') !!}<br>
+{!! Form::date('data', null, ['class'=>"form-control width-medio <% validar(video.data) %>", 'ng-model'=>'video.data',  'init-model'=>'video.data', 'ng-required'=>'true', 'placeholder' => '']) !!}<br>
 
 {!! Form::label('titulo', 'Título *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(video.titulo) %>", 'ng-model'=>'video.titulo', 'ng-required'=>'true', 'init-model'=>'video.titulo', 'placeholder' => '']) !!}<br>

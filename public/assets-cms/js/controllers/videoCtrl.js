@@ -121,7 +121,12 @@ cmsApp.controller('videoCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
             //console.log($scope.video);
             $http.post("cms/inserir-video", {video: $scope.video}).success(function (data){
                  listarVideos();
-                 delete $scope.video;//limpa o form
+                 //delete $scope.video;//limpa o form
+                 delete $scope.video.data;
+                 delete $scope.video.titulo;
+                 delete $scope.video.link_video;
+                 delete $scope.video.resumida;
+                 delete $scope.video.descricao;
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -138,7 +143,12 @@ cmsApp.controller('videoCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
                 $timeout(function () {
                     file.result = response.data;
                 });
-                delete $scope.video;//limpa o form
+                //delete $scope.video;//limpa o form
+                delete $scope.video.data;
+                delete $scope.video.titulo;
+                delete $scope.video.link_video;
+                delete $scope.video.resumida;
+                delete $scope.video.descricao;
                 $scope.picFile = null;//limpa o file
                 listarVideos();
                 $scope.mensagemInserir =  "Gravado com sucesso!";

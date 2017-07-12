@@ -2,11 +2,11 @@
 {!! Form::label('idioma_id', 'Idioma *') !!}<br>
 {!! Form::select('idioma_id',
         $idiomas,
-null, ['class'=>"form-control width-medio <% validar(noticia.idioma_id) %>", 'ng-model'=>'noticia.idioma_id', 'init-model'=>'noticia.idioma_id', '0' => 'Selecione']) !!}<br>
+null, ['class'=>"form-control width-medio <% validar(noticia.idioma_id) %>", 'ng-model'=>'noticia.idioma_id', 'init-model'=>'noticia.idioma_id']) !!}<br>
 </div>
 
 {!! Form::label('data', 'Data *') !!}<br>
-{!! Form::date('data', null, ['class'=>"form-control width-medio <% validar(noticia.data) %>", 'ng-model'=>'noticia.data', 'init-model'=>'noticia.data', 'placeholder' => '']) !!}<br>
+{!! Form::date('data', null, ['class'=>"form-control width-medio <% validar(noticia.data) %>", 'ng-model'=>'noticia.data', 'ng-required'=>'true', 'init-model'=>'noticia.data', 'placeholder' => '']) !!}<br>
 
 
 {!! Form::label('titulo', 'Título *') !!}<br>
@@ -20,5 +20,5 @@ null, ['class'=>"form-control width-medio <% validar(noticia.idioma_id) %>", 'ng
 {!! Form::text('slug', null, ['class'=>"form-control width-medio <% validar(noticia.slug) %>", 'ng-model'=>'noticia.slug', 'init-model'=>'noticia.slug', 'placeholder' => '']) !!}<br>
 </div>
 {!! Form::label('descricao', 'Descrição *') !!}<br>
-{!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(noticia.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-model'=>'noticia.descricao', 'init-model'=>'noticia.descricao']) !!}<br>
+{!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(noticia.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-required'=>'true', 'ng-model'=>'noticia.descricao', 'init-model'=>'noticia.descricao']) !!}<br>
 
