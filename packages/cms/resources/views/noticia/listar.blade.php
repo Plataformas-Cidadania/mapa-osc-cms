@@ -99,7 +99,7 @@
                         <tbody>
                         <tr ng-repeat="noticia in noticias">
                             <td><% noticia.id %></td>
-                            <td><img ng-show="noticia.imagem" ng-src="/imagens/noticias/xs-<% noticia.imagem %>" width="60"></td>
+                            <td><img ng-show="noticia.imagem" ng-src="imagens/noticias/xs-<% noticia.imagem %>" width="60"></td>
                             <td><a href="cms/noticia/<% noticia.id %>"><% noticia.titulo %></a></td>
                             <td class="text-right">
                                 <div>
