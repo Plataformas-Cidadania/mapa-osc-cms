@@ -103,7 +103,7 @@
                             <td><a href="cms/edital/<% edital.id %>"><% edital.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    <a href="cms/items/<% edital.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
+                                    {{--<a href="cms/items/<% edital.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
                                     <a href="cms/edital/<% edital.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(edital.id, edital.titulo, edital.imagem)"></i></a>
                                 </div>

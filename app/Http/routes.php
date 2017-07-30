@@ -23,3 +23,6 @@ Route::get('noticiaByID/{idNoticia}', 'ApiController@noticiaByID');
 
 Route::get('VideoByID/{idVideo}', 'ApiController@videoByID');
 Route::get('videoByID/{idVideo}', 'ApiController@videoByID');
+
+Route::get('EditalByID/{idEdital}', 'ApiController@editalByID');
+Route::get('editalByID/{idEdital}', 'ApiController@editalByID');

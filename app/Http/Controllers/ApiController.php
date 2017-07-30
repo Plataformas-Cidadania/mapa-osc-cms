@@ -29,4 +29,8 @@ class ApiController extends Controller
     public function videoByID($idVideo){
         return \App\Video::select('titulo as tx_titulo_video', 'link_video as tx_link_video', 'resumida as tx_resumo_video', 'descricao as tx_descricao_video', 'data as dt_video')->find($idVideo);
     }
+
+    public function editalByID($idEdital){
+        return \App\Edital::select('titulo as tx_titulo_edital', 'instituicao as tx_instituicao_edital', 'area as tx_area_edital', 'data_vencimento as dt_vencimento_edital', 'edital as link_edital', 'status as it_status_edital')->find($idEdital);
+    }
 }
