@@ -90,6 +90,9 @@
                     <a href="cms/noticias"><i class="fa fa-fw fa-newspaper-o"></i> Notícias</a>
                 </li>
                 <li>
+                    <a href="cms/editais"><i class="fa fa-fw fa-newspaper-o"></i> Editais</a>
+                </li>
+                <li>
                     <a href="cms/videos"><i class="fa fa-fw fa-newspaper-o"></i> Vídeos</a>
                 </li>
 

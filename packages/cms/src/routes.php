@@ -55,6 +55,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-noticia/{id}', 'Cms\Controllers\NoticiaController@alterar');
         Route::get('/cms/excluir-noticia/{id}', 'Cms\Controllers\NoticiaController@excluir');
 
+        //EDITAIS
+        Route::get('/cms/editais', 'Cms\Controllers\EditalController@index');
+        Route::get('/cms/listar-editais', 'Cms\Controllers\EditalController@listar');
+        Route::post('/cms/inserir-edital', 'Cms\Controllers\EditalController@inserir');
+        Route::get('/cms/edital/{id}', 'Cms\Controllers\EditalController@detalhar');
+        Route::post('/cms/alterar-edital/{id}', 'Cms\Controllers\EditalController@alterar');
+        Route::get('/cms/excluir-edital/{id}', 'Cms\Controllers\EditalController@excluir');
+
         //MROSCS
         Route::get('/cms/mroscs', 'Cms\Controllers\MroscController@index');
         Route::get('/cms/listar-mroscs', 'Cms\Controllers\MroscController@listar');
