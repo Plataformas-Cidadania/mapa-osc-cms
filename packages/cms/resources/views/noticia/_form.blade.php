@@ -16,7 +16,7 @@ null, ['class'=>"form-control width-medio <% validar(noticia.idioma_id) %>", 'ng
 {!! Form::label('titulo', 'Título *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(noticia.titulo) %>", 'ng-model'=>'noticia.titulo', 'ng-required'=>'true', 'init-model'=>'noticia.titulo', 'placeholder' => '']) !!}<br>
 
-{!! Form::label('resumida', 'Descrição resumida') !!}<br>
+{!! Form::label('resumida', 'Descrição resumida *') !!}<br>
 {!! Form::textarea('resumida', null, ['class'=>"form-control width-grande <% validar(noticia.resumida) %>", 'ng-model'=>'noticia.resumida', 'ng-required'=>'true',  'init-model'=>'noticia.resumida', 'placeholder' => '']) !!}<br>
 
 <div style="display: none;">

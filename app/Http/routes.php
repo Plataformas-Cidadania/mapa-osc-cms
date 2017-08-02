@@ -18,11 +18,13 @@ Route::get('/', function () {
 Route::get('Imprensa', 'ApiController@imprensa');
 Route::get('imprensa', 'ApiController@imprensa');
 
+
 Route::get('NoticiaByID/{idNoticia}', 'ApiController@noticiaByID');
 Route::get('noticiaByID/{idNoticia}', 'ApiController@noticiaByID');
 
 Route::get('VideoByID/{idVideo}', 'ApiController@videoByID');
 Route::get('videoByID/{idVideo}', 'ApiController@videoByID');
 
+Route::get('editais', 'ApiController@editais');
 Route::get('EditalByID/{idEdital}', 'ApiController@editalByID');
 Route::get('editalByID/{idEdital}', 'ApiController@editalByID');

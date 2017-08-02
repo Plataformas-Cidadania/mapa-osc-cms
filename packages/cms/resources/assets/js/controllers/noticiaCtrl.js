@@ -166,7 +166,7 @@ cmsApp.controller('noticiaCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
         $scope.imagemExcluir = imagem;
         $scope.excluido = false;
         $scope.mensagemExcluido = "";
-    }
+    };
 
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
