@@ -12,6 +12,8 @@ cmsApp.controller('alterarVideoCtrl', ['$scope', '$http', 'Upload', '$timeout', 
 
     $scope.removerImagem = false;
 
+    $scope.stringToDate = stringToDate;
+
     $scope.alterar = function (file){
 
         if(file==null){

@@ -7,8 +7,13 @@
 {!! Form::label('area', 'Área') !!}<br>
 {!! Form::text('area', null, ['class'=>"form-control width-grande <% validar(edital.area) %>", 'ng-model'=>'edital.area', 'init-model'=>'edital.area', 'placeholder' => '']) !!}<br>
 
+{{--
 {!! Form::label('data_vencimento', 'Data vencimento *') !!}<br>
 {!! Form::date('data_vencimento', null, ['class'=>"form-control width-medio <% validar(edital.data_vencimento) %>", 'ng-model'=>'edital.data_vencimento', 'ng-required'=>'true', 'init-model'=>'edital.data_vencimento', 'placeholder' => '']) !!}<br>
+--}}
+
+<label for="data_vencimento">Data de Vencimento</label><br>
+<input type="date" name="data_vencimento" class="form-control width-medio <% validar(edital.data_vencimento) %>" ng-model="edital.data_vencimento" ng-required="true" @if(!empty($edital))ng-init="edital.data_vencimento=stringToDate('{{$edital->data_vencimento}}')"@endif ><br>
 
 {!! Form::label('numero_chamada', 'Número da chamada') !!}<br>
 {!! Form::text('numero_chamada', null, ['class'=>"form-control width-grande <% validar(edital.numero_chamada) %>", 'ng-model'=>'edital.numero_chamada', 'init-model'=>'edital.numero_chamada', 'placeholder' => '']) !!}<br>

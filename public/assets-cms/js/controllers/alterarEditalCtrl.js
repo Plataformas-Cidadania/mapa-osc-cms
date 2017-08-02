@@ -11,6 +11,8 @@ cmsApp.controller('alterarEditalCtrl', ['$scope', '$http', 'Upload', '$timeout',
     $scope.removerImagem = 0;
     $scope.removerArquivo = 0;
 
+    $scope.stringToDate = stringToDate;
+
     $scope.alterar = function (file, arquivo){
         $scope.processandoSalvar = true;
         $scope.mensagemSalvar = "";

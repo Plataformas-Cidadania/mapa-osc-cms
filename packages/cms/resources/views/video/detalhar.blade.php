@@ -30,7 +30,7 @@
                 <input type="hidden" name="id" ng-model="id" ng-init="id='{{$video->id}}'"/>
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
-                        <button class="btn btn-info" type="button" ng-click="alterar(picFile)" ng-disabled="form.$invalid && form.video.$dirty">Salvar</button>
+                        <button class="btn btn-info" type="button" ng-click="alterar(picFile)" ng-disabled="form.$invalid">Salvar</button>
                     </div>
                     <div class="col-md-2 col-lg-2 col-xs-6">
                         <span class="progress" ng-show="picFile.progress >= 0">

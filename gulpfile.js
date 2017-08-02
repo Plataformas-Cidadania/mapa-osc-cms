@@ -29,6 +29,8 @@ elixir(function(mix) {
 
     mix.scripts('../../../packages/cms/resources/assets/js/tiny.js', 'public/assets-cms/js/tiny.js');
 
+    mix.scripts('../../../packages/cms/resources/assets/js/utils.js', 'public/assets-cms/js/utils.js');
+
     //Directives
     mix.scripts('../../../packages/cms/resources/assets/js/directives/initModel.js', 'public/assets-cms/js/directives/initModel.js');
 

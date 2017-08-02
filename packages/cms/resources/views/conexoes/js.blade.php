@@ -12,6 +12,7 @@
 <!-- CMS -->
 {!! Html::script('assets-cms/js/cms.js') !!}
 {!! Html::script('assets-cms/js/directives/initModel.js') !!}
+{!! Html::script('assets-cms/js/utils.js') !!}
 
 {{-- {!! Html::script('assets-cms/tinymce/js/tinymce/tinymce.min.js') !!}--}}
 {!! Html::script('assets-cms/lib/angular/tinymce.min.js') !!}

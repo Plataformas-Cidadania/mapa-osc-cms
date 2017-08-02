@@ -10,7 +10,7 @@ null, ['class'=>"form-control width-medio <% validar(noticia.idioma_id) %>", 'ng
 --}}
 
 <label for="data">Data</label><br>
-<input type="date" name="data" class="form-control width-medio <% validar(noticia.data) %>" ng-model="noticia.data" ng-required="true" @if(!empty($noticia))ng-init="noticia.data=converteData('{{$noticia->data}}')"@endif ><br>
+<input type="date" name="data" class="form-control width-medio <% validar(noticia.data) %>" ng-model="noticia.data" ng-required="true" @if(!empty($noticia))ng-init="noticia.data=stringToDate('{{$noticia->data}}')"@endif ><br>
 
 
 {!! Form::label('titulo', 'Título *') !!}<br>
