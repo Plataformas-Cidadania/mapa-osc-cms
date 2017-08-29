@@ -28,3 +28,9 @@ Route::get('videoByID/{idVideo}', 'ApiController@videoByID');
 Route::get('editais', 'ApiController@editais');
 Route::get('EditalByID/{idEdital}', 'ApiController@editalByID');
 Route::get('editalByID/{idEdital}', 'ApiController@editalByID');
+
+Route::get('MenuMrosc', 'ApiController@menuMrosc');
+Route::get('menuMrosc', 'ApiController@menuMrosc');
+
+Route::get('ConteudoMroscByID/{id}', 'ApiController@ConteudoMroscByID');
+Route::get('conteudoMroscByID/{id}', 'ApiController@ConteudoMroscByID');

@@ -37,4 +37,12 @@ class ApiController extends Controller
     public function editais(){
         return \App\Edital::select('titulo as tx_titulo_edital', 'instituicao as tx_instituicao_edital', 'area as tx_area_edital', 'data_vencimento as dt_vencimento_edital', 'edital as link_edital', 'status as it_status_edital')->get();
     }
+
+    public function menuMrosc(){
+        return \App\Mrosc::select('id as cd_menu_mrosc', 'titulo as tx_titulo_menu_mrosc', 'posicao')->get();
+    }
+
+    public function ConteudoMroscByID($id){
+        return \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
+    }
 }

@@ -49,7 +49,7 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
             </div>
             <div class="modal-body">
                 <?php
-                $types = array( 'png', 'jpg', 'jpeg', 'gif' );
+/*                $types = array( 'png', 'jpg', 'jpeg', 'gif' );
                 if ( $handle = opendir('../public/imagens/geral') ) {
                     while ( $entry = readdir( $handle ) ) {
                         $ext = strtolower( pathinfo( $entry, PATHINFO_EXTENSION) );
@@ -60,7 +60,7 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
                     }
                     closedir($handle);
                 }
-                ?>
+                */?>
             </div>
             <div style="clear: both;"></div>
             <div class="modal-footer">
@@ -80,7 +80,7 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
             </div>
             <div class="modal-body">
                 <?php
-                $types = array( 'pdf', 'doc', 'docx' );
+/*                $types = array( 'pdf', 'doc', 'docx' );
                 if ( $handle = opendir('../public/imagens/geral') ) {
                     while ( $entry = readdir( $handle ) ) {
                         $ext = strtolower( pathinfo( $entry, PATHINFO_EXTENSION) );
@@ -91,7 +91,7 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
                     }
                     closedir($handle);
                 }
-                ?>
+                */?>
             </div>
             <div style="clear: both;"></div>
             <div class="modal-footer">
