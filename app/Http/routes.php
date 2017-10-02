@@ -34,3 +34,13 @@ Route::get('menuMrosc', 'ApiController@menuMrosc');
 
 Route::get('ConteudoMroscByID/{id}', 'ApiController@ConteudoMroscByID');
 Route::get('conteudoMroscByID/{id}', 'ApiController@ConteudoMroscByID');
+
+Route::get('ItensMrosc', 'ApiController@menuMrosc');
+Route::get('itensMrosc', 'ApiController@menuMrosc');
+
+
+Route::get('ModuloByID/{idModulo}', 'ApiController@moduloByID');
+Route::get('moduloByID/{idModulo}', 'ApiController@moduloByID');
+
+Route::get('WebdoorByID/{idWebdoor}', 'ApiController@webdoorByID');
+Route::get('webdoorByID/{idWebdoor}', 'ApiController@webdoorByID');

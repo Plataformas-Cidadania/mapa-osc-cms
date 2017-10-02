@@ -45,4 +45,12 @@ class ApiController extends Controller
     public function ConteudoMroscByID($id){
         return \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
     }
+
+    public function moduloByID($idModulo){
+        return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo')->find($idModulo);
+    }
+
+    public function webdoorByID($idWebdoor){
+        return \App\Webdoor::select('titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->find($idWebdoor);
+    }
 }
