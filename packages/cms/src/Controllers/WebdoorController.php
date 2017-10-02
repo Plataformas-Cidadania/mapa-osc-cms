@@ -20,14 +20,14 @@ class WebdoorController extends Controller
     {
         $this->webdoor = new \App\Webdoor;
         $this->campos = [
-            'imagem', 'titulo', 'resumida', 'descricao', 'link', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'link', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/webdoors';
         $this->sizesImagem = [
-            'xs' => ['width' => 300, 'height' => 169],
-            'sm' => ['width' => 480, 'height' => 164],
-            'md' => ['width' => 780, 'height' => 267],
-            'lg' => ['width' => 1170, 'height' => 400]
+            'xs' => ['width' => 300, 'height' => 63],
+            'sm' => ['width' => 768, 'height' => 160],
+            'md' => ['width' => 980, 'height' => 204],
+            'lg' => ['width' => 1200, 'height' => 250]
         ];
         $this->widthOriginal = true;
     }

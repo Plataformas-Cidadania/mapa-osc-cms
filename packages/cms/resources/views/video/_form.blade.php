@@ -1,10 +1,10 @@
-<div style="display: block;">
+{{--<div style="display: block;">
 {!! Form::label('idioma_id', 'Idioma *') !!}<br>
 {!! Form::select('idioma_id',
         $idiomas,
 null, ['class'=>"form-control width-medio <% validar(video.idioma_id) %>", 'ng-model'=>'video.idioma_id', 'init-model'=>'video.idioma_id', '0' => 'Selecione']) !!}<br>
 
-</div>
+</div>--}}
 {{--
 {!! Form::label('data', 'Data *') !!}<br>
 {!! Form::date('data', null, ['class'=>"form-control width-medio <% validar(video.data) %>", 'ng-model'=>'video.data',  'init-model'=>'video.data', 'ng-required'=>'true', 'placeholder' => '']) !!}<br>

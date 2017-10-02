@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Webdoor extends Model
 {
     protected $fillable = [
-        'imagem', 'titulo', 'resumida', 'descricao', 'link', 'cmsuser_id',
+        'imagem', 'titulo', 'descricao', 'link', 'cmsuser_id',
     ];
 }

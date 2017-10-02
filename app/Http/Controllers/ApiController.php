@@ -47,10 +47,11 @@ class ApiController extends Controller
     }
 
     public function moduloByID($idModulo){
-        return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo')->find($idModulo);
+        return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
     }
 
     public function webdoorByID($idWebdoor){
-        return \App\Webdoor::select('titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->find($idWebdoor);
+        //return \App\Webdoor::select('titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->find($idWebdoor);
+        return \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->get();
     }
 }

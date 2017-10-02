@@ -74,11 +74,11 @@
                 <li class="active">
                     <a href="cms"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
-                <li>
+                {{--<li>
                     <a href="cms/idiomas"><i class="fa fa-fw fa-building"></i> Idiomas</a>
-                </li>
+                </li>--}}
                 <li>
-                    <a href="cms/modulos"><i class="fa fa-fw fa-building"></i> Institucional</a>
+                    <a href="cms/modulos"><i class="fa fa-fw fa-building"></i> Modulos</a>
                 </li>
                 <li>
                     <a href="cms/mroscs"><i class="fa fa-fw fa-desktop"></i> MROSC</a>

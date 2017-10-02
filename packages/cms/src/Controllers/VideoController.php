@@ -20,7 +20,7 @@ class VideoController extends Controller
     {
         $this->video = new \App\Video;
         $this->campos = [
-            'imagem', 'titulo', 'data', 'resumida', 'descricao', 'link_video', 'idioma_id', 'cmsuser_id',
+            'imagem', 'titulo', 'data', 'resumida', 'descricao', 'link_video', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/videos';
         $this->sizesImagem = [
@@ -36,9 +36,10 @@ class VideoController extends Controller
     {
 
         $videos = \App\Video::all();
-        $idiomas = \App\Idioma::lists('titulo', 'id')->all();
+        //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::video.listar', ['videos' => $videos, 'idiomas' => $idiomas]);
+        return view('cms::video.listar', ['videos' => $videos]);
+        //return view('cms::video.listar', ['videos' => $videos, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
@@ -98,8 +99,10 @@ class VideoController extends Controller
         $video = $this->video->where([
             ['id', '=', $id],
         ])->firstOrFail();
-        $idiomas = \App\Idioma::lists('titulo', 'id')->all();
-        return view('cms::video.detalhar', ['video' => $video, 'idiomas' => $idiomas]);
+        //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
+
+        return view('cms::video.detalhar', ['video' => $video]);
+        //return view('cms::video.detalhar', ['video' => $video, 'idiomas' => $idiomas]);
     }
 
     public function alterar(Request $request, $id)

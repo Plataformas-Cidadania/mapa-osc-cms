@@ -17,13 +17,13 @@
                 <span class="texto-obrigatorio" ng-show="form.$invalid">* campos obrigatórios</span><br><br>
                 {!! Form::open(['name' =>'form']) !!}
                 <div class="container-thumb">
-                    <div class="box-thumb" name="fileDrop" ngf-dimensions="$width == 1170 && $height == 400" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
+                    <div class="box-thumb" name="fileDrop" ngf-dimensions="$width == 1200 && $height == 250" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
                          ng-show="!picFile" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
                     <img  ngf-thumbnail="picFile" class="thumb">
                 </div>
                 <br>
                 <span class="btn btn-primary btn-file" ng-show="!picFile">
-                    Escolher imagem <input  type="file" ngf-dimensions="$width == 1170 && $height == 400" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+                    Escolher imagem <input  type="file" ngf-dimensions="$width == 1200 && $height == 250" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
                 </span>
                 <button class="btn btn-danger" ng-click="picFile = null" ng-show="picFile" type="button">Remover Imagem</button>
                 <i ng-show="form.file.$error.maxSize || form.fileDrop.$error.maxSize" style="margin-left: 10px;">
@@ -31,7 +31,7 @@
                     <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
                 </i>
                 <i ng-show="form.file.$error.dimensions || form.fileDrop.$error.dimensions" style="margin-left: 10px;">
-                    Tamanho inválido! O tamanho deve ser de 1170x400
+                    Tamanho inválido! O tamanho deve ser de 1200x250
                     <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
                 </i>
 
