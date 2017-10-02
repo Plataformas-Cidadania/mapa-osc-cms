@@ -61,7 +61,16 @@ class ApiController extends Controller
     }
 
     public function moduloByID($idModulo){
-        return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
+        //return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
+        $modulos =  \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
+        $itens = \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('modulo_id', $idModulo)->get();
+
+        $return = [
+            'modulos' => $modulos,
+            'itens' => $itens,
+        ];
+
+        return [$return];
     }
 
     public function webdoorByID(){
