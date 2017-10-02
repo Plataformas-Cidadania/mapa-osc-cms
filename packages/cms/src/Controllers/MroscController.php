@@ -21,7 +21,7 @@ class MroscController extends Controller
         $this->mrosc = new \App\Mrosc;
         $this->campos = [
             //'imagem', 'titulo', 'descricao', 'arquivo', 'idioma_id', 'cmsuser_id',
-            'imagem', 'titulo', 'subtitulo', 'descricao', 'arquivo', 'slug', 'posicao', 'idioma_id', 'cmsuser_id',
+            'imagem', 'titulo', 'subtitulo', 'descricao', 'arquivo', 'posicao', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/mroscs';
         $this->sizesImagem = [
@@ -39,10 +39,11 @@ class MroscController extends Controller
     {
 
         $mroscs = \App\Mrosc::all();
-        $idiomas = \App\Idioma::lists('titulo', 'id')->all();
+        //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
 
-        return view('cms::mrosc.listar', ['mroscs' => $mroscs, 'idiomas' => $idiomas]);
+        return view('cms::mrosc.listar', ['mroscs' => $mroscs]);
+        //return view('cms::mrosc.listar', ['mroscs' => $mroscs, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
@@ -119,9 +120,10 @@ class MroscController extends Controller
         $mrosc = $this->mrosc->where([
             ['id', '=', $id],
         ])->firstOrFail();
-        $idiomas = \App\Idioma::lists('titulo', 'id')->all();
+        //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::mrosc.detalhar', ['mrosc' => $mrosc, 'idiomas' => $idiomas]);
+        return view('cms::mrosc.detalhar', ['mrosc' => $mrosc]);
+        //return view('cms::mrosc.detalhar', ['mrosc' => $mrosc, 'idiomas' => $idiomas]);
     }
 
     /*public function alterar(Request $request, $id)

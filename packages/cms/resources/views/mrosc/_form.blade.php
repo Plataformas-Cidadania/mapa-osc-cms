@@ -3,10 +3,10 @@
 
 
 
-{!! Form::label('idioma_id', 'Idioma *') !!}<br>
+{{--{!! Form::label('idioma_id', 'Idioma *') !!}<br>
 {!! Form::select('idioma_id',
         $idiomas,
-null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-model'=>'mrosc.idioma_id', 'ng-required'=>'true', 'init-model'=>'mrosc.idioma_id', 'placeholder' => 'Selecione']) !!}<br>
+null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-model'=>'mrosc.idioma_id', 'ng-required'=>'true', 'init-model'=>'mrosc.idioma_id', 'placeholder' => 'Selecione']) !!}<br>--}}
 
 {!! Form::label('titulo', 'Título *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(mrosc.titulo) %>", 'ng-model'=>'mrosc.titulo', 'ng-required'=>'true', 'init-model'=>'mrosc.titulo', 'placeholder' => '']) !!}<br>
@@ -14,8 +14,8 @@ null, ['class'=>"form-control width-medio <% validar(mrosc.idioma_id) %>", 'ng-m
 {!! Form::label('subtitulo', 'Sub título *') !!}<br>
 {!! Form::text('subtitulo', null, ['class'=>"form-control width-grande <% validar(mrosc.subtitulo) %>", 'ng-model'=>'mrosc.subtitulo', 'init-model'=>'mrosc.subtitulo', 'placeholder' => '']) !!}<br>
 
-{!! Form::label('slug', 'slug *') !!}<br>
-{!! Form::text('slug', null, ['class'=>"form-control width-medio <% validar(mrosc.slug) %>", 'ng-model'=>'mrosc.slug', 'ng-required'=>'true', 'init-model'=>'mrosc.slug', 'placeholder' => '']) !!}<br>
+{{--{!! Form::label('slug', 'slug *') !!}<br>
+{!! Form::text('slug', null, ['class'=>"form-control width-medio <% validar(mrosc.slug) %>", 'ng-model'=>'mrosc.slug', 'ng-required'=>'true', 'init-model'=>'mrosc.slug', 'placeholder' => '']) !!}<br>--}}
 
 
 

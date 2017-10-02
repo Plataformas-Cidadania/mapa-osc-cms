@@ -43,15 +43,28 @@ class ApiController extends Controller
     }
 
     public function ConteudoMroscByID($id){
-        return \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
+        //return \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
+
+        $conteudoMrosc = \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
+        $itensMrosc = \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('modulo_id', $id)->get();
+
+        $return = [
+            'conteudoMrosc' => $conteudoMrosc,
+            'itensMrosc' => $itensMrosc,
+        ];
+
+        return [$return];
+    }
+
+    public function itensMrosc(){
+        return \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->get();
     }
 
     public function moduloByID($idModulo){
         return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
     }
 
-    public function webdoorByID($idWebdoor){
-        //return \App\Webdoor::select('titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->find($idWebdoor);
+    public function webdoorByID(){
         return \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->get();
     }
 }

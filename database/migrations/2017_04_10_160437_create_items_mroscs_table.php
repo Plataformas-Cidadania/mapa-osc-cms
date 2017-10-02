@@ -20,8 +20,8 @@ class CreateItemsMroscsTable extends Migration
             $table->text('arquivo');
             $table->integer('modulo_id')->unsigned();
             $table->foreign('modulo_id')->references('id')->on('modulos')->onDelete('cascade');
-            $table->integer('idioma_id')->unsigned();
-            $table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');
+/*            $table->integer('idioma_id')->unsigned();
+            $table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');*/
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
