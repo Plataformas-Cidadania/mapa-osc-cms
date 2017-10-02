@@ -18,7 +18,7 @@ class ItemMroscController extends Controller
 
     public function __construct()
     {
-        $this->item = new \App\Item;
+        $this->item = new \App\ItemMrosc();
         $this->campos = [
             'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'cmsuser_id',
         ];
@@ -37,7 +37,7 @@ class ItemMroscController extends Controller
     function index($modulo_id)
     {
 
-        $items = \App\Item::all();
+        $items = \App\ItemMrosc::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
         return view('cms::item_mrosc.listar', ['items' => $items, 'modulo_id' => $modulo_id]);
@@ -48,13 +48,13 @@ class ItemMroscController extends Controller
     {
 
         //Log::info('CAMPOS: '.$request->campos);
-        Log::info('modulo_id: '.$request->modulo_id);
+        //Log::info('modulo_id: '.$request->modulo_id);
 
         //Auth::loginUsingId(2);
 
         $campos = explode(", ", $request->campos);
 
-        $items = DB::table('items')
+        $items = DB::table('items_mroscs')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
