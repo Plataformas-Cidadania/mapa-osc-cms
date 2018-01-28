@@ -46,7 +46,7 @@ class ApiController extends Controller
         //return \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
 
         $conteudoMrosc = \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
-        $itensMrosc = \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('modulo_id', $id)->get();
+        $itensMrosc = \App\ItemMrosc::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('modulo_id', $id)->get();
 
         $return = [
             'conteudoMrosc' => $conteudoMrosc,
