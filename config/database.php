@@ -69,13 +69,13 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'port' => env('DB_PORT', '5434'),
+            'database' => env('DB_DATABASE', 'portalosc'),
+            'username' => env('DB_USERNAME', 'i3geo'),
+            'password' => env('DB_PASSWORD', 'ipea001'),
             'charset' => 'utf8',
             'prefix' => '',
-            'schema' => 'public',
+            'schema' => env('DB_PGSQL_SCHEMA', 'public'),
         ],
 
     ],

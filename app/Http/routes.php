@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('info123', function(){
+    return view('info');
+});
+
 Route::get('Imprensa', 'ApiController@imprensa');
 Route::get('imprensa', 'ApiController@imprensa');
 
