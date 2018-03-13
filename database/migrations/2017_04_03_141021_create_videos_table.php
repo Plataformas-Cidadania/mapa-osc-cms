@@ -16,8 +16,8 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->string('titulo');
             $table->string('link_video');
-            $table->integer('idioma_id')->unsigned();
-            $table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');
+            //$table->integer('idioma_id')->unsigned();
+            //$table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();

@@ -68,12 +68,16 @@ class VideoController extends Controller
 
         $data['video'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
+	//$data['video']['idioma_id'] = 1;
+
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 $data['video'] += [$campo => ''];
             }
         }
+
+	
 
         $file = $request->file('file');
 
@@ -84,12 +88,14 @@ class VideoController extends Controller
             
             if($success){
                 $data['video']['imagem'] = $filename;
+		Log::info($data);
                 return $this->video->create($data['video']);
             }else{
                 return "erro";
             }
         }
 
+	Log::info($data);
         return $this->video->create($data['video']);
 
     }
@@ -109,6 +115,8 @@ class VideoController extends Controller
     {
         $data = $request->all();
         $data['video'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+
+	//$data['video']['idioma_id'] = 1;
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
