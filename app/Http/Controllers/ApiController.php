@@ -30,11 +30,7 @@ class ApiController extends Controller
 
         $row->tx_descricao_noticia = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_noticia);
 
-        Log::info([$row]);
-
         return $row;
-
-        //return \App\Noticia::select('titulo as tx_titulo_noticia', 'descricao as tx_descricao_noticia', 'data as dt_noticia')->find($idNoticia);
     }
 
     public function videoByID($idVideo){
