@@ -118,10 +118,13 @@ class ApiController extends Controller
     }
 
     public function webdoorByID(){
-        $row = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->get();
+        $webdoors = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->get();
 
-        $row->tx_descricao_webdoor = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_webdoor);
+        foreach ($webdoors as $webdoor) {
+            $webdoor->tx_descricao_webdoor = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $webdoor->tx_descricao_webdoor);
+        }
 
-        return $row;
+
+        return $webdoors;
     }
 }
