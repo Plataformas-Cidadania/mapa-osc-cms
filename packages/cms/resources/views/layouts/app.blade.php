@@ -78,6 +78,9 @@
                     <a href="cms/idiomas"><i class="fa fa-fw fa-building"></i> Idiomas</a>
                 </li>--}}
                 <li>
+                    <a href="cms/tipos"><i class="fa fa-fw fa-building"></i> Tipo</a>
+                </li>
+                <li>
                     <a href="cms/modulos"><i class="fa fa-fw fa-building"></i> Modulos</a>
                 </li>
                 <li>

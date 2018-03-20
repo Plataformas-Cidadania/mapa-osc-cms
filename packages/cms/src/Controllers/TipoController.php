@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
-class ItemMroscController extends Controller
+class TipoController extends Controller
 {
     
     
 
     public function __construct()
     {
-        $this->item = new \App\ItemMrosc();
+        $this->tipo = new \App\Tipo;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'mrosc_id', 'cmsuser_id',
+            'imagem', 'titulo', 'arquivo', 'cmsuser_id',
         ];
-        $this->pathImagem = public_path().'/imagens/items-mrosc';
+        $this->pathImagem = public_path().'/imagens/tipos';
         $this->sizesImagem = [
             'xs' => ['width' => 140, 'height' => 79],
             'sm' => ['width' => 480, 'height' => 270],
@@ -31,38 +31,36 @@ class ItemMroscController extends Controller
         ];
         $this->widthOriginal = true;
 
-        $this->pathArquivo = public_path().'/arquivos/items-mrosc';
+        $this->pathArquivo = public_path().'/arquivos/tipos';
     }
 
-    function index($mrosc_id)
+    function index()
     {
 
-        $items = \App\ItemMrosc::all();
+        $tipos = \App\Tipo::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::item_mrosc.listar', ['items' => $items, 'mrosc_id' => $mrosc_id]);
-        //return view('cms::item_mrosc.listar', ['items' => $items, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
+
+        return view('cms::tipo.listar', ['tipos' => $tipos/*, 'idiomas' => $idiomas*/]);
     }
 
     public function listar(Request $request)
     {
 
         //Log::info('CAMPOS: '.$request->campos);
-        //Log::info('modulo_id: '.$request->modulo_id);
 
         //Auth::loginUsingId(2);
 
         $campos = explode(", ", $request->campos);
 
-        $items = DB::table('items_mroscs')
+        $tipos = DB::table('tipos')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
-                ['mrosc_id', $request->mrosc_id],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
-        return $items;
+        return $tipos;
     }
 
 
@@ -71,12 +69,12 @@ class ItemMroscController extends Controller
 
         $data = $request->all();
 
-        $data['item'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['tipo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
-                $data['item'] += [$campo => ''];
+                $data['tipo'] += [$campo => ''];
             }
         }
 
@@ -90,7 +88,7 @@ class ItemMroscController extends Controller
             $imagemCms = new ImagemCms();
             $successFile = $imagemCms->inserir($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal);
             if($successFile){
-                $data['item']['imagem'] = $filename;
+                $data['tipo']['imagem'] = $filename;
             }
         }
 
@@ -99,49 +97,46 @@ class ItemMroscController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['item']['arquivo'] = $filenameArquivo;
+                $data['tipo']['arquivo'] = $filenameArquivo;
             }
         }
 
 
         if($successFile && $successArquivo){
-            return $this->item->create($data['item']);
+            return $this->tipo->create($data['tipo']);
         }else{
             return "erro";
         }
 
 
-        return $this->item->create($data['item']);
+        return $this->tipo->create($data['tipo']);
 
     }
 
     public function detalhar($id)
     {
-        $item = $this->item->where([
+        $tipo = $this->tipo->where([
             ['id', '=', $id],
         ])->firstOrFail();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        $mrosc_id = $item->mrosc_id;
-
-        return view('cms::item_mrosc.detalhar', ['item' => $item, 'mrosc_id' => $mrosc_id]);
-        //return view('cms::item_mrosc.detalhar', ['item' => $item, 'mrosc_id' => $mrosc_id, 'idiomas' => $idiomas]);
+        return view('cms::tipo.detalhar', ['tipo' => $tipo/*, 'idiomas' => $idiomas*/]);
     }
 
     /*public function alterar(Request $request, $id)
     {
         $data = $request->all();
-        $data['item'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['tipo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem'){
-                    $data['item'] += [$campo => ''];
+                    $data['tipo'] += [$campo => ''];
                 }
             }
         }
-        $item = $this->item->where([
+        $tipo = $this->tipo->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
@@ -150,11 +145,11 @@ class ItemMroscController extends Controller
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
             $imagemCms = new ImagemCms();
-            $success = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $item);
+            $success = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $tipo);
             if($success){
-                $data['item']['imagem'] = $filename;
-                $item->update($data['item']);
-                return $item->imagem;
+                $data['tipo']['imagem'] = $filename;
+                $tipo->update($data['tipo']);
+                return $tipo->imagem;
             }else{
                 return "erro";
             }
@@ -162,13 +157,13 @@ class ItemMroscController extends Controller
 
         //remover imagem
         if($data['removerImagem']){
-            $data['item']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$item->imagem)) {
-                unlink($this->pathImagem . "/" . $item->imagem);
+            $data['tipo']['imagem'] = '';
+            if(file_exists($this->pathImagem."/".$tipo->imagem)) {
+                unlink($this->pathImagem . "/" . $tipo->imagem);
             }
         }
 
-        $item->update($data['item']);
+        $tipo->update($data['tipo']);
         return "Gravado com sucesso";
     }*/
 
@@ -178,17 +173,17 @@ class ItemMroscController extends Controller
 
         //return $data;
 
-        $data['item'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['tipo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem' && $campo!='arquivo'){
-                    $data['item'] += [$campo => ''];
+                    $data['tipo'] += [$campo => ''];
                 }
             }
         }
-        $item = $this->item->where([
+        $tipo = $this->tipo->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
@@ -198,17 +193,17 @@ class ItemMroscController extends Controller
 
         //remover imagem
         if($data['removerImagem']){
-            $data['item']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$item->imagem)) {
-                unlink($this->pathImagem . "/" . $item->imagem);
+            $data['tipo']['imagem'] = '';
+            if(file_exists($this->pathImagem."/".$tipo->imagem)) {
+                unlink($this->pathImagem . "/" . $tipo->imagem);
             }
         }
 
 
         if($data['removerArquivo']){
-            $data['item']['arquivo'] = '';
-            if(file_exists($this->pathArquivo."/".$item->arquivo)) {
-                unlink($this->pathArquivo . "/" . $item->arquivo);
+            $data['tipo']['arquivo'] = '';
+            if(file_exists($this->pathArquivo."/".$tipo->arquivo)) {
+                unlink($this->pathArquivo . "/" . $tipo->arquivo);
             }
         }
 
@@ -217,9 +212,9 @@ class ItemMroscController extends Controller
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
             $imagemCms = new ImagemCms();
-            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $item);
+            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $tipo);
             if($successFile){
-                $data['item']['imagem'] = $filename;
+                $data['tipo']['imagem'] = $filename;
             }
         }
 
@@ -228,19 +223,19 @@ class ItemMroscController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['item']['arquivo'] = $filenameArquivo;
+                $data['tipo']['arquivo'] = $filenameArquivo;
             }
         }
 
         if($successFile && $successArquivo){
 
-            $item->update($data['item']);
-            return $item->imagem;
+            $tipo->update($data['tipo']);
+            return $tipo->imagem;
         }else{
             return "erro";
         }
 
-        //$item->update($data['item']);
+        //$tipo->update($data['tipo']);
         //return "Gravado com sucesso";
     }
 
@@ -248,25 +243,25 @@ class ItemMroscController extends Controller
     {
         //Auth::loginUsingId(2);
 
-        $item = $this->item->where([
+        $tipo = $this->tipo->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
         //remover imagens        
-        if(!empty($item->imagem)){
+        if(!empty($tipo->imagem)){
             //remover imagens
             $imagemCms = new ImagemCms();
-            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $item);
+            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $tipo);
         }
 
 
-        if(!empty($item->arquivo)) {
-            if (file_exists($this->pathArquivo . "/" . $item->arquivo)) {
-                unlink($this->pathArquivo . "/" . $item->arquivo);
+        if(!empty($tipo->arquivo)) {
+            if (file_exists($this->pathArquivo . "/" . $tipo->arquivo)) {
+                unlink($this->pathArquivo . "/" . $tipo->arquivo);
             }
         }
 
-        $item->delete();
+        $tipo->delete();
 
     }
 

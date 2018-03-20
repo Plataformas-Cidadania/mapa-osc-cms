@@ -29,7 +29,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/excluir-item/{id}', 'Cms\Controllers\ItemController@excluir');
 
         //ITEMS MROSC
-        Route::get('/cms/items-mrosc/{modulo_id}', 'Cms\Controllers\ItemMroscController@index');
+        Route::get('/cms/items-mrosc/{mrosc_id}', 'Cms\Controllers\ItemMroscController@index');
         Route::get('/cms/listar-items-mrosc', 'Cms\Controllers\ItemMroscController@listar');
         Route::post('/cms/inserir-item-mrosc', 'Cms\Controllers\ItemMroscController@inserir');
         Route::get('/cms/item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@detalhar');
@@ -46,6 +46,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/modulo/{id}', 'Cms\Controllers\ModuloController@detalhar');
         Route::post('/cms/alterar-modulo/{id}', 'Cms\Controllers\ModuloController@alterar');
         Route::get('/cms/excluir-modulo/{id}', 'Cms\Controllers\ModuloController@excluir');
+        
+        //TIPOS
+        Route::get('/cms/tipos', 'Cms\Controllers\TipoController@index');
+        Route::get('/cms/listar-tipos', 'Cms\Controllers\TipoController@listar');
+        Route::post('/cms/inserir-tipo', 'Cms\Controllers\TipoController@inserir');
+        Route::get('/cms/tipo/{id}', 'Cms\Controllers\TipoController@detalhar');
+        Route::post('/cms/alterar-tipo/{id}', 'Cms\Controllers\TipoController@alterar');
+        Route::get('/cms/excluir-tipo/{id}', 'Cms\Controllers\TipoController@excluir');
 
         //NOTICIAS
         Route::get('/cms/noticias', 'Cms\Controllers\NoticiaController@index');

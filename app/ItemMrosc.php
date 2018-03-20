@@ -10,6 +10,6 @@ class ItemMrosc extends Model
     protected $table = 'items_mroscs';
 
     protected $fillable = [
-        'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'cmsuser_id',
+        'imagem', 'titulo', 'descricao', 'arquivo', 'mrosc_id', 'cmsuser_id',
     ];
 }

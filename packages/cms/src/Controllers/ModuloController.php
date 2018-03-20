@@ -20,7 +20,7 @@ class ModuloController extends Controller
     {
         $this->modulo = new \App\Modulo;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'arquivo', 'tipo_id', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/modulos';
         $this->sizesImagem = [
@@ -37,11 +37,12 @@ class ModuloController extends Controller
     function index()
     {
 
+        $tipos = \App\Tipo::pluck('titulo', 'id')->all();
         $modulos = \App\Modulo::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
 
-        return view('cms::modulo.listar', ['modulos' => $modulos/*, 'idiomas' => $idiomas*/]);
+        return view('cms::modulo.listar', ['modulos' => $modulos, 'tipos' => $tipos/*, 'idiomas' => $idiomas*/]);
     }
 
     public function listar(Request $request)
@@ -115,12 +116,13 @@ class ModuloController extends Controller
 
     public function detalhar($id)
     {
+        $tipos = \App\Tipo::pluck('titulo', 'id')->all();
         $modulo = $this->modulo->where([
             ['id', '=', $id],
         ])->firstOrFail();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::modulo.detalhar', ['modulo' => $modulo/*, 'idiomas' => $idiomas*/]);
+        return view('cms::modulo.detalhar', ['modulo' => $modulo, 'tipos' => $tipos/*, 'idiomas' => $idiomas*/]);
     }
 
     /*public function alterar(Request $request, $id)

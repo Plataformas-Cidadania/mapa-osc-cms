@@ -45,5 +45,8 @@ Route::get('itensMrosc', 'ApiController@itensMrosc');*/
 Route::get('ModuloByID/{idModulo}', 'ApiController@moduloByID');
 Route::get('moduloByID/{idModulo}', 'ApiController@moduloByID');
 
+Route::get('ModuloByTipo/{idTipo}', 'ApiController@moduloByTipo');
+Route::get('moduloByTipo/{idTipo}', 'ApiController@moduloByTipo');
+
 Route::get('WebdoorByID/{idWebdoor}', 'ApiController@webdoorByID');
 Route::get('webdoorByID/{idWebdoor}', 'ApiController@webdoorByID');

@@ -1,43 +1,43 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/alterarItemMroscCtrl.js') !!}
-    <div ng-controller="alterarItemMroscCtrl">
+    {!! Html::script('assets-cms/js/controllers/alterarTipoCtrl.js') !!}
+    <div ng-controller="alterarTipoCtrl">
         <div class="box-padrao">
-            <h1><a href="javascript:history.back();"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Items (MROSC)</h1>
-            <?php //print_r($item);?>
-            <div ng-init="carregaImagem('{{$item->imagem}}', '{{$item->arquivo}}')">
+            <h1><a href="javascript:history.back();"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;&nbsp;Tipos</h1>
+            <?php //print_r($tipo);?>
+            <div ng-init="carregaImagem('{{$tipo->imagem}}', '{{$tipo->arquivo}}')">
                 <span class="texto-obrigatorio">* campos obrigatórios</span><br><br>
-                {!! Form::model($item, ['name' =>'form']) !!}
-                <div class="container-thumb">
+                {!! Form::model($tipo, ['name' =>'form']) !!}
+                <div class="container-thumb" style="display: none;">
                     <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
                          ng-show="!picFile && !imagemBD" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
                     <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb">
                     <img ng-show="imagemBD" class="thumb" ng-src="<% imagemBD %>">
                 </div>
-                <br>
-                <span class="btn btn-primary btn-file" ng-show="!picFile && !imagemBD">
+                {{--<br>--}}
+                <span class="btn btn-primary btn-file" ng-show="!picFile && !imagemBD" style="display: none;">
                     Escolher imagem <input  type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
                 </span>
-                <button class="btn btn-danger" ng-click="limparImagem()" ng-show="picFile || imagemBD" type="button">Remover Imagem</button>
+                <button class="btn btn-danger" ng-click="limparImagem()" ng-show="picFile || imagemBD" type="button" style="display: none;">Remover Imagem</button>
                 <i ng-show="form.file.$error.maxSize" style="margin-left: 10px;">Arquivo muito grande <% errorFile.size / 1000000|number:1 %>MB: máximo 2MB</i>
 
-                <br><br>
+                {{--<br><br>--}}
 
-                <span class="btn btn-primary btn-file" ng-show="!fileArquivo && !arquivoBD">
+                <span class="btn btn-primary btn-file" ng-show="!fileArquivo && !arquivoBD" style="display: none;">
                     Escolher Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
                 </span>
                 <button class="btn btn-danger" ng-click="limparArquivo()" ng-show="fileArquivo || arquivoBD" type="button">Remover Arquivo</button>
-                <a href="arquivos/items-mrosc/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
+                <a href="arquivos/tipos/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
                 <a ng-show="fileArquivo"><% fileArquivo.name %></a>
-                <br><br>
+                {{--<br><br>--}}
 
                 <br><br>
-                @include('cms::item_mrosc._form')
-                <input type="hidden" name="id" ng-model="id" ng-init="id='{{$item->id}}'"/>
+                @include('cms::tipo._form')
+                <input type="hidden" name="id" ng-model="id" ng-init="id='{{$tipo->id}}'"/>
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
-                        <button class="btn btn-info" type="button" ng-click="alterar(picFile, fileArquivo)" ng-disabled="form.$invalid && form.item.$dirty">Salvar</button>
+                        <button class="btn btn-info" type="button" ng-click="alterar(picFile, fileArquivo)" ng-disabled="form.$invalid && form.tipo.$dirty">Salvar</button>
                     </div>
                     <div class="col-md-2 col-lg-2 col-xs-6">
                         <span class="progress" ng-show="picFile.progress >= 0">

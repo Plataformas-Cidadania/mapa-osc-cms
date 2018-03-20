@@ -1,6 +1,6 @@
-cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('tipoCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
     
-    $scope.items = [];
+    $scope.tipos = [];
     $scope.currentPage = 1;
     $scope.lastPage = 0;
     $scope.totalItens = 0;
@@ -17,28 +17,25 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
 
     $scope.$watch('currentPage', function(){
         if($listar){
-            listarItems();
+            listarTipos();
         }
     });
     $scope.$watch('itensPerPage', function(){
         if($listar){
-            listarItems();
+            listarTipos();
         }
     });
-    $scope.$watch('dadoItem', function(){
+    $scope.$watch('dadoTipo', function(){
         if($listar){
-            listarItems();
+            listarTipos();
         }
     });
 
-    $scope.$watch('item.mrosc_id', function(){
-        listarItems();
-    });
 
-    var listarItems = function(){
+    var listarTipos = function(){
         $scope.processandoListagem = true;
         $http({
-            url: 'cms/listar-items-mrosc',
+            url: 'cms/listar-tipos',
             method: 'GET',
             params: {
                 page: $scope.currentPage,
@@ -47,11 +44,10 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
                 campos: $scope.campos,
                 campoPesquisa: $scope.campoPesquisa,
                 ordem: $scope.ordem,
-                sentido: $scope.sentidoOrdem,
-                mrosc_id: $scope.item.mrosc_id
+                sentido: $scope.sentidoOrdem
             }
         }).success(function(data, status, headers, config){
-            $scope.items = data.data;
+            $scope.tipos = data.data;
             $scope.lastPage = data.last_page;
             $scope.totalItens = data.total;
             $scope.primeiroDaPagina = data.from;
@@ -76,7 +72,7 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
             $scope.sentidoOrdem = "asc";
         }
 
-        listarItems();
+        listarTipos();
     };
 
     $scope.validar = function(){
@@ -84,7 +80,7 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
     };
     
 
-    //listarItems();
+    listarTipos();
 
     //INSERIR/////////////////////////////
 
@@ -99,13 +95,10 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
         if(file==null && arquivo==null){
             $scope.processandoInserir = true;
 
-            //console.log($scope.item);
-            $http.post("cms/inserir-item-mrosc", {item: $scope.item}).success(function (data){
-                 listarItems();
-                //delete $scope.item;//limpa o form
-                //deleta um por um para não excluir o id da tabela relacionada
-                $scope.item.titulo = '';
-                $scope.item.descricao = '';
+            //console.log($scope.tipo);
+            $http.post("cms/inserir-tipo", {tipo: $scope.tipo}).success(function (data){
+                 listarTipos();
+                 delete $scope.tipo;//limpa o form
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -114,21 +107,19 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
              });
         }else{
 
+
             Upload.upload({
-                url: 'cms/inserir-item-mrosc',
-                data: {item: $scope.item, file: file, arquivo: arquivo},
+                url: 'cms/inserir-tipo',
+                data: {tipo: $scope.tipo, file: file, arquivo: arquivo},
             }).then(function (response) {
                 $timeout(function () {
                     $scope.result = response.data;
                 });
                 console.log(response.data);
-                //delete $scope.item;//limpa o form
-                //deleta um por um para não excluir o id da tabela relacionada
-                $scope.item.titulo = '';
-                $scope.item.descricao = '';
+                delete $scope.tipo;//limpa o form
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
-                listarItems();
+                listarTipos();
                 $scope.mensagemInserir =  "Gravado com sucesso!";
             }, function (response) {
                 console.log(response.data);
@@ -170,14 +161,14 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-item-mrosc/'+id,
+            url: 'cms/excluir-tipo/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);
             $scope.processandoExcluir = false;
             $scope.excluido = true;
             $scope.mensagemExcluido = "Excluído com sucesso!";
-            listarItems();
+            listarTipos();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoExcluir = false;

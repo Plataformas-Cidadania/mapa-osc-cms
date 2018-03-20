@@ -34,7 +34,11 @@ class ApiController extends Controller
     }
 
     public function videoByID($idVideo){
-        return \App\Video::select('titulo as tx_titulo_video', 'link_video as tx_link_video', 'resumida as tx_resumo_video', 'descricao as tx_descricao_video', 'data as dt_video')->find($idVideo);
+        $row = \App\Video::select('titulo as tx_titulo_video', 'link_video as tx_link_video', 'resumida as tx_resumo_video', 'descricao as tx_descricao_video', 'data as dt_video')->find($idVideo);
+
+        $row->tx_descricao_video = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_video);
+
+        return $row;
     }
 
     public function editalByID($idEdital){
@@ -50,10 +54,15 @@ class ApiController extends Controller
     }
 
     public function ConteudoMroscByID($id){
-        //return \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
 
         $conteudoMrosc = \App\Mrosc::select('descricao as tx_descricao_conteudo')->find($id);
-        $itensMrosc = \App\ItemMrosc::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('modulo_id', $id)->get();
+        $itensMrosc = \App\ItemMrosc::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('mrosc_id', $id)->get();
+
+        $conteudoMrosc->tx_descricao_conteudo = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $conteudoMrosc->tx_descricao_conteudo);
+
+        foreach ($itensMrosc as $item) {
+            $item->tx_descricao_itens_mrosc = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $item->tx_descricao_itens_mrosc);
+        }
 
         $return = [
             'conteudoMrosc' => $conteudoMrosc,
@@ -64,13 +73,21 @@ class ApiController extends Controller
     }
 
     public function itensMrosc(){
-        return \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->get();
+        $row =  \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->get();
+
+        $row->tx_descricao_itens_mrosc = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_itens_mrosc);
+
+        return $row;
     }
 
     public function moduloByID($idModulo){
-        //return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
         $modulos =  \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
-        $itens = \App\Item::select('id as cd_itens_mrosc', 'titulo as tx_titulo_itens_mrosc', 'descricao as tx_descricao_itens_mrosc', 'imagem as tx_imagem_itens_mrosc', 'arquivo as tx_arquivo_itens_mrosc')->where('modulo_id', $idModulo)->get();
+        $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('modulo_id', $idModulo)->get();
+
+        $modulos->tx_descricao_modulo = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $modulos->tx_descricao_modulo);
+        foreach ($itens as $item) {
+            $item->tx_descricao_itens = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $item->tx_descricao_itens);
+        }
 
         $return = [
             'modulos' => $modulos,
@@ -80,7 +97,31 @@ class ApiController extends Controller
         return [$return];
     }
 
+    public function moduloByTipo($idTipo){
+        //return \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
+        $modulo =  \App\Modulo::select('id', 'titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->where('tipo_id', $idTipo)->first();
+
+        $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('modulo_id', $modulo->id)->get();
+
+
+        $modulo->tx_descricao_modulo = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $modulo->tx_descricao_modulo);
+        foreach ($itens as $item) {
+            $item->tx_descricao_itens = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $item->tx_descricao_itens);
+        }
+
+        $return = [
+            'modulo' => $modulo,
+            'itens' => $itens,
+        ];
+
+        return [$return];
+    }
+
     public function webdoorByID(){
-        return \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->get();
+        $row = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->get();
+
+        $row->tx_descricao_webdoor = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_webdoor);
+
+        return $row;
     }
 }

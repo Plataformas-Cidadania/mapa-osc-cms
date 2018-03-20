@@ -31,7 +31,7 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
         }
     });
 
-    $scope.$watch('item.modulo_id', function(){
+    $scope.$watch('item.mrosc_id', function(){
         listarItems();
     });
 
@@ -48,7 +48,7 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
                 campoPesquisa: $scope.campoPesquisa,
                 ordem: $scope.ordem,
                 sentido: $scope.sentidoOrdem,
-                modulo_id: $scope.item.modulo_id
+                mrosc_id: $scope.item.mrosc_id
             }
         }).success(function(data, status, headers, config){
             $scope.items = data.data;

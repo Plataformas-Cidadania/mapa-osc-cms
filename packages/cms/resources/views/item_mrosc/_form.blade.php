@@ -1,5 +1,5 @@
 {{--É NECESSÁRIO RODAR O COMANDO composer require illuminate/html E ALTERAR ACRESCENTAR LINHA NO ARQUIVO config/app.php--}}
-{!! Form::hidden('modulo_id', $modulo_id, ['ng-model'=>'item.modulo_id', 'ng-required'=>'true', 'init-model'=>'item.modulo_id', 'placeholder' => '']) !!}<br>
+{!! Form::hidden('mrosc_id', $mrosc_id, ['ng-model'=>'item.mrosc_id', 'ng-required'=>'true', 'init-model'=>'item.mrosc_id', 'placeholder' => '']) !!}<br>
 
 
 {{--

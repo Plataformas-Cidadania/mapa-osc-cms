@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemsMroscsTable extends Migration
+class CreateTiposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,11 @@ class CreateItemsMroscsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items_mroscs', function (Blueprint $table) {
+        Schema::create('tipos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem');
             $table->string('titulo');
-            $table->text('descricao');
             $table->text('arquivo');
-            $table->integer('mrosc_id')->unsigned();
-            $table->foreign('mrosc_id')->references('id')->on('mroscs')->onDelete('cascade');
-/*            $table->integer('idioma_id')->unsigned();
-            $table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');*/
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
@@ -35,6 +30,6 @@ class CreateItemsMroscsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('items_mroscs');
+        Schema::drop('tipos');
     }
 }
