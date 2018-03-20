@@ -50,3 +50,6 @@ Route::get('moduloByTipo/{idTipo}', 'ApiController@moduloByTipo');
 
 Route::get('WebdoorByID/{idWebdoor}', 'ApiController@webdoorByID');
 Route::get('webdoorByID/{idWebdoor}', 'ApiController@webdoorByID');
+
+Route::get('ModulosByTipoID/{idTipo}', 'ApiController@modulosByTipoID');
+Route::get('modulosByTipoID/{idTipo}', 'ApiController@modulosByTipoID');
