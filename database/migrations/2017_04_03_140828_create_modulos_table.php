@@ -18,6 +18,8 @@ class CreateModulosTable extends Migration
             $table->string('titulo');
             $table->text('descricao');
             $table->text('arquivo');
+            $table->integer('tipo_id')->unsigned();
+            $table->foreign('tipo_id')->references('id')->on('tipos')->onDelete('cascade');
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
