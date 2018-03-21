@@ -2,10 +2,10 @@
 {!! Form::select('idioma_id',
         $idiomas,
 null, ['class'=>"form-control width-medio <% validar(modulo.idioma_id) %>", 'ng-model'=>'modulo.idioma_id', 'ng-required'=>'true', 'init-model'=>'modulo.idioma_id', 'placeholder' => 'Selecione']) !!}<br>--}}
-{!! Form::label('tipo_id', 'Tipo *') !!}<br>
+{!! Form::label('tipo_id', 'Tipo') !!}<br>
 {!! Form::select('tipo_id',
         $tipos,
-null, ['class'=>"form-control width-medio <% validar(modulo.tipo_id) %>", 'ng-model'=>'modulo.tipo_id', 'ng-required'=>'true', 'init-model'=>'modulo.tipo_id', 'placeholder' => 'Selecione']) !!}<br>
+null, ['class'=>"form-control width-medio <% validar(modulo.tipo_id) %>", 'ng-model'=>'modulo.tipo_id', 'init-model'=>'modulo.tipo_id', 'placeholder' => 'Sem Tipo']) !!}<br>
 
 
 {!! Form::label('titulo', 'Título *') !!}<br>

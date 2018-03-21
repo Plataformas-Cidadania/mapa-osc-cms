@@ -72,11 +72,16 @@ class ModuloController extends Controller
 
         $data['modulo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
+
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 $data['modulo'] += [$campo => ''];
             }
+        }
+
+        if(empty($data['modulo']['tipo_id'])){
+            $data['modulo']['tipo_id'] = 0;
         }
 
         $file = $request->file('file');
@@ -189,6 +194,9 @@ class ModuloController extends Controller
             ['id', '=', $id],
         ])->firstOrFail();
 
+        if(empty($data['modulo']['tipo_id'])){
+            $data['modulo']['tipo_id'] = 0;
+        }
 
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
