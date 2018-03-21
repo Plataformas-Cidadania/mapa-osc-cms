@@ -81,7 +81,7 @@ class ApiController extends Controller
     }
 
     public function moduloByID($idModulo){
-        $modulos =  \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
+        $modulos =  \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'slug as tx_slug_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->find($idModulo);
         $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('modulo_id', $idModulo)->get();
 
         $modulos->tx_descricao_modulo = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $modulos->tx_descricao_modulo);
@@ -99,7 +99,7 @@ class ApiController extends Controller
 
     public function moduloByTipo($idTipo){
 
-        $modulo =  \App\Modulo::select('id', 'titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->where('tipo_id', $idTipo)->first();
+        $modulo =  \App\Modulo::select('id', 'titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'slug as tx_slug_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->where('tipo_id', $idTipo)->first();
 
         $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('modulo_id', $modulo->id)->get();
 
