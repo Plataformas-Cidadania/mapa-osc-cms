@@ -15,9 +15,9 @@ class CreateMroscsTable extends Migration
         Schema::create('mroscs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem');
-            $table->string('titulo');
-            $table->text('descricao');
-            $table->text('arquivo');
+            $table->string('titulo')->nullable();
+            $table->text('descricao')->nullable();
+            $table->text('arquivo')->nullable();
 /*            $table->text('slug');
             $table->integer('idioma_id')->unsigned();
             $table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');*/

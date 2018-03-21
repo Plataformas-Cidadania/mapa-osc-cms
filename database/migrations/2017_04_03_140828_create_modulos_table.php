@@ -14,10 +14,11 @@ class CreateModulosTable extends Migration
     {
         Schema::create('modulos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('imagem');
-            $table->string('titulo');
-            $table->text('descricao');
-            $table->text('arquivo');
+            $table->string('imagem')->nullable();
+            $table->string('titulo')->nullable();
+            $table->text('descricao')->nullable();
+            $table->text('arquivo')->nullable();
+            $table->text('slug')->nullable();
             $table->integer('tipo_id')->unsigned();
             $table->foreign('tipo_id')->references('id')->on('tipos')->onDelete('cascade');
             $table->integer('cmsuser_id')->unsigned();

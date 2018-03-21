@@ -14,8 +14,8 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
-            $table->string('link_video');
+            $table->string('titulo')->nullable();
+            $table->string('link_video')->nullable();
             //$table->integer('idioma_id')->unsigned();
             //$table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('restrict');
             $table->integer('cmsuser_id')->unsigned();

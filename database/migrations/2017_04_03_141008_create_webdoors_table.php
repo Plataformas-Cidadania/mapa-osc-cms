@@ -15,9 +15,9 @@ class CreateWebdoorsTable extends Migration
         Schema::create('webdoors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem');
-            $table->string('titulo');
-            $table->text('descricao');
-            $table->text('link');
+            $table->string('titulo')->nullable();
+            $table->text('descricao')->nullable();
+            $table->text('link')->nullable();
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
