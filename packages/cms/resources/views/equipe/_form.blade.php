@@ -14,8 +14,8 @@ null, ['class'=>"form-control width-medio <% validar(equipe.tipo_id) %>", 'ng-mo
 
 
 
-{!! Form::label('titulo', 'Título *') !!}<br>
+{!! Form::label('titulo', 'Nome *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(equipe.titulo) %>", 'ng-model'=>'equipe.titulo', 'ng-required'=>'true', 'init-model'=>'equipe.titulo', 'placeholder' => '']) !!}<br>
 
-{!! Form::label('url', 'Descrição url *') !!}<br>
+{!! Form::label('url', 'Link') !!}<br>
 {!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(equipe.url) %>", 'ng-model'=>'equipe.url',  'init-model'=>'equipe.url', 'placeholder' => '']) !!}<br>

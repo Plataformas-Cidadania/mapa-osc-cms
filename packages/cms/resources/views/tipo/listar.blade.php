@@ -119,18 +119,18 @@
             <div class="col-md-12">
                 <!--<button class="btn btn-primary btn-block" ng-click="loadMore()" ng-hide="currentPage==lastPage">Load More</button>-->
                 <div ng-show="totalItens > 0" class="clan-paginacao">
-                    <div class="tipo-paginacao">
-                        <uib-pagination total-tipos="totalItens" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" tipos-per-page="itensPerPage" num-pages="numPages"></uib-pagination>
+                    <div class="item-paginacao">
+                        <uib-pagination total-items="totalItens" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="itensPerPage" num-pages="numPages"></uib-pagination>
                     </div>
-                    <div class="tipo-paginacao">
-                        <select class="form-control itens-por-pagina tipo-paginacao"  ng-model="itensPerPage">
+                    <div class="item-paginacao">
+                        <select class="form-control itens-por-pagina item-paginacao"  ng-model="itensPerPage">
                             <option ng-selected="true">10</option>
                             <option>25</option>
                             <option>50</option>
                             <option>100</option>
                         </select>
                     </div>
-                    <div class="tipo-paginacao">
+                    <div class="item-paginacao">
                         <div class="resumo-pagina">&nbsp; <% primeiroDaPagina %> - <% (ultimoDaPagina) %> de <% totalItens %></div>
                     </div>
                 </div>
