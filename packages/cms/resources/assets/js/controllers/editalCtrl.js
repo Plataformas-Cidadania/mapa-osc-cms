@@ -25,7 +25,7 @@ cmsApp.controller('editalCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             listarEditais();
         }
     });
-    $scope.$watch('dadoEdital', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarEditais();
         }

@@ -1,16 +1,16 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/editalCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/linkCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="editalCtrl">
+    <div ng-controller="linkCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-edital" aria-hidden="true"></i>&nbsp;Editais</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Edital</button>
+            <h1><i class="fa fa-link" aria-hidden="true"></i>&nbsp;Links</h1>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Nova Link</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">
@@ -33,14 +33,14 @@
 
                 <br><br>
 
-                <span class="btn btn-primary btn-file" ng-show="!fileArquivo">
+                <span class="btn btn-primary btn-file" ng-show="!fileArquivo" style="display: none">
                     Escolher Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
                 </span>
                 <a ng-show="fileArquivo"><% fileArquivo.name %></a>
 
 
                 <br><br>
-                @include('cms::edital._form')
+                @include('cms::link._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
@@ -76,36 +76,36 @@
                         <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     </div>
                     <br>
-                    <div><% mensagemEditalr %></div>
+                    <div><% mensagemLinkr %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                     <h2 class="tabela_vazia" ng-show="!processandoListagem && totalItens==0">Nenhum registro encontrado!</h2>
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="editalr:pointer;">
+                            <th ng-click="ordernarPor('id')" style="linkr:pointer;">
                                 Id
                                 <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th>Imagem</th>
-                            <th ng-click="ordernarPor('edital')" style="editalr:pointer;">
-                                Edital
-                                <i ng-if="ordem=='edital' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='edital' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            <th ng-click="ordernarPor('link')" style="linkr:pointer;">
+                                Link
+                                <i ng-if="ordem=='link' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='link' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="edital in editais">
-                            <td><% edital.id %></td>
-                            <td><img ng-show="edital.imagem" ng-src="imagens/editais/xs-<% edital.imagem %>" width="60"></td>
-                            <td><a href="cms/edital/<% edital.id %>"><% edital.titulo %></a></td>
+                        <tr ng-repeat="link in links">
+                            <td><% link.id %></td>
+                            <td><img ng-show="link.imagem" ng-src="imagens/links/xs-<% link.imagem %>" width="60"></td>
+                            <td><a href="cms/link/<% link.id %>"><% link.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    {{--<a href="cms/items/<% edital.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
-                                    <a href="cms/edital/<% edital.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(edital.id, edital.titulo, edital.imagem)"></i></a>
+                                    {{--<a href="cms/items/<% link.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
+                                    <a href="cms/link/<% link.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(link.id, link.titulo, link.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -119,18 +119,18 @@
             <div class="col-md-12">
                 <!--<button class="btn btn-primary btn-block" ng-click="loadMore()" ng-hide="currentPage==lastPage">Load More</button>-->
                 <div ng-show="totalItens > 0" class="clan-paginacao">
-                    <div class="edital-paginacao">
-                        <uib-pagination total-editais="totalItens" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" editais-per-page="itensPerPage" num-pages="numPages"></uib-pagination>
+                    <div class="link-paginacao">
+                        <uib-pagination total-links="totalItens" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true" links-per-page="itensPerPage" num-pages="numPages"></uib-pagination>
                     </div>
-                    <div class="edital-paginacao">
-                        <select class="form-control itens-por-pagina edital-paginacao"  ng-model="itensPerPage">
+                    <div class="link-paginacao">
+                        <select class="form-control itens-por-pagina link-paginacao"  ng-model="itensPerPage">
                             <option ng-selected="true">10</option>
                             <option>25</option>
                             <option>50</option>
                             <option>100</option>
                         </select>
                     </div>
-                    <div class="edital-paginacao">
+                    <div class="link-paginacao">
                         <div class="resumo-pagina">&nbsp; <% primeiroDaPagina %> - <% (ultimoDaPagina) %> de <% totalItens %></div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img  ng-src="imagens/editais/xs-<% imagemExcluir %>" width="100">
+                                <img  ng-src="imagens/links/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
                                 <p><% tituloExcluir %></p>

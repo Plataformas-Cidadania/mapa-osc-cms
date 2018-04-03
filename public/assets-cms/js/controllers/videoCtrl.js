@@ -26,7 +26,7 @@ cmsApp.controller('videoCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
             listarVideos();
         }
     });
-    $scope.$watch('dadoVideo', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarVideos();
         }

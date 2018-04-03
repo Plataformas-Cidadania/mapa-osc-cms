@@ -25,11 +25,12 @@ cmsApp.controller('tipoCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             listarTipos();
         }
     });
-    $scope.$watch('dadoTipo', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarTipos();
         }
     });
+
 
 
     var listarTipos = function(){

@@ -56,3 +56,9 @@ Route::get('modulosByTipoID/{idTipo}', 'ApiController@modulosByTipoID');
 
 Route::get('ModuloBySlug/{slug}', 'ApiController@ModuloBySlug');
 Route::get('moduloBySlug/{slug}', 'ApiController@moduloBySlug');
+
+Route::get('Links/', 'ApiController@links');
+Route::get('links/', 'ApiController@links');
+
+Route::get('Equipes/', 'ApiController@equipes');
+Route::get('equipes/', 'ApiController@equipes');

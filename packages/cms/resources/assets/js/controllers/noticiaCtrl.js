@@ -25,7 +25,7 @@ cmsApp.controller('noticiaCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
             listarNoticias();
         }
     });
-    $scope.$watch('dadoNoticia', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarNoticias();
         }

@@ -9,7 +9,7 @@
 </script>
     <div ng-controller="itemCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-item" aria-hidden="true"></i>&nbsp;Items</h1>
+            <h1><a href="javascript:history.back();"><i class="fa fa-arrow-circle-left"></i></a>&nbsp;Items</h1>
             <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Item</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
@@ -73,7 +73,7 @@
                 <div class="box-padrao">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                        <input class="form-control" type="text" ng-model="dadoItem" placeholder="Faça sua busca"/>
+                        <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     </div>
                     <br>
                     <div><% mensagemItemr %></div>

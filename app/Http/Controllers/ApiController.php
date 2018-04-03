@@ -153,4 +153,24 @@ class ApiController extends Controller
 
         return $webdoors;
     }
+    
+    public function links(){
+        $links = \App\Link::select('titulo as tx_titulo_link', 'descricao as tx_descricao_link', 'imagem as tx_imagem_link', 'url as tx_link_link')->get();
+
+        foreach ($links as $link) {
+            $link->tx_descricao_link = str_replace('/imagens/links', env('APP_URL').'/imagens/geral', $link->tx_descricao_link);
+        }
+
+        return $links;
+    }    
+    
+    public function equipes(){
+        $equipes = \App\Equipe::select('tipo_id as cd_equipe', 'titulo as tx_titulo_equipe', 'imagem as tx_imagem_equipe', 'url as tx_equipe_equipe')->get();
+
+        foreach ($equipes as $equipe) {
+            $equipe->tx_descricao_equipe = str_replace('/imagens/equipes', env('APP_URL').'/imagens/geral', $equipe->tx_descricao_equipe);
+        }
+
+        return $equipes;
+    }
 }

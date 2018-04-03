@@ -25,7 +25,7 @@ cmsApp.controller('itemMroscCtrl', ['$scope', '$http', 'Upload', '$timeout', fun
             listarItems();
         }
     });
-    $scope.$watch('dadoItem', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarItems();
         }

@@ -26,7 +26,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
             listarMroscs();
         }
     });
-    $scope.$watch('dadoMrosc', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarMroscs();
         }

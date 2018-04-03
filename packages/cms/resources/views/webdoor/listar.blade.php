@@ -69,7 +69,7 @@
                 <div class="box-padrao">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                        <input class="form-control" type="text" ng-model="dadoWebdoor" placeholder="Faça sua busca"/>
+                        <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     </div>
                     <br>
                     <div><% mensagemWebdoorr %></div>

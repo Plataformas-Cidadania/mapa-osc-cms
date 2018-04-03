@@ -63,6 +63,22 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-noticia/{id}', 'Cms\Controllers\NoticiaController@alterar');
         Route::get('/cms/excluir-noticia/{id}', 'Cms\Controllers\NoticiaController@excluir');
 
+        //LINKS
+        Route::get('/cms/links', 'Cms\Controllers\LinkController@index');
+        Route::get('/cms/listar-links', 'Cms\Controllers\LinkController@listar');
+        Route::post('/cms/inserir-link', 'Cms\Controllers\LinkController@inserir');
+        Route::get('/cms/link/{id}', 'Cms\Controllers\LinkController@detalhar');
+        Route::post('/cms/alterar-link/{id}', 'Cms\Controllers\LinkController@alterar');
+        Route::get('/cms/excluir-link/{id}', 'Cms\Controllers\LinkController@excluir');
+        
+        //EQUIPES
+        Route::get('/cms/equipes', 'Cms\Controllers\EquipeController@index');
+        Route::get('/cms/listar-equipes', 'Cms\Controllers\EquipeController@listar');
+        Route::post('/cms/inserir-equipe', 'Cms\Controllers\EquipeController@inserir');
+        Route::get('/cms/equipe/{id}', 'Cms\Controllers\EquipeController@detalhar');
+        Route::post('/cms/alterar-equipe/{id}', 'Cms\Controllers\EquipeController@alterar');
+        Route::get('/cms/excluir-equipe/{id}', 'Cms\Controllers\EquipeController@excluir');
+
         //EDITAIS
         Route::get('/cms/editais', 'Cms\Controllers\EditalController@index');
         Route::get('/cms/listar-editais', 'Cms\Controllers\EditalController@listar');

@@ -63,6 +63,14 @@ elixir(function(mix) {
     //Noticias
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/noticiaCtrl.js', 'public/assets-cms/js/controllers/noticiaCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarNoticiaCtrl.js', 'public/assets-cms/js/controllers/alterarNoticiaCtrl.js');
+
+    //Links
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/linkCtrl.js', 'public/assets-cms/js/controllers/linkCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarLinkCtrl.js', 'public/assets-cms/js/controllers/alterarLinkCtrl.js');
+    
+    //Equipes
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/equipeCtrl.js', 'public/assets-cms/js/controllers/equipeCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarEquipeCtrl.js', 'public/assets-cms/js/controllers/alterarEquipeCtrl.js');
     
     //Editais
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/editalCtrl.js', 'public/assets-cms/js/controllers/editalCtrl.js');

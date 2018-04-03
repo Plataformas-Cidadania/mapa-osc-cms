@@ -26,7 +26,7 @@ cmsApp.controller('webdoorCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
             listarWebdoors();
         }
     });
-    $scope.$watch('dadoWebdoor', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarWebdoors();
         }

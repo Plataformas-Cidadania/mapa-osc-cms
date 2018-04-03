@@ -25,7 +25,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             listarModulos();
         }
     });
-    $scope.$watch('dadoModulo', function(){
+    $scope.$watch('dadoPesquisa', function(){
         if($listar){
             listarModulos();
         }

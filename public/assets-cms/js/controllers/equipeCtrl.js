@@ -1,6 +1,6 @@
-cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('equipeCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
     
-    $scope.mroscs = [];
+    $scope.equipes = [];
     $scope.currentPage = 1;
     $scope.lastPage = 0;
     $scope.totalItens = 0;
@@ -15,28 +15,27 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
     $scope.sentidoOrdem = "asc";
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
-
     $scope.$watch('currentPage', function(){
         if($listar){
-            listarMroscs();
+            listarEquipes();
         }
     });
     $scope.$watch('itensPerPage', function(){
         if($listar){
-            listarMroscs();
+            listarEquipes();
         }
     });
     $scope.$watch('dadoPesquisa', function(){
         if($listar){
-            listarMroscs();
+            listarEquipes();
         }
     });
 
 
-    var listarMroscs = function(){
+    var listarEquipes = function(){
         $scope.processandoListagem = true;
         $http({
-            url: 'cms/listar-mroscs',
+            url: 'cms/listar-equipes',
             method: 'GET',
             params: {
                 page: $scope.currentPage,
@@ -48,7 +47,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
                 sentido: $scope.sentidoOrdem
             }
         }).success(function(data, status, headers, config){
-            $scope.mroscs = data.data;
+            $scope.equipes = data.data;
             $scope.lastPage = data.last_page;
             $scope.totalItens = data.total;
             $scope.primeiroDaPagina = data.from;
@@ -73,7 +72,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
             $scope.sentidoOrdem = "asc";
         }
 
-        listarMroscs();
+        listarEquipes();
     };
 
     $scope.validar = function(){
@@ -81,7 +80,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
     };
     
 
-    listarMroscs();
+    listarEquipes();
 
     //INSERIR/////////////////////////////
 
@@ -96,10 +95,15 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
         if(file==null && arquivo==null){
             $scope.processandoInserir = true;
 
-            //console.log($scope.mrosc);
-            $http.post("cms/inserir-mrosc", {mrosc: $scope.mrosc}).success(function (data){
-                 listarMroscs();
-                 delete $scope.mrosc;//limpa o form
+            //console.log($scope.equipe);
+            $http.post("cms/inserir-equipe", {equipe: $scope.equipe}).success(function (data){
+                 listarEquipes();
+                //delete $scope.equipe;//limpa o form
+                delete $scope.equipe.data;
+                delete $scope.equipe.titulo;
+                delete $scope.equipe.resumida;
+                delete $scope.equipe.slug;
+                delete $scope.equipe.descricao;
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -110,17 +114,22 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
 
 
             Upload.upload({
-                url: 'cms/inserir-mrosc',
-                data: {mrosc: $scope.mrosc, file: file, arquivo: arquivo},
+                url: 'cms/inserir-equipe',
+                data: {equipe: $scope.equipe, file: file, arquivo: arquivo},
             }).then(function (response) {
                 $timeout(function () {
                     $scope.result = response.data;
                 });
-                console.log(response.data);
-                delete $scope.mrosc;//limpa o form
+                //console.log(response.data);
+                //delete $scope.equipe;//limpa o form
+                delete $scope.equipe.data;
+                delete $scope.equipe.titulo;
+                delete $scope.equipe.resumida;
+                delete $scope.equipe.slug;
+                delete $scope.equipe.descricao;
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
-                listarMroscs();
+                listarEquipes();
                 $scope.mensagemInserir =  "Gravado com sucesso!";
             }, function (response) {
                 console.log(response.data);
@@ -157,19 +166,19 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
         $scope.imagemExcluir = imagem;
         $scope.excluido = false;
         $scope.mensagemExcluido = "";
-    }
+    };
 
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-mrosc/'+id,
+            url: 'cms/excluir-equipe/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);
             $scope.processandoExcluir = false;
             $scope.excluido = true;
             $scope.mensagemExcluido = "Excluído com sucesso!";
-            listarMroscs();
+            listarEquipes();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoExcluir = false;

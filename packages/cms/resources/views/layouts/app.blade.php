@@ -81,10 +81,10 @@
                     <a href="cms/tipos"><i class="fa fa-fw fa-building"></i> Tipo</a>
                 </li>
                 <li>
-                    <a href="cms/modulos"><i class="fa fa-fw fa-building"></i> Modulos</a>
+                    <a href="cms/modulos"><i class="fa fa-fw fa-book"></i> Modulos</a>
                 </li>
                 <li>
-                    <a href="cms/mroscs"><i class="fa fa-fw fa-desktop"></i> MROSC</a>
+                    <a href="cms/mroscs"><i class="fa fa-fw fa-archive"></i> MROSC</a>
                 </li>
                 <li>
                     <a href="cms/webdoors"><i class="fa fa-fw fa-desktop"></i> Webdoor</a>
@@ -93,10 +93,16 @@
                     <a href="cms/noticias"><i class="fa fa-fw fa-newspaper-o"></i> Notícias</a>
                 </li>
                 <li>
-                    <a href="cms/editais"><i class="fa fa-fw fa-newspaper-o"></i> Editais</a>
+                    <a href="cms/editais"><i class="fa fa-fw fa-file"></i> Editais</a>
                 </li>
                 <li>
-                    <a href="cms/videos"><i class="fa fa-fw fa-newspaper-o"></i> Vídeos</a>
+                    <a href="cms/videos"><i class="fa fa-fw fa-video-camera"></i> Vídeos</a>
+                </li>
+                <li>
+                    <a href="cms/links"><i class="fa fa-fw fa-link"></i> Links</a>
+                </li>
+                <li>
+                    <a href="cms/equipes"><i class="fa fa-fw fa-user"></i> Equipe</a>
                 </li>
 
                 <li>

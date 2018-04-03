@@ -59,7 +59,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box-padrao">
-                    <input class="form-control" type="text" ng-model="dadoCmsuser" placeholder="Faça sua busca"/>
+                    <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     <br>
                     <div><% mensagemCmsuserr %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
