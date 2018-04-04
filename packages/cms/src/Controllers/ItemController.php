@@ -57,7 +57,7 @@ class ItemController extends Controller
         $items = DB::table('items')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
                 ['modulo_id', $request->modulo_id],
             ])
             ->orderBy($request->ordem, $request->sentido)

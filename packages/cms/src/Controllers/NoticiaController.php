@@ -57,7 +57,7 @@ class NoticiaController extends Controller
         $noticias = DB::table('noticias')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);

@@ -56,7 +56,7 @@ class TipoController extends Controller
         $tipos = DB::table('tipos')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);

@@ -57,7 +57,7 @@ class LinkController extends Controller
         $links = DB::table('links')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);

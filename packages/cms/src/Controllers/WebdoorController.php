@@ -52,7 +52,7 @@ class WebdoorController extends Controller
         $webdoors = DB::table('webdoors')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);

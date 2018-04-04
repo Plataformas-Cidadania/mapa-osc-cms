@@ -57,7 +57,7 @@ class ItemMroscController extends Controller
         $items = DB::table('items_mroscs')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
                 ['mrosc_id', $request->mrosc_id],
             ])
             ->orderBy($request->ordem, $request->sentido)

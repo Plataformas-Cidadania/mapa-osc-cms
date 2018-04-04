@@ -40,7 +40,7 @@ class CmsUserController extends Controller
         $cmsusers = DB::table('cms_users')
             ->select($campos)
             ->where([
-                [$request->campoPesquisa, 'like', "%$request->dadoPesquisa%"],
+                [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
