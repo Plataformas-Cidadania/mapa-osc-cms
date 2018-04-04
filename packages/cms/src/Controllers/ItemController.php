@@ -20,7 +20,7 @@ class ItemController extends Controller
     {
         $this->item = new \App\Item;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'arquivo', 'modulo_id', 'posicao', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/items';
         $this->sizesImagem = [
