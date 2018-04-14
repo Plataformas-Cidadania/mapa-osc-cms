@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEquipesTable extends Migration
+class CreateItemsVersoesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,17 @@ class CreateEquipesTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipes', function (Blueprint $table) {
+        Schema::create('items_versoes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem')->nullable();
-            $table->string('titulo')->nullable();
-            $table->string('sub_titulo')->nullable();
-            $table->text('descricao')->nullable();
             $table->text('arquivo')->nullable();
+            $table->integer('tipo_id')->nullable();
+            $table->string('titulo')->nullable();
+            $table->string('url')->nullable();
+            
+            $table->integer('versao_id')->unsigned();
+            $table->foreign('versao_id')->references('id')->on('versoes')->onDelete('cascade');
+
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
@@ -32,6 +36,6 @@ class CreateEquipesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('equipes');
+        Schema::drop('items_versoes');
     }
 }

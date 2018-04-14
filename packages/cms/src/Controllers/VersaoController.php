@@ -11,18 +11,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
-class EquipeController extends Controller
+class VersaoController extends Controller
 {
-    
-    
+
 
     public function __construct()
     {
-        $this->equipe = new \App\Equipe;
+        $this->versao = new \App\Versao;
         $this->campos = [
-            'imagem', 'titulo', 'sub_titulo', 'descricao', 'arquivo', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'arquivo', 'cmsuser_id',
         ];
-        $this->pathImagem = public_path().'/imagens/equipes';
+        $this->pathImagem = public_path().'/imagens/versoes';
         $this->sizesImagem = [
             'xs' => ['width' => 140, 'height' => 79],
             'sm' => ['width' => 480, 'height' => 270],
@@ -31,18 +30,18 @@ class EquipeController extends Controller
         ];
         $this->widthOriginal = true;
 
-        $this->pathArquivo = public_path().'/arquivos/equipes';
+        $this->pathArquivo = public_path().'/arquivos/versoes';
     }
 
     function index()
     {
 
-        $equipes = \App\Equipe::all();
+        $versoes = \App\Versao::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
 
-        return view('cms::equipe.listar', ['equipes' => $equipes]);
-        //return view('cms::equipe.listar', ['equipes' => $equipes, 'idiomas' => $idiomas]);
+        return view('cms::versao.listar', ['versoes' => $versoes]);
+        //return view('cms::versao.listar', ['versoes' => $versoes, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
@@ -54,14 +53,14 @@ class EquipeController extends Controller
 
         $campos = explode(", ", $request->campos);
 
-        $equipes = DB::table('equipes')
+        $versoes = DB::table('versoes')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
-        return $equipes;
+        return $versoes;
     }
 
 
@@ -70,19 +69,18 @@ class EquipeController extends Controller
 
         $data = $request->all();
 
-        $data['equipe'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['versao'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
-                $data['equipe'] += [$campo => ''];
+                $data['versao'] += [$campo => ''];
             }
         }
 
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
-	
-	Log::info($request);
+
 
         $successFile = true;
         if($file!=null){
@@ -90,7 +88,7 @@ class EquipeController extends Controller
             $imagemCms = new ImagemCms();
             $successFile = $imagemCms->inserir($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal);
             if($successFile){
-                $data['equipe']['imagem'] = $filename;
+                $data['versao']['imagem'] = $filename;
             }
         }
 
@@ -99,76 +97,34 @@ class EquipeController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['equipe']['arquivo'] = $filenameArquivo;
+                $data['versao']['arquivo'] = $filenameArquivo;
             }
         }
 
 
         if($successFile && $successArquivo){
-            return $this->equipe->create($data['equipe']);
+            return $this->versao->create($data['versao']);
         }else{
             return "erro";
         }
 
 
-        return $this->equipe->create($data['equipe']);
+        return $this->versao->create($data['versao']);
 
     }
 
     public function detalhar($id)
     {
-        $equipe = $this->equipe->where([
+        $versao = $this->versao->where([
             ['id', '=', $id],
         ])->firstOrFail();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::equipe.detalhar', ['equipe' => $equipe]);
-        //return view('cms::equipe.detalhar', ['equipe' => $equipe, 'idiomas' => $idiomas]);
+        return view('cms::versao.detalhar', ['versao' => $versao]);
+        //return view('cms::versao.detalhar', ['versao' => $versao, 'idiomas' => $idiomas]);
     }
 
-    /*public function alterar(Request $request, $id)
-    {
-        $data = $request->all();
-        $data['equipe'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
-        //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
-        foreach($this->campos as $campo){
-            if(!array_key_exists($campo, $data)){
-                if($campo!='imagem'){
-                    $data['equipe'] += [$campo => ''];
-                }
-            }
-        }
-        $equipe = $this->equipe->where([
-            ['id', '=', $id],
-        ])->firstOrFail();
-
-        $file = $request->file('file');
-
-        if($file!=null){
-            $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
-            $imagemCms = new ImagemCms();
-            $success = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $equipe);
-            if($success){
-                $data['equipe']['imagem'] = $filename;
-                $equipe->update($data['equipe']);
-                return $equipe->imagem;
-            }else{
-                return "erro";
-            }
-        }
-
-        //remover imagem
-        if($data['removerImagem']){
-            $data['equipe']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$equipe->imagem)) {
-                unequipe($this->pathImagem . "/" . $equipe->imagem);
-            }
-        }
-
-        $equipe->update($data['equipe']);
-        return "Gravado com sucesso";
-    }*/
 
     public function alterar(Request $request, $id)
     {
@@ -176,17 +132,17 @@ class EquipeController extends Controller
 
         //return $data;
 
-        $data['equipe'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['versao'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem' && $campo!='arquivo'){
-                    $data['equipe'] += [$campo => ''];
+                    $data['versao'] += [$campo => ''];
                 }
             }
         }
-        $equipe = $this->equipe->where([
+        $versao = $this->versao->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
@@ -194,21 +150,19 @@ class EquipeController extends Controller
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
 
-	Log::info($request);
-
         //remover imagem
         if($data['removerImagem']){
-            $data['equipe']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$equipe->imagem)) {
-                unequipe($this->pathImagem . "/" . $equipe->imagem);
+            $data['versao']['imagem'] = '';
+            if(file_exists($this->pathImagem."/".$versao->imagem)) {
+                unlink($this->pathImagem . "/" . $versao->imagem);
             }
         }
 
 
         if($data['removerArquivo']){
-            $data['equipe']['arquivo'] = '';
-            if(file_exists($this->pathArquivo."/".$equipe->arquivo)) {
-                unequipe($this->pathArquivo . "/" . $equipe->arquivo);
+            $data['versao']['arquivo'] = '';
+            if(file_exists($this->pathArquivo."/".$versao->arquivo)) {
+                unlink($this->pathArquivo . "/" . $versao->arquivo);
             }
         }
 
@@ -217,9 +171,9 @@ class EquipeController extends Controller
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
             $imagemCms = new ImagemCms();
-            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $equipe);
+            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $versao);
             if($successFile){
-                $data['equipe']['imagem'] = $filename;
+                $data['versao']['imagem'] = $filename;
             }
         }
 
@@ -228,19 +182,19 @@ class EquipeController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['equipe']['arquivo'] = $filenameArquivo;
+                $data['versao']['arquivo'] = $filenameArquivo;
             }
         }
 
         if($successFile && $successArquivo){
 
-            $equipe->update($data['equipe']);
-            return $equipe->imagem;
+            $versao->update($data['versao']);
+            return $versao->imagem;
         }else{
             return "erro";
         }
 
-        //$equipe->update($data['equipe']);
+        //$versao->update($data['versao']);
         //return "Gravado com sucesso";
     }
 
@@ -248,25 +202,25 @@ class EquipeController extends Controller
     {
         //Auth::loginUsingId(2);
 
-        $equipe = $this->equipe->where([
+        $versao = $this->versao->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
         //remover imagens        
-        if(!empty($equipe->imagem)){
+        if(!empty($versao->imagem)){
             //remover imagens
             $imagemCms = new ImagemCms();
-            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $equipe);
+            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $versao);
         }
 
 
-        if(!empty($equipe->arquivo)) {
-            if (file_exists($this->pathArquivo . "/" . $equipe->arquivo)) {
-                unequipe($this->pathArquivo . "/" . $equipe->arquivo);
+        if(!empty($versao->arquivo)) {
+            if (file_exists($this->pathArquivo . "/" . $versao->arquivo)) {
+                unlink($this->pathArquivo . "/" . $versao->arquivo);
             }
         }
 
-        $equipe->delete();
+        $versao->delete();
 
     }
 

@@ -45,6 +45,9 @@
 .bg-pri-gray {
   background-color: #f6f6f6;
 }
+.color-success {
+  color: #5cb85c;
+}
 .thumb {
   width: 140px;
   float: none;

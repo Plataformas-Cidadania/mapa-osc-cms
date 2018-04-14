@@ -176,6 +176,28 @@ cmsApp.controller('tipoCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             $scope.mensagemExcluido = "Erro ao tentar excluir!";
         });
     };
+
+    $scope.status = function(id){
+        //console.log(id);
+        $scope.mensagemStatus = '';
+        $scope.idStatus = '';
+        $scope.processandoStatus = true;
+        $http({
+            url: 'cms/status-tipo/'+id,
+            method: 'GET'
+        }).success(function(data, status, headers, config){
+            //console.log(data);
+            $scope.processandoStatus = false;
+            //$scope.excluido = true;
+            $scope.mensagemStatus = 'color-success';
+            $scope.idStatus = id;
+            listarTipos();
+        }).error(function(data){
+            $scope.message = "Ocorreu um erro: "+data;
+            $scope.processandoStatus = false;
+            $scope.mensagemStatus = "Erro ao tentar status!";
+        });
+    };
     //////////////////////////////////
 
 

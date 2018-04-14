@@ -88,6 +88,15 @@ elixir(function(mix) {
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/itemMroscCtrl.js', 'public/assets-cms/js/controllers/itemMroscCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarItemMroscCtrl.js', 'public/assets-cms/js/controllers/alterarItemMroscCtrl.js');
 
+  
+    //Versoes
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/versaoCtrl.js', 'public/assets-cms/js/controllers/versaoCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarVersaoCtrl.js', 'public/assets-cms/js/controllers/alterarVersaoCtrl.js');
+
+    //Items Versao
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/itemVersaoCtrl.js', 'public/assets-cms/js/controllers/itemVersaoCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarItemVersaoCtrl.js', 'public/assets-cms/js/controllers/alterarItemVersaoCtrl.js');
+
     //CmsUsers
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/cmsUserCtrl.js', 'public/assets-cms/js/controllers/cmsUserCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarCmsUserCtrl.js', 'public/assets-cms/js/controllers/alterarCmsUserCtrl.js');

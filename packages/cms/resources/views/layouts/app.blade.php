@@ -102,9 +102,8 @@
                     <a href="cms/links"><i class="fa fa-fw fa-link"></i> Links</a>
                 </li>
                 <li>
-                    <a href="cms/equipes"><i class="fa fa-fw fa-user"></i> Equipe</a>
+                    <a href="cms/equipe/1"><i class="fa fa-fw fa-user"></i> Equipe</a>
                 </li>
-
                 <li>
                     <a href="cms/usuarios"><i class="fa fa-fw fa-users"></i> Usuários</a>
                 </li>

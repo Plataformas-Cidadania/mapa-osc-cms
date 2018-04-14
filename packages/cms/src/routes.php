@@ -36,6 +36,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@alterar');
         Route::get('/cms/excluir-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@excluir');
 
+        //ITEMS VERSAO
+        Route::get('/cms/items-versao/{versao_id}', 'Cms\Controllers\ItemVersaoController@index');
+        Route::get('/cms/listar-items-versao', 'Cms\Controllers\ItemVersaoController@listar');
+        Route::post('/cms/inserir-item-versao', 'Cms\Controllers\ItemVersaoController@inserir');
+        Route::get('/cms/item-versao/{id}', 'Cms\Controllers\ItemVersaoController@detalhar');
+        Route::post('/cms/alterar-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@alterar');
+        Route::get('/cms/excluir-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@excluir');
+
         //Route::get('/cms/teste-excel', 'Cms\Controllers\SerieController@testeExcel');
         Route::get('/cms/teste-excel/{id}/{arquivo}', 'Cms\Controllers\SerieController@testeExcel');
 
@@ -54,6 +62,8 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/tipo/{id}', 'Cms\Controllers\TipoController@detalhar');
         Route::post('/cms/alterar-tipo/{id}', 'Cms\Controllers\TipoController@alterar');
         Route::get('/cms/excluir-tipo/{id}', 'Cms\Controllers\TipoController@excluir');
+
+        Route::get('/cms/status-tipo/{id}', 'Cms\Controllers\TipoController@status');
 
         //NOTICIAS
         Route::get('/cms/noticias', 'Cms\Controllers\NoticiaController@index');
@@ -94,6 +104,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/mrosc/{id}', 'Cms\Controllers\MroscController@detalhar');
         Route::post('/cms/alterar-mrosc/{id}', 'Cms\Controllers\MroscController@alterar');
         Route::get('/cms/excluir-mrosc/{id}', 'Cms\Controllers\MroscController@excluir');
+        
+        //VERSOES
+        Route::get('/cms/versoes', 'Cms\Controllers\VersaoController@index');
+        Route::get('/cms/listar-versoes', 'Cms\Controllers\VersaoController@listar');
+        Route::post('/cms/inserir-versao', 'Cms\Controllers\VersaoController@inserir');
+        Route::get('/cms/versao/{id}', 'Cms\Controllers\VersaoController@detalhar');
+        Route::post('/cms/alterar-versao/{id}', 'Cms\Controllers\VersaoController@alterar');
+        Route::get('/cms/excluir-versao/{id}', 'Cms\Controllers\VersaoController@excluir');
 
         //IDIOMAS
         Route::get('/cms/idiomas', 'Cms\Controllers\IdiomaController@index');
