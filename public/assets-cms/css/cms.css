@@ -48,6 +48,9 @@
 .color-success {
   color: #5cb85c;
 }
+.color-success-inactive {
+  color: #CCCCCC;
+}
 .thumb {
   width: 140px;
   float: none;

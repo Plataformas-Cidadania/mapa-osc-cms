@@ -105,7 +105,7 @@
                                 <div>
                                     {{--<a href="cms/items/<% tipo.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
                                     <a href="cms/tipo/<% tipo.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;{{--<% mensagemStatus %><% idStatus %>--}}
-                                    <a  ng-class="<% idStatus %> == <% tipo.id %> ? 'color-success' : 'none'"  {{--class="<% mensagemStatus %>"--}} style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(tipo.id);"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% tipo.status %> == 1 ? 'color-success' : 'color-success-inactive'"  {{--class="<% mensagemStatus %>"--}} style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(tipo.id);"></i></a>&nbsp;&nbsp;
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(tipo.id, tipo.titulo, tipo.imagem)"></i></a>
                                 </div>
                             </td>

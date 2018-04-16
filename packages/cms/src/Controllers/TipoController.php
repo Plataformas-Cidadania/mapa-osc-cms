@@ -266,31 +266,11 @@ class TipoController extends Controller
     }
     public function status($id)
     {
-
-        /*$tipo = $this->tipo->where([
-            ['id', '=', $id],
-        ])->firstOrFail();*/
-
         $tipo_atual = DB::table('tipos')->where('id', $id)->first();
-
-        //Log::info($tipo_atual->titulo);
-
-        if($tipo_atual->status == 0){
-            DB::table('tipos')->where('id', $id)->update(['status' => 1]);
-        }else{
-            DB::table('tipos')->where('id', $id)->update(['status' => 0]);
-        }
-
-
-        //$tipo->update(['status' => 1]);
-
-
-
-        //$tipo->status();
+        $status = $tipo_atual->status == 0 ? 1 : 0;
+        DB::table('tipos')->where('id', $id)->update(['status' => $status]);
 
     }
-
-    
 
 
 }

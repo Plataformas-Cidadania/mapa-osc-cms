@@ -164,7 +164,13 @@ class WebdoorController extends Controller
 
     }
 
-    
+    public function status($id)
+    {
+        $tipo_atual = DB::table('webdoors')->where('id', $id)->first();
+        $status = $tipo_atual->status == 0 ? 1 : 0;
+        DB::table('webdoors')->where('id', $id)->update(['status' => $status]);
+
+    }
 
 
 }

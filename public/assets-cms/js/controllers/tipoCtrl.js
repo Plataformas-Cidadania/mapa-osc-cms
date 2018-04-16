@@ -7,7 +7,7 @@ cmsApp.controller('tipoCtrl', ['$scope', '$http', 'Upload', '$timeout', function
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem";
+    $scope.campos = "id, titulo, imagem, status";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
@@ -30,7 +30,6 @@ cmsApp.controller('tipoCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             listarTipos();
         }
     });
-
 
 
     var listarTipos = function(){
