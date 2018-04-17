@@ -13,5 +13,5 @@ null, ['class'=>"form-control width-medio <% validar(item.tipo_id) %>", 'ng-mode
 {!! Form::label('titulo', 'Nome *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(item.titulo) %>", 'ng-model'=>'item.titulo', 'ng-required'=>'true', 'init-model'=>'item.titulo', 'placeholder' => '']) !!}<br>
 
-{!! Form::label('url', 'Link *') !!}<br>
-{!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(item.url) %>", 'ng-model'=>'item.url', 'ng-required'=>'true', 'init-model'=>'item.url', 'placeholder' => '']) !!}<br>
+{!! Form::label('url', 'Link') !!}<br>
+{!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(item.url) %>", 'ng-model'=>'item.url', 'init-model'=>'item.url', 'placeholder' => '']) !!}<br>
