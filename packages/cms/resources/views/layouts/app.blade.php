@@ -101,8 +101,19 @@
                 <li>
                     <a href="cms/links"><i class="fa fa-fw fa-link"></i> Links</a>
                 </li>
-                <li>
+                {{--<li>
                     <a href="cms/equipe/1"><i class="fa fa-fw fa-user"></i> Equipe</a>
+                </li>--}}
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Equipe <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="cms/equipe/1">Descrição</a>
+                        </li>
+                        <li>
+                            <a href="cms/versoes">Versões</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="cms/usuarios"><i class="fa fa-fw fa-users"></i> Usuários</a>

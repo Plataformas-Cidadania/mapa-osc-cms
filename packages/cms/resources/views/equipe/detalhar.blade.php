@@ -4,7 +4,7 @@
     {!! Html::script('assets-cms/js/controllers/alterarEquipeCtrl.js') !!}
     <div ng-controller="alterarEquipeCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-user"></i>&nbsp;&nbsp;Equipe  <a href="cms/versoes"><i class="fa fa-fw fa-user"></i> Versões</a></h1>
+            <h1><i class="fa fa-user"></i>&nbsp;&nbsp;Equipe  </h1>
             <?php //print_r($equipe);?>
             <div ng-init="carregaImagem('{{$equipe->imagem}}', '{{$equipe->arquivo}}')">
                 <span class="texto-obrigatorio">* campos obrigatórios</span><br><br>
