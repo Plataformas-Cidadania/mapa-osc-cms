@@ -98,6 +98,7 @@
                             <td class="text-right">
                                 <div>
                                     <a href="cms/video/<% video.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% video.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(video.id);"></i></a>
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(video.id, video.titulo, video.imagem)"></i></a>
                                 </div>
                             </td>

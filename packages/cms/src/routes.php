@@ -19,6 +19,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/webdoor/{id}', 'Cms\Controllers\WebdoorController@detalhar');
         Route::post('/cms/alterar-webdoor/{id}', 'Cms\Controllers\WebdoorController@alterar');
         Route::get('/cms/excluir-webdoor/{id}', 'Cms\Controllers\WebdoorController@excluir');
+        Route::get('/cms/status-webdoor/{id}', 'Cms\Controllers\WebdoorController@status');
 
         //ITEMS
         Route::get('/cms/items/{modulo_id}', 'Cms\Controllers\ItemController@index');
@@ -27,6 +28,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/item/{id}', 'Cms\Controllers\ItemController@detalhar');
         Route::post('/cms/alterar-item/{id}', 'Cms\Controllers\ItemController@alterar');
         Route::get('/cms/excluir-item/{id}', 'Cms\Controllers\ItemController@excluir');
+        Route::get('/cms/status-item/{id}', 'Cms\Controllers\ItemController@status');
 
         //ITEMS MROSC
         Route::get('/cms/items-mrosc/{mrosc_id}', 'Cms\Controllers\ItemMroscController@index');
@@ -35,6 +37,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@detalhar');
         Route::post('/cms/alterar-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@alterar');
         Route::get('/cms/excluir-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@excluir');
+        Route::get('/cms/status-item-mrosc/{id}', 'Cms\Controllers\ItemMroscController@status');
 
         //ITEMS VERSAO
         Route::get('/cms/items-versao/{versao_id}', 'Cms\Controllers\ItemVersaoController@index');
@@ -43,6 +46,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/item-versao/{id}', 'Cms\Controllers\ItemVersaoController@detalhar');
         Route::post('/cms/alterar-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@alterar');
         Route::get('/cms/excluir-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@excluir');
+        Route::get('/cms/status-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@status');
 
         //Route::get('/cms/teste-excel', 'Cms\Controllers\SerieController@testeExcel');
         Route::get('/cms/teste-excel/{id}/{arquivo}', 'Cms\Controllers\SerieController@testeExcel');
@@ -54,6 +58,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/modulo/{id}', 'Cms\Controllers\ModuloController@detalhar');
         Route::post('/cms/alterar-modulo/{id}', 'Cms\Controllers\ModuloController@alterar');
         Route::get('/cms/excluir-modulo/{id}', 'Cms\Controllers\ModuloController@excluir');
+        Route::get('/cms/status-modulo/{id}', 'Cms\Controllers\ModuloController@status');
         
         //TIPOS
         Route::get('/cms/tipos', 'Cms\Controllers\TipoController@index');
@@ -62,7 +67,6 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/tipo/{id}', 'Cms\Controllers\TipoController@detalhar');
         Route::post('/cms/alterar-tipo/{id}', 'Cms\Controllers\TipoController@alterar');
         Route::get('/cms/excluir-tipo/{id}', 'Cms\Controllers\TipoController@excluir');
-
         Route::get('/cms/status-tipo/{id}', 'Cms\Controllers\TipoController@status');
 
         //NOTICIAS
@@ -72,6 +76,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/noticia/{id}', 'Cms\Controllers\NoticiaController@detalhar');
         Route::post('/cms/alterar-noticia/{id}', 'Cms\Controllers\NoticiaController@alterar');
         Route::get('/cms/excluir-noticia/{id}', 'Cms\Controllers\NoticiaController@excluir');
+        Route::get('/cms/status-noticia/{id}', 'Cms\Controllers\NoticiaController@status');
 
         //LINKS
         Route::get('/cms/links', 'Cms\Controllers\LinkController@index');
@@ -80,6 +85,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/link/{id}', 'Cms\Controllers\LinkController@detalhar');
         Route::post('/cms/alterar-link/{id}', 'Cms\Controllers\LinkController@alterar');
         Route::get('/cms/excluir-link/{id}', 'Cms\Controllers\LinkController@excluir');
+        Route::get('/cms/status-link/{id}', 'Cms\Controllers\LinkController@status');
         
         //EQUIPES
         Route::get('/cms/equipes', 'Cms\Controllers\EquipeController@index');
@@ -104,6 +110,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/mrosc/{id}', 'Cms\Controllers\MroscController@detalhar');
         Route::post('/cms/alterar-mrosc/{id}', 'Cms\Controllers\MroscController@alterar');
         Route::get('/cms/excluir-mrosc/{id}', 'Cms\Controllers\MroscController@excluir');
+        Route::get('/cms/status-mrosc/{id}', 'Cms\Controllers\MroscController@status');
         
         //VERSOES
         Route::get('/cms/versoes', 'Cms\Controllers\VersaoController@index');
@@ -112,6 +119,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/versao/{id}', 'Cms\Controllers\VersaoController@detalhar');
         Route::post('/cms/alterar-versao/{id}', 'Cms\Controllers\VersaoController@alterar');
         Route::get('/cms/excluir-versao/{id}', 'Cms\Controllers\VersaoController@excluir');
+        Route::get('/cms/status-versao/{id}', 'Cms\Controllers\VersaoController@status');
 
         //IDIOMAS
         Route::get('/cms/idiomas', 'Cms\Controllers\IdiomaController@index');
@@ -121,6 +129,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-idioma/{id}', 'Cms\Controllers\IdiomaController@alterar');
         Route::get('/cms/excluir-idioma/{id}', 'Cms\Controllers\IdiomaController@excluir');
 
+
         //VIDEOS
         Route::get('/cms/videos', 'Cms\Controllers\VideoController@index');
         Route::get('/cms/listar-videos', 'Cms\Controllers\VideoController@listar');
@@ -128,6 +137,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/video/{id}', 'Cms\Controllers\VideoController@detalhar');
         Route::post('/cms/alterar-video/{id}', 'Cms\Controllers\VideoController@alterar');
         Route::get('/cms/excluir-video/{id}', 'Cms\Controllers\VideoController@excluir');
+        Route::get('/cms/status-video/{id}', 'Cms\Controllers\VideoController@status');
         
 
         //User

@@ -7,7 +7,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem";
+    $scope.campos = "id, titulo, imagem, status";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
@@ -176,6 +176,26 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
         });
     };
     //////////////////////////////////
-
+    $scope.status = function(id){
+        //console.log(id);
+        $scope.mensagemStatus = '';
+        $scope.idStatus = '';
+        $scope.processandoStatus = true;
+        $http({
+            url: 'cms/status-modulo/'+id,
+            method: 'GET'
+        }).success(function(data, status, headers, config){
+            //console.log(data);
+            $scope.processandoStatus = false;
+            //$scope.excluido = true;
+            $scope.mensagemStatus = 'color-success';
+            $scope.idStatus = id;
+            listarModulos();
+        }).error(function(data){
+            $scope.message = "Ocorreu um erro: "+data;
+            $scope.processandoStatus = false;
+            $scope.mensagemStatus = "Erro ao tentar status!";
+        });
+    };
 
 }]);

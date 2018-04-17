@@ -105,6 +105,7 @@
                                 <div>
                                     <a href="cms/items/<% modulo.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
                                     <a href="cms/modulo/<% modulo.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% modulo.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(modulo.id);"></i></a>
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(modulo.id, modulo.titulo, modulo.imagem)"></i></a>
                                 </div>
                             </td>

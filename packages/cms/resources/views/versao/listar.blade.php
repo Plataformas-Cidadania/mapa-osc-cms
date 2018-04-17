@@ -109,6 +109,7 @@
                                 <div>
                                     <a href="cms/items-versao/<% versao.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
                                     <a href="cms/versao/<% versao.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% versao.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(versao.id);"></i></a>
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(versao.id, versao.titulo, versao.imagem)"></i></a>
                                 </div>
                             </td>

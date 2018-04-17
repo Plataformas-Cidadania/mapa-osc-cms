@@ -104,6 +104,7 @@
                             <td class="text-right">
                                 <div>
                                     <a href="cms/item-mrosc/<% item.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% item.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(item.id);"></i></a>
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(item.id, item.titulo, item.imagem)"></i></a>
                                 </div>
                             </td>
