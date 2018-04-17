@@ -7,7 +7,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem, status";
+    $scope.campos = "id, titulo, imagem, status, posicao";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;

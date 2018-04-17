@@ -93,6 +93,11 @@
                                 <i ng-if="ordem=='mrosc' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='mrosc' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
+                            <th ng-click="ordernarPor('posicao')" style="mroscr:pointer;">
+                                Posição
+                                <i ng-if="ordem=='posicao' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='posicao' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -101,6 +106,7 @@
                             <td><% mrosc.id %></td>
                             <td><img ng-show="mrosc.imagem" ng-src="imagens/mroscs/xs-<% mrosc.imagem %>" width="60"></td>
                             <td><a href="cms/mrosc/<% mrosc.id %>"><% mrosc.titulo %></a></td>
+                            <td><a href="cms/mrosc/<% mrosc.id %>"><% mrosc.posicao %></a></td>
                             <td class="text-right">
                                 <div>
                                     <a href="cms/items-mrosc/<% mrosc.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;

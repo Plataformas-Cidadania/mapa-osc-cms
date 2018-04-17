@@ -93,6 +93,11 @@
                                 <i ng-if="ordem=='item' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='item' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
+                            <th ng-click="ordernarPor('posicao')" style="itemr:pointer;">
+                                Posição
+                                <i ng-if="ordem=='posicao' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='posicao' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -101,6 +106,7 @@
                             <td><% item.id %></td>
                             <td><img ng-show="item.imagem" ng-src="imagens/items/xs-<% item.imagem %>" width="60"></td>
                             <td><a href="cms/item/<% item.id %>"><% item.titulo %></a></td>
+                            <td><a href="cms/item/<% item.id %>"><% item.posicao %></a></td>
                             <td class="text-right">
                                 <div>
                                     <a href="cms/item/<% item.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
