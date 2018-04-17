@@ -191,7 +191,7 @@ cmsApp.controller('versaoCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             //$scope.excluido = true;
             $scope.mensagemStatus = 'color-success';
             $scope.idStatus = id;
-            listarVersaos();
+            listarVersoes();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoStatus = false;
