@@ -167,10 +167,10 @@ class ApiController extends Controller
     public function equipes(){
         $equipes = \App\Equipe::select('id', 'titulo as tx_titulo_equipe', 'sub_titulo as tx_sub_titulo_equipe', 'descricao as tx_descricao_equipe')->get();
 
-        $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens_mrosc')->where('status', 1)->get();
+        $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->get();
 
         foreach ($versoes as $versao) {
-            $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens_mrosc')->where('status', 1)->get();
+            $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->get();
             foreach ($versoes as $versao) {
                 $coordenadores = \App\ItemVersao::select('titulo as tx_nome_equipe', 'url as tx_url_equipe')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 1)->get();
                 $equipe = \App\ItemVersao::select('titulo as tx_nome_equipe', 'url as tx_url_equipe')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 2)->get();
