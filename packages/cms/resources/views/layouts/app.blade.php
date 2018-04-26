@@ -102,10 +102,10 @@
                     <a href="cms/links"><i class="fa fa-fw fa-link"></i> Links</a>
                 </li>
                 <li>
-                    <a href="cms/apoios"><i class="fa fa-fw fa-link"></i> Apoio</a>
+                    <a href="cms/apoios"><i class="fa fa-fw fa-anchor"></i> Apoio</a>
                 </li>
                 <li>
-                    <a href="cms/publications"><i class="fa fa-fw fa-link"></i> Publicações</a>
+                    <a href="cms/publications"><i class="fa fa-fw fa-file-text-o"></i> Publicações</a>
                 </li>
                 {{--<li>
                     <a href="cms/equipe/1"><i class="fa fa-fw fa-user"></i> Equipe</a>
