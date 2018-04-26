@@ -97,6 +97,11 @@
                                 <i ng-if="ordem=='versao' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='versao' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
+                            <th ng-click="ordernarPor('posicao')" style="versaor:pointer;">
+                                Posição
+                                <i ng-if="ordem=='posicao' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='posicao' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -105,8 +110,16 @@
                             <td><% versao.id %></td>
                             <td><img ng-show="versao.imagem" ng-src="imagens/versoes/xs-<% versao.imagem %>" width="60"></td>
                             <td><a href="cms/versao/<% versao.id %>"><% versao.titulo %></a></td>
+                            <td><a href="cms/versao/<% versao.id %>"><% versao.posicao %></a></td>
                             <td class="text-right">
                                 <div>
+
+                                    <a><i class="fa fa-arrow-circle-up fa-2x" title="Posição" ng-click="positionUp(versao.id);" style="cursor: pointer;" ng-hide="<% $first %>"></i></a>
+                                    <a><i class="fa fa-minus-circle fa-2x" title="Posição"   ng-show="<% $first %>" style="color: #CCCCCC; margin-right: 5px;"></i></a>&nbsp;&nbsp;
+
+                                    <a><i class="fa fa-arrow-circle-down fa-2x" title="Posição" ng-click="positionDown(versao.id);"  style="cursor: pointer;" ng-hide="<% $last %>"></i></a>
+                                    <a><i class="fa fa-minus-circle fa-2x" title="Posição"   ng-show="<% $last %>" style="color: #CCCCCC; margin-right: 5px;"></i></a>&nbsp;&nbsp;
+
                                     <a href="cms/items-versao/<% versao.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
                                     <a href="cms/versao/<% versao.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
                                     <a  ng-class="<% versao.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(versao.id);"></i></a>

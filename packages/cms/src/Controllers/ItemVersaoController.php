@@ -20,7 +20,7 @@ class ItemVersaoController extends Controller
     {
         $this->item = new \App\ItemVersao();
         $this->campos = [
-            'imagem', 'titulo', 'arquivo', 'url', 'tipo_id', 'versao_id', 'cmsuser_id',
+            'imagem', 'arquivo', 'tipo_id', 'integrante_id', 'versao_id', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/items-versao';
         $this->sizesImagem = [
@@ -37,24 +37,21 @@ class ItemVersaoController extends Controller
     function index($versao_id)
     {
 
+        $integrantes = \App\Integrante::pluck('titulo', 'id')->all();
         $items = \App\ItemVersao::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::item_versao.listar', ['items' => $items, 'versao_id' => $versao_id]);
+        return view('cms::item_versao.listar', ['items' => $items, 'versao_id' => $versao_id, 'integrantes' => $integrantes]);
         //return view('cms::item_versao.listar', ['items' => $items, 'modulo_id' => $modulo_id, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
     {
 
-        //Log::info('CAMPOS: '.$request->campos);
-        //Log::info('modulo_id: '.$request->modulo_id);
-
-        //Auth::loginUsingId(2);
-
         $campos = explode(", ", $request->campos);
 
         $items = DB::table('items_versoes')
+            ->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
@@ -62,7 +59,7 @@ class ItemVersaoController extends Controller
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
-        return $items;
+        return ['items' => $items, 'tipos' => config('constants.TIPOS')];
     }
 
 
@@ -117,6 +114,7 @@ class ItemVersaoController extends Controller
 
     public function detalhar($id)
     {
+        $integrantes = \App\Integrante::pluck('titulo', 'id')->all();
         $item = $this->item->where([
             ['id', '=', $id],
         ])->firstOrFail();
@@ -124,7 +122,7 @@ class ItemVersaoController extends Controller
 
         $versao_id = $item->versao_id;
 
-        return view('cms::item_versao.detalhar', ['item' => $item, 'versao_id' => $versao_id]);
+        return view('cms::item_versao.detalhar', ['item' => $item, 'versao_id' => $versao_id, 'integrantes' => $integrantes]);
         //return view('cms::item_versao.detalhar', ['item' => $item, 'versao_id' => $versao_id, 'idiomas' => $idiomas]);
     }
 

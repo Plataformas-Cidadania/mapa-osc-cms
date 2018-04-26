@@ -117,6 +117,9 @@
                             <a href="cms/equipe/1">Descrição</a>
                         </li>
                         <li>
+                            <a href="cms/integrantes">Integrantes</a>
+                        </li>
+                        <li>
                             <a href="cms/versoes">Versões</a>
                         </li>
                     </ul>

@@ -10,8 +10,7 @@
 null, ['class'=>"form-control width-medio <% validar(item.tipo_id) %>", 'ng-model'=>'item.tipo_id', 'ng-required'=>'true', 'init-model'=>'item.tipo_id', 'placeholder' => '']) !!}<br>
 
 
-{!! Form::label('titulo', 'Nome *') !!}<br>
-{!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(item.titulo) %>", 'ng-model'=>'item.titulo', 'ng-required'=>'true', 'init-model'=>'item.titulo', 'placeholder' => '']) !!}<br>
-
-{!! Form::label('url', 'Link') !!}<br>
-{!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(item.url) %>", 'ng-model'=>'item.url', 'init-model'=>'item.url', 'placeholder' => '']) !!}<br>
+{!! Form::label('integrante_id', 'Integrante') !!}<br>
+{!! Form::select('integrante_id',
+        $integrantes,
+null, ['class'=>"form-control width-medio <% validar(item.integrante_id) %>", 'ng-model'=>'item.integrante_id', 'init-model'=>'item.integrante_id', 'placeholder' => 'Sem um Integrante']) !!}<br>

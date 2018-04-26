@@ -29,6 +29,8 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-item/{id}', 'Cms\Controllers\ItemController@alterar');
         Route::get('/cms/excluir-item/{id}', 'Cms\Controllers\ItemController@excluir');
         Route::get('/cms/status-item/{id}', 'Cms\Controllers\ItemController@status');
+        Route::get('/cms/positionUp-item/{id}', 'Cms\Controllers\ItemController@positionUp');
+        Route::get('/cms/positionDown-item/{id}', 'Cms\Controllers\ItemController@positionDown');
 
         //ITEMS MROSC
         Route::get('/cms/items-mrosc/{mrosc_id}', 'Cms\Controllers\ItemMroscController@index');
@@ -47,6 +49,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@alterar');
         Route::get('/cms/excluir-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@excluir');
         Route::get('/cms/status-item-versao/{id}', 'Cms\Controllers\ItemVersaoController@status');
+
 
         //Route::get('/cms/teste-excel', 'Cms\Controllers\SerieController@testeExcel');
         Route::get('/cms/teste-excel/{id}/{arquivo}', 'Cms\Controllers\SerieController@testeExcel');
@@ -111,7 +114,15 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/inserir-equipe', 'Cms\Controllers\EquipeController@inserir');
         Route::get('/cms/equipe/{id}', 'Cms\Controllers\EquipeController@detalhar');
         Route::post('/cms/alterar-equipe/{id}', 'Cms\Controllers\EquipeController@alterar');
-        Route::get('/cms/excluir-equipe/{id}', 'Cms\Controllers\EquipeController@excluir');
+        Route::get('/cms/excluir-equipe/{id}', 'Cms\Controllers\EquipeController@excluir');  
+        
+        //INTEGRANTES
+        Route::get('/cms/integrantes', 'Cms\Controllers\IntegranteController@index');
+        Route::get('/cms/listar-integrantes', 'Cms\Controllers\IntegranteController@listar');
+        Route::post('/cms/inserir-integrante', 'Cms\Controllers\IntegranteController@inserir');
+        Route::get('/cms/integrante/{id}', 'Cms\Controllers\IntegranteController@detalhar');
+        Route::post('/cms/alterar-integrante/{id}', 'Cms\Controllers\IntegranteController@alterar');
+        Route::get('/cms/excluir-integrante/{id}', 'Cms\Controllers\IntegranteController@excluir');
 
         //EDITAIS
         Route::get('/cms/editais', 'Cms\Controllers\EditalController@index');
@@ -140,6 +151,8 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-versao/{id}', 'Cms\Controllers\VersaoController@alterar');
         Route::get('/cms/excluir-versao/{id}', 'Cms\Controllers\VersaoController@excluir');
         Route::get('/cms/status-versao/{id}', 'Cms\Controllers\VersaoController@status');
+        Route::get('/cms/positionUp-versao/{id}', 'Cms\Controllers\VersaoController@positionUp');
+        Route::get('/cms/positionDown-versao/{id}', 'Cms\Controllers\VersaoController@positionDown');
 
         //IDIOMAS
         Route::get('/cms/idiomas', 'Cms\Controllers\IdiomaController@index');

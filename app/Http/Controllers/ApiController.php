@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 class ApiController extends Controller
 {
     public function imprensa(){
-        $noticias = \App\Noticia::select('data as dt_noticia', 'id as cd_noticia', 'titulo as tx_titulo_noticia', 'resumida as tx_resumo_noticia', 'imagem as tx_link_img_noticia', 'status')->where('status', 1)->get();
+        $noticias = \App\Noticia::select('data as dt_noticia', 'id as cd_noticia', 'titulo as tx_titulo_noticia', 'resumida as tx_resumo_noticia', 'imagem as tx_link_img_noticia', 'arquivo as tx_arquivo_noticia', 'status')->where('status', 1)->get();
         $videos = \App\Video::select('data as dt_video', 'id as cd_video', 'titulo as tx_titulo_video', 'resumida as tx_resumo_video', 'imagem as tx_link_img_video')->where('status', 1)->get();
 
         $return = [
@@ -26,7 +26,7 @@ class ApiController extends Controller
 
     public function noticiaByID($idNoticia){
 
-        $row = \App\Noticia::select('titulo as tx_titulo_noticia', 'descricao as tx_descricao_noticia', 'data as dt_noticia')->where('status', 1)->find($idNoticia);
+        $row = \App\Noticia::select('titulo as tx_titulo_noticia', 'descricao as tx_descricao_noticia', 'data as dt_noticia', 'arquivo as tx_arquivo_noticia')->where('status', 1)->find($idNoticia);
 
         $row->tx_descricao_noticia = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_noticia);
 
@@ -42,7 +42,7 @@ class ApiController extends Controller
     }
 
     public function editalByID($idEdital){
-        return \App\Edital::select('titulo as tx_titulo_edital', 'instituicao as tx_instituicao_edital', 'area as tx_area_edital', 'data_vencimento as dt_vencimento_edital', 'edital as link_edital', 'status as it_status_edital')->find($idEdital);
+        return \App\Edital::select('titulo as tx_titulo_edital', 'instituicao as tx_instituicao_edital', 'area as tx_area_edital', 'data_vencimento as dt_vencimento_edital', 'edital as link_edital', 'status as it_status_edital', 'arquivo as tx_arquivo_edital')->find($idEdital);
     }
 
     public function editais(){
@@ -50,7 +50,7 @@ class ApiController extends Controller
     }
 
     public function menuMrosc(){
-        return \App\Mrosc::select('id as cd_menu_mrosc', 'titulo as tx_titulo_menu_mrosc', 'posicao')->where('status', 1)->get();
+        return \App\Mrosc::select('id as cd_menu_mrosc', 'titulo as tx_titulo_menu_mrosc')->where('status', 1)->orderBy('posicao')->get();
     }
 
     public function ConteudoMroscByID($id){
@@ -82,7 +82,7 @@ class ApiController extends Controller
 
     public function moduloByID($idModulo){
         $modulos =  \App\Modulo::select('titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'slug as tx_slug_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->where('status', 1)->find($idModulo);
-        $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens', 'posicao as cd_posicao_itens')->where('status', 1)->where('modulo_id', $idModulo)->get();
+        $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('status', 1)->where('modulo_id', $idModulo)->orderBy('posicao')->get();
 
         $modulos->tx_descricao_modulo = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $modulos->tx_descricao_modulo);
         foreach ($itens as $item) {
@@ -176,14 +176,13 @@ class ApiController extends Controller
     
     public function equipes(){
         $equipes = \App\Equipe::select('id', 'titulo as tx_titulo_equipe', 'sub_titulo as tx_sub_titulo_equipe', 'descricao as tx_descricao_equipe')->get();
-
-        $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->get();
+        $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->orderBy('posicao')->get();
 
         foreach ($versoes as $versao) {
-            $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'imagem as tx_imagem_itens', 'descricao as tx_descricao_itens')->where('status', 1)->get();
+            $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'imagem as tx_imagem_itens', 'descricao as tx_descricao_itens')->where('status', 1)->orderBy('posicao')->get();
             foreach ($versoes as $versao) {
-                $coordenadores = \App\ItemVersao::select('titulo as tx_nome_equipe', 'url as tx_url_equipe')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 1)->get();
-                $equipe = \App\ItemVersao::select('titulo as tx_nome_equipe', 'url as tx_url_equipe')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 2)->get();
+                $coordenadores = \App\ItemVersao::select('integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 1)->get();
+                $equipe = \App\ItemVersao::select('integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 2)->get();
 
                 $versao->coordenadores = $coordenadores;
                 $versao->equipe = $equipe;
@@ -201,7 +200,7 @@ class ApiController extends Controller
     }
 
     public function publicacoes(){
-        $publications = \App\Publication::select('data as dt_publicacao', 'id as cd_publicacao', 'titulo as tx_titulo_publicacao', 'resumida as tx_resumo_publicacao', 'imagem as tx_link_img_publicacao', 'status')->where('status', 1)->get();
+        $publications = \App\Publication::select('data as dt_publicacao', 'id as cd_publicacao', 'titulo as tx_titulo_publicacao', 'resumida as tx_resumo_publicacao', 'imagem as tx_link_img_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->get();
 
         foreach ($publications as $publication) {
             $publication->tx_descricao_publication = str_replace('/imagens/publications', env('APP_URL').'/imagens/geral', $publication->tx_descricao_publication);
@@ -213,7 +212,7 @@ class ApiController extends Controller
 
     public function publicacaoByID($idPublication){
 
-        $row = \App\Publication::select('titulo as tx_titulo_publicacao', 'descricao as tx_descricao_publicacao', 'data as dt_publicacao')->where('status', 1)->find($idPublication);
+        $row = \App\Publication::select('titulo as tx_titulo_publicacao', 'descricao as tx_descricao_publicacao', 'data as dt_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->find($idPublication);
 
         $row->tx_descricao_publication = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_publication);
 

@@ -4,3 +4,5 @@
 {!! Form::label('descricao', 'Descrição *') !!}<br>
 {!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(versao.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-model'=>'versao.descricao', 'init-model'=>'versao.descricao']) !!}<br>
 
+{!! Form::label('posicao', 'Posição *') !!}<br>
+{!! Form::text('posicao', null, ['class'=>"form-control width-grande <% validar(versao.posicao) %>", 'ng-model'=>'versao.posicao', 'ng-required'=>'true', 'init-model'=>'versao.posicao', 'placeholder' => '']) !!}<br>

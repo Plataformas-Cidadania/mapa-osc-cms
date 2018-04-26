@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemsVersoesTable extends Migration
+class CreateIntegrantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,12 @@ class CreateItemsVersoesTable extends Migration
      */
     public function up()
     {
-        Schema::create('items_versoes', function (Blueprint $table) {
+        Schema::create('integrantes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem')->nullable();
+            $table->string('titulo')->nullable();
+            $table->string('url')->nullable();
             $table->text('arquivo')->nullable();
-            $table->integer('tipo_id')->nullable();
-            $table->integer('integrante_id')->nullable();
-
-            
-            $table->integer('versao_id')->unsigned();
-            $table->foreign('versao_id')->references('id')->on('versoes')->onDelete('cascade');
-
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
@@ -36,6 +31,6 @@ class CreateItemsVersoesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('items_versoes');
+        Schema::drop('integrantes');
     }
 }

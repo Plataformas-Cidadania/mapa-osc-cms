@@ -7,12 +7,13 @@ cmsApp.controller('itemVersaoCtrl', ['$scope', '$http', 'Upload', '$timeout', fu
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem, status";
-    $scope.campoPesquisa = "titulo";
+    $scope.campos = "items_versoes.id, items_versoes.tipo_id, items_versoes.integrante_id, integrantes.imagem, integrantes.titulo, items_versoes.status";
+    $scope.campoPesquisa = "integrantes.titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
-    $scope.ordem = "titulo";
+    $scope.ordem = "integrantes.titulo";
     $scope.sentidoOrdem = "asc";
+    $scope.tipos = [];
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
     $scope.$watch('currentPage', function(){
@@ -51,11 +52,12 @@ cmsApp.controller('itemVersaoCtrl', ['$scope', '$http', 'Upload', '$timeout', fu
                 versao_id: $scope.item.versao_id
             }
         }).success(function(data, status, headers, config){
-            $scope.items = data.data;
-            $scope.lastPage = data.last_page;
-            $scope.totalItens = data.total;
-            $scope.primeiroDaPagina = data.from;
-            $scope.ultimoDaPagina = data.to;
+            $scope.items = data.items.data;
+            $scope.lastPage = data.items.last_page;
+            $scope.totalItens = data.items.total;
+            $scope.primeiroDaPagina = data.items.from;
+            $scope.ultimoDaPagina = data.items.to;
+            $scope.tipos = data.tipos;
             $listar = true;
             //console.log(data);
             $scope.processandoListagem = false;
@@ -104,8 +106,8 @@ cmsApp.controller('itemVersaoCtrl', ['$scope', '$http', 'Upload', '$timeout', fu
                  listarItems();
                 //delete $scope.item;//limpa o form
                 //deleta um por um para não excluir o id da tabela relacionada
-                $scope.item.titulo = '';
-                $scope.item.descricao = '';
+                $scope.item.tipo_id = '';
+                $scope.item.integrante_id = '';
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -124,8 +126,8 @@ cmsApp.controller('itemVersaoCtrl', ['$scope', '$http', 'Upload', '$timeout', fu
                 console.log(response.data);
                 //delete $scope.item;//limpa o form
                 //deleta um por um para não excluir o id da tabela relacionada
-                $scope.item.titulo = '';
-                $scope.item.descricao = '';
+                $scope.item.tipo_id = '';
+                $scope.item.integrante_id = '';
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
                 listarItems();

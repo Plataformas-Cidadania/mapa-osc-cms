@@ -10,6 +10,6 @@ class ItemVersao extends Model
     protected $table = 'items_versoes';
 
     protected $fillable = [
-        'imagem', 'titulo', 'arquivo', 'url', 'tipo_id', 'versao_id', 'cmsuser_id',
+        'imagem', 'arquivo', 'tipo_id', 'integrante_id', 'versao_id', 'cmsuser_id',
     ];
 }

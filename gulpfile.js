@@ -79,6 +79,10 @@ elixir(function(mix) {
     //Equipes
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/equipeCtrl.js', 'public/assets-cms/js/controllers/equipeCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarEquipeCtrl.js', 'public/assets-cms/js/controllers/alterarEquipeCtrl.js');
+
+    //Integrantes
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/integranteCtrl.js', 'public/assets-cms/js/controllers/integranteCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarIntegranteCtrl.js', 'public/assets-cms/js/controllers/alterarIntegranteCtrl.js');
     
     //Editais
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/editalCtrl.js', 'public/assets-cms/js/controllers/editalCtrl.js');

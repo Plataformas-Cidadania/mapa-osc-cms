@@ -199,46 +199,25 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
         });
     };
     $scope.positionUp = function(id){
-        //console.log(id);
-        $scope.mensagemPositionUp = '';
         $scope.idPositionUp = '';
-        $scope.processandoPositionUp = true;
         $http({
             url: 'cms/positionUp-mrosc/'+id,
             method: 'GET'
         }).success(function(data, positionUp, headers, config){
-            //console.log(data);
-            $scope.processandoPositionUp = false;
-            //$scope.excluido = true;
-            $scope.mensagemPositionUp = 'color-success';
             $scope.idPositionUp = id;
             listarMroscs();
-        }).error(function(data){
-            $scope.message = "Ocorreu um erro: "+data;
-            $scope.processandoPositionUp = false;
-            $scope.mensagemPositionUp = "Erro ao tentar positionUp!";
         });
     };
     $scope.positionDown = function(id){
-        //console.log(id);
-        $scope.mensagemPositionDown = '';
         $scope.idPositionDown = '';
-        $scope.processandoPositionDown = true;
         $http({
             url: 'cms/positionDown-mrosc/'+id,
             method: 'GET'
         }).success(function(data, positionDown, headers, config){
-            //console.log(data);
-            $scope.processandoPositionDown = false;
-            //$scope.excluido = true;
-            $scope.mensagemPositionDown = 'color-success';
             $scope.idPositionDown = id;
             listarMroscs();
-        }).error(function(data){
-            $scope.message = "Ocorreu um erro: "+data;
-            $scope.processandoPositionDown = false;
-            $scope.mensagemPositionDown = "Erro ao tentar positionDown!";
         });
     };
 
 }]);
+

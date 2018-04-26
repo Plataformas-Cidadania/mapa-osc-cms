@@ -1,16 +1,16 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/mroscCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/integranteCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="mroscCtrl">
+    <div ng-controller="integranteCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-mrosc" aria-hidden="true"></i>&nbsp;Mrosc</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Tópico</button>
+            <h1><i class="fa fa-integrante" aria-hidden="true"></i>&nbsp;Integrantes</h1>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Nova Integrante</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">
@@ -33,14 +33,14 @@
 
                 <br><br>
 
-                <span class="btn btn-primary btn-file" ng-show="!fileArquivo">
+                <span class="btn btn-primary btn-file" ng-show="!fileArquivo" style="display: none">
                     Escolher Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
                 </span>
                 <a ng-show="fileArquivo"><% fileArquivo.name %></a>
 
 
                 <br><br>
-                @include('cms::mrosc._form')
+                @include('cms::integrante._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
@@ -76,49 +76,36 @@
                         <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     </div>
                     <br>
-                    <div><% mensagemMroscr %></div>
+                    <div><% mensagemIntegranter %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                     <h2 class="tabela_vazia" ng-show="!processandoListagem && totalItens==0">Nenhum registro encontrado!</h2>
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="mroscr:pointer;">
+                            <th ng-click="ordernarPor('id')" style="integranter:pointer;">
                                 Id
                                 <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th>Imagem</th>
-                            <th ng-click="ordernarPor('mrosc')" style="mroscr:pointer;">
-                                Mrosc
-                                <i ng-if="ordem=='mrosc' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='mrosc' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
-                            </th>
-                            <th ng-click="ordernarPor('posicao')" style="mroscr:pointer;">
-                                Posição
-                                <i ng-if="ordem=='posicao' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='posicao' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            <th ng-click="ordernarPor('integrante')" style="integranter:pointer;">
+                                Integrante
+                                <i ng-if="ordem=='integrante' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='integrante' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="mrosc in mroscs">
-                            <td><% mrosc.id %></td>
-                            <td><img ng-show="mrosc.imagem" ng-src="imagens/mroscs/xs-<% mrosc.imagem %>" width="60"></td>
-                            <td><a href="cms/mrosc/<% mrosc.id %>"><% mrosc.titulo %></a></td>
-                            <td><a href="cms/mrosc/<% mrosc.id %>"><% mrosc.posicao %></a></td>
+                        <tr ng-repeat="integrante in integrantes">
+                            <td><% integrante.id %></td>
+                            <td><img ng-show="integrante.imagem" ng-src="imagens/integrantes/xs-<% integrante.imagem %>" width="60"></td>
+                            <td><a href="cms/integrante/<% integrante.id %>"><% integrante.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    <a><i class="fa fa-arrow-circle-up fa-2x" title="Posição" ng-click="positionUp(mrosc.id);" style="cursor: pointer;" ng-hide="<% $first %>"></i></a>
-                                    <a><i class="fa fa-minus-circle fa-2x" title="Posição"   ng-show="<% $first %>" style="color: #CCCCCC; margin-right: 5px;"></i></a>&nbsp;&nbsp;
-
-                                    <a><i class="fa fa-arrow-circle-down fa-2x" title="Posição" ng-click="positionDown(mrosc.id);"  style="cursor: pointer;" ng-hide="<% $last %>"></i></a>
-                                    <a><i class="fa fa-minus-circle fa-2x" title="Posição"   ng-show="<% $last %>" style="color: #CCCCCC; margin-right: 5px;"></i></a>&nbsp;&nbsp;
-
-                                    <a href="cms/items-mrosc/<% mrosc.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
-                                    <a href="cms/mrosc/<% mrosc.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
-                                    <a ng-class="<% mrosc.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(mrosc.id);"></i></a>
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(mrosc.id, mrosc.titulo, mrosc.imagem)"></i></a>
+                                    {{--<a href="cms/items/<% integrante.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
+                                    <a href="cms/integrante/<% integrante.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(integrante.id, integrante.titulo, integrante.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -162,7 +149,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img  ng-src="imagens/mroscs/xs-<% imagemExcluir %>" width="100">
+                                <img  ng-src="imagens/integrantes/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
                                 <p><% tituloExcluir %></p>

@@ -11,7 +11,7 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
-    $scope.ordem = "titulo";
+    $scope.ordem = "posicao";
     $scope.sentidoOrdem = "asc";
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
@@ -206,6 +206,27 @@ cmsApp.controller('itemCtrl', ['$scope', '$http', 'Upload', '$timeout', function
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoStatus = false;
             $scope.mensagemStatus = "Erro ao tentar status!";
+        });
+    };
+
+    $scope.positionUp = function(id){
+        $scope.idPositionUp = '';
+        $http({
+            url: 'cms/positionUp-item/'+id,
+            method: 'GET'
+        }).success(function(data, positionUp, headers, config){
+            $scope.idPositionUp = id;
+            listarItems();
+        });
+    };
+    $scope.positionDown = function(id){
+        $scope.idPositionDown = '';
+        $http({
+            url: 'cms/positionDown-item/'+id,
+            method: 'GET'
+        }).success(function(data, positionDown, headers, config){
+            $scope.idPositionDown = id;
+            listarItems();
         });
     };
 

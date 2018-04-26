@@ -19,7 +19,7 @@ class VersaoController extends Controller
     {
         $this->versao = new \App\Versao;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'arquivo', 'posicao', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/versoes';
         $this->sizesImagem = [
@@ -229,6 +229,36 @@ class VersaoController extends Controller
         $tipo_atual = DB::table('versoes')->where('id', $id)->first();
         $status = $tipo_atual->status == 0 ? 1 : 0;
         DB::table('versoes')->where('id', $id)->update(['status' => $status]);
+
+    }
+    public function positionUp($id)
+    {
+
+        $posicao_atual = DB::table('versoes')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao-1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('versoes')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('versoes')->where('id', $id)->update(['posicao' => $upPosicao]);
+
+
+    }
+
+    public function positionDown($id)
+    {
+
+        $posicao_atual = DB::table('versoes')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao+1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('versoes')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('versoes')->where('id', $id)->update(['posicao' => $upPosicao]);
 
     }
 

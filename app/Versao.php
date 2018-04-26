@@ -10,6 +10,6 @@ class Versao extends Model
     protected $table = 'versoes';
 
     protected $fillable = [
-        'imagem', 'titulo', 'descricao', 'arquivo', 'cmsuser_id',
+        'imagem', 'titulo', 'descricao', 'arquivo', 'posicao', 'cmsuser_id',
     ];
 }

@@ -278,5 +278,34 @@ class ItemController extends Controller
 
     }
 
+    public function positionUp($id)
+    {
+        $posicao_atual = DB::table('items')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao-1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('items')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('items')->where('id', $id)->update(['posicao' => $upPosicao]);
+
+
+    }
+
+    public function positionDown($id)
+    {
+        $posicao_atual = DB::table('items')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao+1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('items')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('items')->where('id', $id)->update(['posicao' => $upPosicao]);
+
+    }
+
 
 }

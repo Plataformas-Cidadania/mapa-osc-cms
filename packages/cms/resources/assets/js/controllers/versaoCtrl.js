@@ -7,11 +7,11 @@ cmsApp.controller('versaoCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem, status";
+    $scope.campos = "id, titulo, imagem, status, posicao";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
-    $scope.ordem = "titulo";
+    $scope.ordem = "posicao";
     $scope.sentidoOrdem = "asc";
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
@@ -199,6 +199,25 @@ cmsApp.controller('versaoCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
         });
     };
     //////////////////////////////////
-
+    $scope.positionUp = function(id){
+        $scope.idPositionUp = '';
+        $http({
+            url: 'cms/positionUp-versao/'+id,
+            method: 'GET'
+        }).success(function(data, positionUp, headers, config){
+            $scope.idPositionUp = id;
+            listarVersoes();
+        });
+    };
+    $scope.positionDown = function(id){
+        $scope.idPositionDown = '';
+        $http({
+            url: 'cms/positionDown-versao/'+id,
+            method: 'GET'
+        }).success(function(data, positionDown, headers, config){
+            $scope.idPositionDown = id;
+            listarVersoes();
+        });
+    };
 
 }]);

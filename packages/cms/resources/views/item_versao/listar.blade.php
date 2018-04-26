@@ -16,6 +16,7 @@
             <div ng-show="mostrarForm">
                 <span class="texto-obrigatorio" ng-show="form.$invalid">* campos obrigatórios</span><br><br>
                 {!! Form::open(['name' =>'form']) !!}
+                <div  style="display: none;">
                 <div class="container-thumb">
                     <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
                          ng-show="!picFile" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
@@ -30,8 +31,10 @@
                     Arquivo muito grande <% errorFile.size / 1000000|number:1 %>MB: máximo 2MB
                     <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
                 </i>
+                    <br><br>
+                </div>
 
-                <br><br>
+
             <div style="display: none;">
                 <span class="btn btn-primary btn-file" ng-show="!fileArquivo" >
                     Escolher Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
@@ -88,10 +91,15 @@
                                 <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th>Imagem</th>
-                            <th ng-click="ordernarPor('item')" style="itemr:pointer;">
-                                Item
-                                <i ng-if="ordem=='item' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='item' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            <th ng-click="ordernarPor('tipo_id')" style="itemr:pointer;">
+                                Tipo
+                                <i ng-if="ordem=='tipo_id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='tipo_id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            </th>
+                            <th ng-click="ordernarPor('integrante_id')" style="itemr:pointer;">
+                                Integrante
+                                <i ng-if="ordem=='integrantes.titulo' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='integrantes.titulo' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th></th>
                         </tr>
@@ -99,11 +107,12 @@
                         <tbody>
                         <tr ng-repeat="item in items">
                             <td><% item.id %></td>
-                            <td><img ng-show="item.imagem" ng-src="imagens/items-versao/xs-<% item.imagem %>" width="60"></td>
-                            <td><a href="cms/item-versao/<% item.id %>"><% item.titulo %></a></td>
+                            <td><img ng-show="item.imagem" ng-src="imagens/integrantes/xs-<% item.imagem %>" width="60"></td>
+                            <td>{{--<a href="cms/item-versao/<% item.id %>">--}}<% tipos[item.tipo_id] %>{{--</a>--}}</td>
+                            <td>{{--<a href="cms/item-versao/<% item.id %>">--}}<% item.titulo %>{{--</a>--}}</td>
                             <td class="text-right">
                                 <div>
-                                    <a href="cms/item-versao/<% item.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                   {{-- <a href="cms/item-versao/<% item.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;--}}
                                     <a  ng-class="<% item.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(item.id);"></i></a>
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(item.id, item.titulo, item.imagem)"></i></a>
                                 </div>
