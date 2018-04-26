@@ -1,42 +1,41 @@
-cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('apoioCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
     
-    $scope.mroscs = [];
+    $scope.apoios = [];
     $scope.currentPage = 1;
     $scope.lastPage = 0;
     $scope.totalItens = 0;
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem, status, posicao";
+    $scope.campos = "id, titulo, imagem, status";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
-    $scope.ordem = "posicao";
+    $scope.ordem = "titulo";
     $scope.sentidoOrdem = "asc";
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
-
     $scope.$watch('currentPage', function(){
         if($listar){
-            listarMroscs();
+            listarApoios();
         }
     });
     $scope.$watch('itensPerPage', function(){
         if($listar){
-            listarMroscs();
+            listarApoios();
         }
     });
     $scope.$watch('dadoPesquisa', function(){
         if($listar){
-            listarMroscs();
+            listarApoios();
         }
     });
 
 
-    var listarMroscs = function(){
+    var listarApoios = function(){
         $scope.processandoListagem = true;
         $http({
-            url: 'cms/listar-mroscs',
+            url: 'cms/listar-apoios',
             method: 'GET',
             params: {
                 page: $scope.currentPage,
@@ -48,7 +47,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
                 sentido: $scope.sentidoOrdem
             }
         }).success(function(data, status, headers, config){
-            $scope.mroscs = data.data;
+            $scope.apoios = data.data;
             $scope.lastPage = data.last_page;
             $scope.totalItens = data.total;
             $scope.primeiroDaPagina = data.from;
@@ -73,7 +72,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
             $scope.sentidoOrdem = "asc";
         }
 
-        listarMroscs();
+        listarApoios();
     };
 
     $scope.validar = function(){
@@ -81,7 +80,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
     };
     
 
-    listarMroscs();
+    listarApoios();
 
     //INSERIR/////////////////////////////
 
@@ -96,10 +95,15 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
         if(file==null && arquivo==null){
             $scope.processandoInserir = true;
 
-            //console.log($scope.mrosc);
-            $http.post("cms/inserir-mrosc", {mrosc: $scope.mrosc}).success(function (data){
-                 listarMroscs();
-                 delete $scope.mrosc;//limpa o form
+            //console.log($scope.apoio);
+            $http.post("cms/inserir-apoio", {apoio: $scope.apoio}).success(function (data){
+                 listarApoios();
+                //delete $scope.apoio;//limpa o form
+                delete $scope.apoio.data;
+                delete $scope.apoio.titulo;
+                delete $scope.apoio.resumida;
+                delete $scope.apoio.slug;
+                delete $scope.apoio.descricao;
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -110,17 +114,22 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
 
 
             Upload.upload({
-                url: 'cms/inserir-mrosc',
-                data: {mrosc: $scope.mrosc, file: file, arquivo: arquivo},
+                url: 'cms/inserir-apoio',
+                data: {apoio: $scope.apoio, file: file, arquivo: arquivo},
             }).then(function (response) {
                 $timeout(function () {
                     $scope.result = response.data;
                 });
-                console.log(response.data);
-                delete $scope.mrosc;//limpa o form
+                //console.log(response.data);
+                //delete $scope.apoio;//limpa o form
+                delete $scope.apoio.data;
+                delete $scope.apoio.titulo;
+                delete $scope.apoio.resumida;
+                delete $scope.apoio.slug;
+                delete $scope.apoio.descricao;
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
-                listarMroscs();
+                listarApoios();
                 $scope.mensagemInserir =  "Gravado com sucesso!";
             }, function (response) {
                 console.log(response.data);
@@ -157,19 +166,19 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
         $scope.imagemExcluir = imagem;
         $scope.excluido = false;
         $scope.mensagemExcluido = "";
-    }
+    };
 
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-mrosc/'+id,
+            url: 'cms/excluir-apoio/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);
             $scope.processandoExcluir = false;
             $scope.excluido = true;
             $scope.mensagemExcluido = "Excluído com sucesso!";
-            listarMroscs();
+            listarApoios();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoExcluir = false;
@@ -183,7 +192,7 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
         $scope.idStatus = '';
         $scope.processandoStatus = true;
         $http({
-            url: 'cms/status-mrosc/'+id,
+            url: 'cms/status-apoio/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             //console.log(data);
@@ -191,53 +200,11 @@ cmsApp.controller('mroscCtrl', ['$scope', '$http', 'Upload', '$timeout', functio
             //$scope.excluido = true;
             $scope.mensagemStatus = 'color-success';
             $scope.idStatus = id;
-            listarMroscs();
+            listarApoios();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoStatus = false;
             $scope.mensagemStatus = "Erro ao tentar status!";
-        });
-    };
-    $scope.positionUp = function(id){
-        //console.log(id);
-        $scope.mensagemPositionUp = '';
-        $scope.idPositionUp = '';
-        $scope.processandoPositionUp = true;
-        $http({
-            url: 'cms/positionUp-mrosc/'+id,
-            method: 'GET'
-        }).success(function(data, positionUp, headers, config){
-            //console.log(data);
-            $scope.processandoPositionUp = false;
-            //$scope.excluido = true;
-            $scope.mensagemPositionUp = 'color-success';
-            $scope.idPositionUp = id;
-            listarMroscs();
-        }).error(function(data){
-            $scope.message = "Ocorreu um erro: "+data;
-            $scope.processandoPositionUp = false;
-            $scope.mensagemPositionUp = "Erro ao tentar positionUp!";
-        });
-    };
-    $scope.positionDown = function(id){
-        //console.log(id);
-        $scope.mensagemPositionDown = '';
-        $scope.idPositionDown = '';
-        $scope.processandoPositionDown = true;
-        $http({
-            url: 'cms/positionDown-mrosc/'+id,
-            method: 'GET'
-        }).success(function(data, positionDown, headers, config){
-            //console.log(data);
-            $scope.processandoPositionDown = false;
-            //$scope.excluido = true;
-            $scope.mensagemPositionDown = 'color-success';
-            $scope.idPositionDown = id;
-            listarMroscs();
-        }).error(function(data){
-            $scope.message = "Ocorreu um erro: "+data;
-            $scope.processandoPositionDown = false;
-            $scope.mensagemPositionDown = "Erro ao tentar positionDown!";
         });
     };
 

@@ -9,8 +9,8 @@ null, ['class'=>"form-control width-medio <% validar(link.idioma_id) %>", 'ng-mo
 {!! Form::label('titulo', 'Título *') !!}<br>
 {!! Form::text('titulo', null, ['class'=>"form-control width-grande <% validar(link.titulo) %>", 'ng-model'=>'link.titulo', 'ng-required'=>'true', 'init-model'=>'link.titulo', 'placeholder' => '']) !!}<br>
 
-{!! Form::label('descricao', 'Descrição *') !!}<br>
-{!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(link.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-required'=>'true', 'ng-model'=>'link.descricao', 'init-model'=>'link.descricao']) !!}<br>
+{!! Form::label('descricao', 'Descrição') !!}<br>
+{!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(link.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-model'=>'link.descricao', 'init-model'=>'link.descricao']) !!}<br>
 
 {!! Form::label('url', 'Link*') !!}<br>
 {!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(link.descricao) %>", 'ng-model'=>'url', 'ng-required'=>'true',  'init-model'=>'url', 'placeholder' => '']) !!}<br>

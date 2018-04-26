@@ -1,16 +1,16 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/mroscCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/publicationCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="mroscCtrl">
+    <div ng-controller="publicationCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-mrosc" aria-hidden="true"></i>&nbsp;Mrosc</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Tópico</button>
+            <h1><i class="fa fa-publication" aria-hidden="true"></i>&nbsp;Publications</h1>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Nova Publication</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">
@@ -40,7 +40,7 @@
 
 
                 <br><br>
-                @include('cms::mrosc._form')
+                @include('cms::publication._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
@@ -76,45 +76,37 @@
                         <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     </div>
                     <br>
-                    <div><% mensagemMroscr %></div>
+                    <div><% mensagemPublicationr %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                     <h2 class="tabela_vazia" ng-show="!processandoListagem && totalItens==0">Nenhum registro encontrado!</h2>
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="mroscr:pointer;">
+                            <th ng-click="ordernarPor('id')" style="publicationr:pointer;">
                                 Id
                                 <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th>Imagem</th>
-                            <th ng-click="ordernarPor('mrosc')" style="mroscr:pointer;">
-                                Mrosc
-                                <i ng-if="ordem=='mrosc' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='mrosc' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
-                            </th>
-                            <th ng-click="ordernarPor('posicao')" style="mroscr:pointer;">
-                                Posição
-                                <i ng-if="ordem=='posicao' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='posicao' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            <th ng-click="ordernarPor('publication')" style="publicationr:pointer;">
+                                Publication
+                                <i ng-if="ordem=='publication' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='publication' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="mrosc in mroscs">
-                            <td><% mrosc.id %></td>
-                            <td><img ng-show="mrosc.imagem" ng-src="imagens/mroscs/xs-<% mrosc.imagem %>" width="60"></td>
-                            <td><a href="cms/mrosc/<% mrosc.id %>"><% mrosc.titulo %></a></td>
-                            <td><a href="cms/mrosc/<% mrosc.id %>"><% mrosc.posicao %></a></td>
+                        <tr ng-repeat="publication in publications">
+                            <td><% publication.id %></td>
+                            <td><img ng-show="publication.imagem" ng-src="imagens/publications/xs-<% publication.imagem %>" width="60"></td>
+                            <td><a href="cms/publication/<% publication.id %>"><% publication.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    <a><i class="fa fa-arrow-circle-up fa-2x" title="Itens" ng-click="positionUp(mrosc.id);" style="cursor: pointer;"></i></a>&nbsp;&nbsp;
-                                    <a><i class="fa fa-arrow-circle-down fa-2x" title="Itens" ng-click="positionDown(mrosc.id);" style="cursor: pointer;"></i></a>&nbsp;&nbsp;
-                                    <a href="cms/items-mrosc/<% mrosc.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;
-                                    <a href="cms/mrosc/<% mrosc.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
-                                    <a ng-class="<% mrosc.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(mrosc.id);"></i></a>
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(mrosc.id, mrosc.titulo, mrosc.imagem)"></i></a>
+                                    {{--<a href="cms/items/<% publication.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
+                                    <a href="cms/publication/<% publication.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% publication.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(publication.id);"></i></a>
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(publication.id, publication.titulo, publication.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -158,7 +150,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img  ng-src="imagens/mroscs/xs-<% imagemExcluir %>" width="100">
+                                <img  ng-src="imagens/publications/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
                                 <p><% tituloExcluir %></p>

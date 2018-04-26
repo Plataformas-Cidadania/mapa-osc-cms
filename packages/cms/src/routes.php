@@ -78,6 +78,15 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/excluir-noticia/{id}', 'Cms\Controllers\NoticiaController@excluir');
         Route::get('/cms/status-noticia/{id}', 'Cms\Controllers\NoticiaController@status');
 
+        //PUBLICATIONS
+        Route::get('/cms/publications', 'Cms\Controllers\PublicationController@index');
+        Route::get('/cms/listar-publications', 'Cms\Controllers\PublicationController@listar');
+        Route::post('/cms/inserir-publication', 'Cms\Controllers\PublicationController@inserir');
+        Route::get('/cms/publication/{id}', 'Cms\Controllers\PublicationController@detalhar');
+        Route::post('/cms/alterar-publication/{id}', 'Cms\Controllers\PublicationController@alterar');
+        Route::get('/cms/excluir-publication/{id}', 'Cms\Controllers\PublicationController@excluir');
+        Route::get('/cms/status-publication/{id}', 'Cms\Controllers\PublicationController@status');
+
         //LINKS
         Route::get('/cms/links', 'Cms\Controllers\LinkController@index');
         Route::get('/cms/listar-links', 'Cms\Controllers\LinkController@listar');
@@ -86,6 +95,15 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-link/{id}', 'Cms\Controllers\LinkController@alterar');
         Route::get('/cms/excluir-link/{id}', 'Cms\Controllers\LinkController@excluir');
         Route::get('/cms/status-link/{id}', 'Cms\Controllers\LinkController@status');
+
+        //APOIOS
+        Route::get('/cms/apoios', 'Cms\Controllers\ApoioController@index');
+        Route::get('/cms/listar-apoios', 'Cms\Controllers\ApoioController@listar');
+        Route::post('/cms/inserir-apoio', 'Cms\Controllers\ApoioController@inserir');
+        Route::get('/cms/apoio/{id}', 'Cms\Controllers\ApoioController@detalhar');
+        Route::post('/cms/alterar-apoio/{id}', 'Cms\Controllers\ApoioController@alterar');
+        Route::get('/cms/excluir-apoio/{id}', 'Cms\Controllers\ApoioController@excluir');
+        Route::get('/cms/status-apoio/{id}', 'Cms\Controllers\ApoioController@status');
         
         //EQUIPES
         Route::get('/cms/equipes', 'Cms\Controllers\EquipeController@index');
@@ -111,7 +129,9 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-mrosc/{id}', 'Cms\Controllers\MroscController@alterar');
         Route::get('/cms/excluir-mrosc/{id}', 'Cms\Controllers\MroscController@excluir');
         Route::get('/cms/status-mrosc/{id}', 'Cms\Controllers\MroscController@status');
-        
+        Route::get('/cms/positionUp-mrosc/{id}', 'Cms\Controllers\MroscController@positionUp');
+        Route::get('/cms/positionDown-mrosc/{id}', 'Cms\Controllers\MroscController@positionDown');
+
         //VERSOES
         Route::get('/cms/versoes', 'Cms\Controllers\VersaoController@index');
         Route::get('/cms/listar-versoes', 'Cms\Controllers\VersaoController@listar');

@@ -11,19 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
-class MroscController extends Controller
+class PublicationController extends Controller
 {
     
     
 
     public function __construct()
     {
-        $this->mrosc = new \App\Mrosc;
+        $this->publication = new \App\Publication;
         $this->campos = [
-            //'imagem', 'titulo', 'descricao', 'arquivo', 'idioma_id', 'cmsuser_id',
-            'imagem', 'titulo', 'subtitulo', 'descricao', 'arquivo', 'posicao', 'cmsuser_id',
+            'imagem', 'titulo', 'resumida', 'descricao', 'arquivo', 'data', 'cmsuser_id',
         ];
-        $this->pathImagem = public_path().'/imagens/mroscs';
+        $this->pathImagem = public_path().'/imagens/publications';
         $this->sizesImagem = [
             'xs' => ['width' => 140, 'height' => 79],
             'sm' => ['width' => 480, 'height' => 270],
@@ -32,18 +31,18 @@ class MroscController extends Controller
         ];
         $this->widthOriginal = true;
 
-        $this->pathArquivo = public_path().'/arquivos/mroscs';
+        $this->pathArquivo = public_path().'/arquivos/publications';
     }
 
     function index()
     {
 
-        $mroscs = \App\Mrosc::all();
+        $publications = \App\Publication::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
 
-        return view('cms::mrosc.listar', ['mroscs' => $mroscs]);
-        //return view('cms::mrosc.listar', ['mroscs' => $mroscs, 'idiomas' => $idiomas]);
+        return view('cms::publication.listar', ['publications' => $publications]);
+        //return view('cms::publication.listar', ['publications' => $publications, 'idiomas' => $idiomas]);
     }
 
     public function listar(Request $request)
@@ -55,14 +54,14 @@ class MroscController extends Controller
 
         $campos = explode(", ", $request->campos);
 
-        $mroscs = DB::table('mroscs')
+        $publications = DB::table('publications')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
-        return $mroscs;
+        return $publications;
     }
 
 
@@ -71,18 +70,19 @@ class MroscController extends Controller
 
         $data = $request->all();
 
-        $data['mrosc'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['publication'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
-                $data['mrosc'] += [$campo => ''];
+                $data['publication'] += [$campo => ''];
             }
         }
 
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
-
+	
+	Log::info($request);
 
         $successFile = true;
         if($file!=null){
@@ -90,7 +90,7 @@ class MroscController extends Controller
             $imagemCms = new ImagemCms();
             $successFile = $imagemCms->inserir($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal);
             if($successFile){
-                $data['mrosc']['imagem'] = $filename;
+                $data['publication']['imagem'] = $filename;
             }
         }
 
@@ -99,47 +99,47 @@ class MroscController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['mrosc']['arquivo'] = $filenameArquivo;
+                $data['publication']['arquivo'] = $filenameArquivo;
             }
         }
 
 
         if($successFile && $successArquivo){
-            return $this->mrosc->create($data['mrosc']);
+            return $this->publication->create($data['publication']);
         }else{
             return "erro";
         }
 
 
-        return $this->mrosc->create($data['mrosc']);
+        return $this->publication->create($data['publication']);
 
     }
 
     public function detalhar($id)
     {
-        $mrosc = $this->mrosc->where([
+        $publication = $this->publication->where([
             ['id', '=', $id],
         ])->firstOrFail();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::mrosc.detalhar', ['mrosc' => $mrosc]);
-        //return view('cms::mrosc.detalhar', ['mrosc' => $mrosc, 'idiomas' => $idiomas]);
+        return view('cms::publication.detalhar', ['publication' => $publication]);
+        //return view('cms::publication.detalhar', ['publication' => $publication, 'idiomas' => $idiomas]);
     }
 
     /*public function alterar(Request $request, $id)
     {
         $data = $request->all();
-        $data['mrosc'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['publication'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem'){
-                    $data['mrosc'] += [$campo => ''];
+                    $data['publication'] += [$campo => ''];
                 }
             }
         }
-        $mrosc = $this->mrosc->where([
+        $publication = $this->publication->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
@@ -148,11 +148,11 @@ class MroscController extends Controller
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
             $imagemCms = new ImagemCms();
-            $success = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $mrosc);
+            $success = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $publication);
             if($success){
-                $data['mrosc']['imagem'] = $filename;
-                $mrosc->update($data['mrosc']);
-                return $mrosc->imagem;
+                $data['publication']['imagem'] = $filename;
+                $publication->update($data['publication']);
+                return $publication->imagem;
             }else{
                 return "erro";
             }
@@ -160,13 +160,13 @@ class MroscController extends Controller
 
         //remover imagem
         if($data['removerImagem']){
-            $data['mrosc']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$mrosc->imagem)) {
-                unlink($this->pathImagem . "/" . $mrosc->imagem);
+            $data['publication']['imagem'] = '';
+            if(file_exists($this->pathImagem."/".$publication->imagem)) {
+                unlink($this->pathImagem . "/" . $publication->imagem);
             }
         }
 
-        $mrosc->update($data['mrosc']);
+        $publication->update($data['publication']);
         return "Gravado com sucesso";
     }*/
 
@@ -176,17 +176,17 @@ class MroscController extends Controller
 
         //return $data;
 
-        $data['mrosc'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['publication'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem' && $campo!='arquivo'){
-                    $data['mrosc'] += [$campo => ''];
+                    $data['publication'] += [$campo => ''];
                 }
             }
         }
-        $mrosc = $this->mrosc->where([
+        $publication = $this->publication->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
@@ -194,19 +194,21 @@ class MroscController extends Controller
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
 
+	Log::info($request);
+
         //remover imagem
         if($data['removerImagem']){
-            $data['mrosc']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$mrosc->imagem)) {
-                unlink($this->pathImagem . "/" . $mrosc->imagem);
+            $data['publication']['imagem'] = '';
+            if(file_exists($this->pathImagem."/".$publication->imagem)) {
+                unlink($this->pathImagem . "/" . $publication->imagem);
             }
         }
 
 
         if($data['removerArquivo']){
-            $data['mrosc']['arquivo'] = '';
-            if(file_exists($this->pathArquivo."/".$mrosc->arquivo)) {
-                unlink($this->pathArquivo . "/" . $mrosc->arquivo);
+            $data['publication']['arquivo'] = '';
+            if(file_exists($this->pathArquivo."/".$publication->arquivo)) {
+                unlink($this->pathArquivo . "/" . $publication->arquivo);
             }
         }
 
@@ -215,9 +217,9 @@ class MroscController extends Controller
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
             $imagemCms = new ImagemCms();
-            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $mrosc);
+            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $publication);
             if($successFile){
-                $data['mrosc']['imagem'] = $filename;
+                $data['publication']['imagem'] = $filename;
             }
         }
 
@@ -226,19 +228,19 @@ class MroscController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['mrosc']['arquivo'] = $filenameArquivo;
+                $data['publication']['arquivo'] = $filenameArquivo;
             }
         }
 
         if($successFile && $successArquivo){
 
-            $mrosc->update($data['mrosc']);
-            return $mrosc->imagem;
+            $publication->update($data['publication']);
+            return $publication->imagem;
         }else{
             return "erro";
         }
 
-        //$mrosc->update($data['mrosc']);
+        //$publication->update($data['publication']);
         //return "Gravado com sucesso";
     }
 
@@ -246,59 +248,33 @@ class MroscController extends Controller
     {
         //Auth::loginUsingId(2);
 
-        $mrosc = $this->mrosc->where([
+        $publication = $this->publication->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
         //remover imagens        
-        if(!empty($mrosc->imagem)){
+        if(!empty($publication->imagem)){
             //remover imagens
             $imagemCms = new ImagemCms();
-            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $mrosc);
+            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $publication);
         }
 
 
-        if(!empty($mrosc->arquivo)) {
-            if (file_exists($this->pathArquivo . "/" . $mrosc->arquivo)) {
-                unlink($this->pathArquivo . "/" . $mrosc->arquivo);
+        if(!empty($publication->arquivo)) {
+            if (file_exists($this->pathArquivo . "/" . $publication->arquivo)) {
+                unlink($this->pathArquivo . "/" . $publication->arquivo);
             }
         }
 
-        $mrosc->delete();
+        $publication->delete();
 
     }
 
     public function status($id)
     {
-        $tipo_atual = DB::table('mroscs')->where('id', $id)->first();
+        $tipo_atual = DB::table('publications')->where('id', $id)->first();
         $status = $tipo_atual->status == 0 ? 1 : 0;
-        DB::table('mroscs')->where('id', $id)->update(['status' => $status]);
-
-    }
-
-    public function positionUp($id)
-    {
-        $posicao_atual = DB::table('mroscs')->where('id', $id)->first();
-        $upPosicao = $posicao_atual->posicao-1;
-        DB::table('mroscs')->where('id', $id)->update(['posicao' => $upPosicao]);
-
-        /*$item_anterior = $posicao_atual->posicao-1;
-        Log::info("Posicao ".$item_anterior);
-
-        DB::table('mroscs')->where('id', $id)->where('posicao', $item_anterior)->update(['posicao' => $upPosicao]);*/
-
-        /*$posicao_anterior = $posicao_atual->posicao-1;
-        $upPosicao = $posicao_atual->posicao+1;
-        DB::table('mroscs')->where('id', $id)->where('posicao', $posicao_anterior)->update(['posicao' => $upPosicao]);*/
-
-
-    }
-
-    public function positionDown($id)
-    {
-        $posicao_atual = DB::table('mroscs')->where('id', $id)->first();
-        $downPosicao = $posicao_atual->posicao+1;
-        DB::table('mroscs')->where('id', $id)->update(['posicao' => $downPosicao]);
+        DB::table('publications')->where('id', $id)->update(['status' => $status]);
 
     }
 

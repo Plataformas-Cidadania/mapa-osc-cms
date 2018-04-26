@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLinksTable extends Migration
+class CreatePublicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,15 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem')->nullable();
             $table->string('titulo')->nullable();
+            $table->text('resumida')->nullable();
             $table->text('descricao')->nullable();
-            $table->string('url')->nullable();
             $table->text('arquivo')->nullable();
+            $table->date('data')->nullable();
+            $table->integer('status')->default(0);
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
@@ -32,6 +34,6 @@ class CreateLinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('links');
+        Schema::drop('publications');
     }
 }

@@ -64,9 +64,17 @@ elixir(function(mix) {
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/noticiaCtrl.js', 'public/assets-cms/js/controllers/noticiaCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarNoticiaCtrl.js', 'public/assets-cms/js/controllers/alterarNoticiaCtrl.js');
 
+    //Publications
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/publicationCtrl.js', 'public/assets-cms/js/controllers/publicationCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarPublicationCtrl.js', 'public/assets-cms/js/controllers/alterarPublicationCtrl.js');
+
     //Links
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/linkCtrl.js', 'public/assets-cms/js/controllers/linkCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarLinkCtrl.js', 'public/assets-cms/js/controllers/alterarLinkCtrl.js');
+    
+    //Apoios
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/apoioCtrl.js', 'public/assets-cms/js/controllers/apoioCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarApoioCtrl.js', 'public/assets-cms/js/controllers/alterarApoioCtrl.js');
     
     //Equipes
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/equipeCtrl.js', 'public/assets-cms/js/controllers/equipeCtrl.js');

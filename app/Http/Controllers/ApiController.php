@@ -162,6 +162,16 @@ class ApiController extends Controller
         }
 
         return $links;
+    }  
+    
+    public function apoios(){
+        $apoios = \App\Apoio::select('titulo as tx_titulo_apoio', 'descricao as tx_descricao_apoio', 'imagem as tx_imagem_apoio', 'url as tx_apoio_apoio')->where('status', 1)->get();
+
+        foreach ($apoios as $apoio) {
+            $apoio->tx_descricao_apoio = str_replace('/imagens/apoios', env('APP_URL').'/imagens/geral', $apoio->tx_descricao_apoio);
+        }
+
+        return $apoios;
     }    
     
     public function equipes(){
@@ -190,6 +200,25 @@ class ApiController extends Controller
 
     }
 
+    public function publicacoes(){
+        $publications = \App\Publication::select('data as dt_publicacao', 'id as cd_publicacao', 'titulo as tx_titulo_publicacao', 'resumida as tx_resumo_publicacao', 'imagem as tx_link_img_publicacao', 'status')->where('status', 1)->get();
+
+        foreach ($publications as $publication) {
+            $publication->tx_descricao_publication = str_replace('/imagens/publications', env('APP_URL').'/imagens/geral', $publication->tx_descricao_publication);
+        }
+
+        return $publications;
+    }
+
+
+    public function publicacaoByID($idPublication){
+
+        $row = \App\Publication::select('titulo as tx_titulo_publicacao', 'descricao as tx_descricao_publicacao', 'data as dt_publicacao')->where('status', 1)->find($idPublication);
+
+        $row->tx_descricao_publication = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_publication);
+
+        return $row;
+    }
 
 
 }
