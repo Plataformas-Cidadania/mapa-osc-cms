@@ -291,7 +291,6 @@ class MroscController extends Controller
         $upPosicao = $posicao_atual->posicao+1;
         DB::table('mroscs')->where('id', $id)->where('posicao', $posicao_anterior)->update(['posicao' => $upPosicao]);*/
 
-
     }
 
     public function positionDown($id)
