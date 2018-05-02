@@ -63,6 +63,9 @@ Route::get('links/', 'ApiController@links');
 Route::get('Equipes/', 'ApiController@equipes');
 Route::get('equipes/', 'ApiController@equipes');
 
+Route::get('Apoios/', 'ApiController@apoios');
+Route::get('apoios/', 'ApiController@apoios');
+
 Route::get('Publicacoes/', 'ApiController@publicacoes');
 Route::get('publicacoes/', 'ApiController@publicacoes');
 
