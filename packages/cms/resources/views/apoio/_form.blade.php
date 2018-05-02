@@ -13,7 +13,7 @@ null, ['class'=>"form-control width-medio <% validar(apoio.idioma_id) %>", 'ng-m
 {!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(apoio.descricao) %>", 'ui-tinymce'=>'tinymceOptions',  'ng-model'=>'apoio.descricao', 'init-model'=>'apoio.descricao']) !!}<br>
 
 {!! Form::label('url', 'Link*') !!}<br>
-{!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(apoio.descricao) %>", 'ng-model'=>'url', 'ng-required'=>'true',  'init-model'=>'url', 'placeholder' => '']) !!}<br>
+{!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(apoio.url) %>", 'ng-model'=>'apoio.url', 'ng-required'=>'true',  'init-model'=>'apoio.url', 'placeholder' => '']) !!}<br>
 
 {!! Form::label('posicao', 'Posição *') !!}<br>
 {!! Form::text('posicao', null, ['class'=>"form-control width-pequeno <% validar(apoio.posicao) %>", 'ng-model'=>'apoio.posicao', 'ng-required'=>'true', 'init-model'=>'apoio.posicao', 'placeholder' => '']) !!}<br>
