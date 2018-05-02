@@ -9,7 +9,7 @@
             <div ng-init="carregaImagem('{{$integrante->imagem}}', '{{$integrante->arquivo}}')">
                 <span class="texto-obrigatorio">* campos obrigatórios</span><br><br>
                 {!! Form::model($integrante, ['name' =>'form']) !!}
-                <div style="display: none;">
+                <div>
                     <div class="container-thumb" style="">
                         <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
                              ng-show="!picFile && !imagemBD" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
@@ -31,9 +31,7 @@
                 <button class="btn btn-danger" ng-click="limparArquivo()" ng-show="fileArquivo || arquivoBD" type="button">Remover Arquivo</button>
                 <a href="arquivos/integrantes/<% arquivoBD %>" target="_blank" ng-show="arquivoBD"><% arquivoBD %></a>
                 <a ng-show="fileArquivo"><% fileArquivo.name %></a>
-                <br><br>
 
-                <br><br>
                 </div>
                 @include('cms::integrante._form')
                 <input type="hidden" name="id" ng-model="id" ng-init="id='{{$integrante->id}}'"/>

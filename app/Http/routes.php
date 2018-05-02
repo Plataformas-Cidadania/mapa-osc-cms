@@ -62,3 +62,9 @@ Route::get('links/', 'ApiController@links');
 
 Route::get('Equipes/', 'ApiController@equipes');
 Route::get('equipes/', 'ApiController@equipes');
+
+Route::get('Publicacoes/', 'ApiController@publicacoes');
+Route::get('publicacoes/', 'ApiController@publicacoes');
+
+Route::get('PublicacaoByID/{idPublication}', 'ApiController@publicacaoByID');
+Route::get('publicacaoByID/{idPublication}', 'ApiController@publicacaoByID');
