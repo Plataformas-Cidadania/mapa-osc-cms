@@ -204,7 +204,7 @@ class ApiController extends Controller
         $publications = \App\Publication::select('data as dt_publicacao', 'id as cd_publicacao', 'titulo as tx_titulo_publicacao', 'resumida as tx_resumo_publicacao', 'descricao as tx_descricao_publicacao', 'imagem as tx_link_img_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->get();
 
         foreach ($publications as $publication) {
-            $publication->tx_descricao_publicacao = str_replace('/imagens/publications', env('APP_URL').'/imagens/geral', $publication->tx_descricao_publication);
+            $publication->tx_descricao_publicacao = str_replace('/imagens/publications', env('APP_URL').'/imagens/geral', $publication->tx_descricao_publicacao);
         }
 
         return $publications;
@@ -215,7 +215,7 @@ class ApiController extends Controller
 
         $row = \App\Publication::select('titulo as tx_titulo_publicacao', 'descricao as tx_descricao_publicacao', 'data as dt_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->find($idPublication);
 
-        $row->tx_descricao_publicacao = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_publication);
+        $row->tx_descricao_publicacao = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_publicacao);
 
         return $row;
     }
