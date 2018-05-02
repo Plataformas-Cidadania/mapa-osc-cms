@@ -156,7 +156,7 @@ class ApiController extends Controller
     }
     
     public function links(){
-        $links = \App\Link::select('titulo as tx_titulo_link', 'descricao as tx_descricao_link', 'imagem as tx_imagem_link', 'url as tx_link_link')->where('status', 1)->get();
+        $links = \App\Link::select('titulo as tx_titulo_link', 'descricao as tx_descricao_link', 'imagem as tx_imagem_link', 'url as tx_link_link')->where('status', 1)->orderBy('posicao')->get();
 
         foreach ($links as $link) {
             $link->tx_descricao_link = str_replace('/imagens/links', env('APP_URL').'/imagens/geral', $link->tx_descricao_link);
@@ -166,7 +166,7 @@ class ApiController extends Controller
     }  
     
     public function apoios(){
-        $apoios = \App\Apoio::select('titulo as tx_titulo_apoio', 'descricao as tx_descricao_apoio', 'imagem as tx_imagem_apoio', 'url as tx_apoio_apoio')->where('status', 1)->get();
+        $apoios = \App\Apoio::select('titulo as tx_titulo_apoio', 'descricao as tx_descricao_apoio', 'imagem as tx_imagem_apoio', 'url as tx_apoio_apoio')->where('status', 1)->orderBy('posicao')->get();
 
         foreach ($apoios as $apoio) {
             $apoio->tx_descricao_apoio = str_replace('/imagens/apoios', env('APP_URL').'/imagens/geral', $apoio->tx_descricao_apoio);
