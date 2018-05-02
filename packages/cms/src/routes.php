@@ -98,6 +98,8 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-link/{id}', 'Cms\Controllers\LinkController@alterar');
         Route::get('/cms/excluir-link/{id}', 'Cms\Controllers\LinkController@excluir');
         Route::get('/cms/status-link/{id}', 'Cms\Controllers\LinkController@status');
+        Route::get('/cms/positionUp-link/{id}', 'Cms\Controllers\LinkController@positionUp');
+        Route::get('/cms/positionDown-link/{id}', 'Cms\Controllers\LinkController@positionDown');
 
         //APOIOS
         Route::get('/cms/apoios', 'Cms\Controllers\ApoioController@index');
@@ -107,6 +109,8 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-apoio/{id}', 'Cms\Controllers\ApoioController@alterar');
         Route::get('/cms/excluir-apoio/{id}', 'Cms\Controllers\ApoioController@excluir');
         Route::get('/cms/status-apoio/{id}', 'Cms\Controllers\ApoioController@status');
+        Route::get('/cms/positionUp-apoio/{id}', 'Cms\Controllers\ApoioController@positionUp');
+        Route::get('/cms/positionDown-apoio/{id}', 'Cms\Controllers\ApoioController@positionDown');
         
         //EQUIPES
         Route::get('/cms/equipes', 'Cms\Controllers\EquipeController@index');

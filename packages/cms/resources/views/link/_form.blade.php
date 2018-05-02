@@ -14,3 +14,6 @@ null, ['class'=>"form-control width-medio <% validar(link.idioma_id) %>", 'ng-mo
 
 {!! Form::label('url', 'Link*') !!}<br>
 {!! Form::text('url', null, ['class'=>"form-control width-grande <% validar(link.descricao) %>", 'ng-model'=>'url', 'ng-required'=>'true',  'init-model'=>'url', 'placeholder' => '']) !!}<br>
+
+{!! Form::label('posicao', 'Posição *') !!}<br>
+{!! Form::text('posicao', null, ['class'=>"form-control width-pequeno <% validar(link.posicao) %>", 'ng-model'=>'link.posicao', 'ng-required'=>'true', 'init-model'=>'link.posicao', 'placeholder' => '']) !!}<br>

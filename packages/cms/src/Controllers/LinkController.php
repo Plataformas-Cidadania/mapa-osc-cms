@@ -20,7 +20,7 @@ class LinkController extends Controller
     {
         $this->link = new \App\Link;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'arquivo', 'url', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'arquivo', 'url', 'posicao', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/links';
         $this->sizesImagem = [
@@ -275,6 +275,37 @@ class LinkController extends Controller
         $tipo_atual = DB::table('links')->where('id', $id)->first();
         $status = $tipo_atual->status == 0 ? 1 : 0;
         DB::table('links')->where('id', $id)->update(['status' => $status]);
+
+    }
+
+    public function positionUp($id)
+    {
+
+        $posicao_atual = DB::table('links')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao-1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('links')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('links')->where('id', $id)->update(['posicao' => $upPosicao]);
+
+
+    }
+
+    public function positionDown($id)
+    {
+
+        $posicao_atual = DB::table('links')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao+1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('links')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('links')->where('id', $id)->update(['posicao' => $upPosicao]);
 
     }
 
