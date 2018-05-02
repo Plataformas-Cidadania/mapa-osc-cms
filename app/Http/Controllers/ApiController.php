@@ -100,7 +100,7 @@ class ApiController extends Controller
 
     public function moduloBySlug($slug){
         $modulo =  \App\Modulo::select('id', 'titulo as tx_titulo_modulo', 'descricao as tx_descricao_modulo', 'slug as tx_slug_modulo', 'imagem as tx_imagem_modulo', 'arquivo as tx_arquivo_modulo')->where('status', 1)->where('slug', $slug)->first();
-        $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('status', 1)->where('modulo_id', $modulo->id)->get();
+        $itens = \App\Item::select('id as cd_itens', 'titulo as tx_titulo_itens', 'descricao as tx_descricao_itens', 'imagem as tx_imagem_itens', 'arquivo as tx_arquivo_itens')->where('status', 1)->where('modulo_id', $modulo->id)->orderBy('posicao')->get();
 
         $modulo->tx_descricao_modulo = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $modulo->tx_descricao_modulo);
         foreach ($itens as $item) {
