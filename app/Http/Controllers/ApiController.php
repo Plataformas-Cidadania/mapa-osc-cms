@@ -144,6 +144,7 @@ class ApiController extends Controller
 
 
 
+
     public function webdoorByID(){
         $webdoors = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->where('status', 1)->get();
 
