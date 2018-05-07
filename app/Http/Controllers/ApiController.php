@@ -180,10 +180,10 @@ class ApiController extends Controller
         $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->orderBy('posicao')->get();
 
         foreach ($versoes as $versao) {
-            $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'imagem as tx_imagem_itens', 'descricao as tx_descricao_itens')->where('status', 1)->orderBy('posicao')->get();
+            $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->orderBy('posicao')->get();
             foreach ($versoes as $versao) {
                 $coordenadores = \App\ItemVersao::select('integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 1)->get();
-                $equipe = \App\ItemVersao::select('integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 2)->get();
+                $equipe = \App\ItemVersao::select('integrantes.imagem as tx_imagem_equipe', 'integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 2)->get();
 
                 $versao->coordenadores = $coordenadores;
                 $versao->equipe = $equipe;
