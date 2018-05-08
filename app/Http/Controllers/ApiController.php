@@ -212,7 +212,6 @@ class ApiController extends Controller
         return $publications;
     }
 
-
     public function publicacaoByID($idPublication){
 
         $row = \App\Publication::select('titulo as tx_titulo_publicacao', 'descricao as tx_descricao_publicacao', 'data as dt_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->find($idPublication);
