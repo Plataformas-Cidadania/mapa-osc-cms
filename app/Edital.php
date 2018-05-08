@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Edital extends Model
 {
     //protected $table = 'editais';
-    protected $table = 'portal.td_edital';
+    protected $table = 'portal.tb_edital';
     protected $primaryKey = 'id_edital';
     public $timestamps = false;
     protected $fillable = [

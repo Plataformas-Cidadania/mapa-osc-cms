@@ -53,7 +53,7 @@ class EditalController extends Controller
 
         $campos = explode(", ", $request->campos);
 
-        $editais = DB::table('portal.td_edital')
+        $editais = DB::table('portal.tb_edital')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
