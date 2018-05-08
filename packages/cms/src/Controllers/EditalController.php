@@ -20,7 +20,7 @@ class EditalController extends Controller
     {
         $this->edital = new \App\Edital;
         $this->campos = [
-            'imagem', 'titulo', 'instituicao', 'area', 'data_vencimento', 'numero_chamada', 'edital', 'status', 'arquivo', 'cmsuser_id',
+            'tx_orgao', 'tx_programa', 'tx_area_interesse_edital', 'dt_vencimento', 'tx_link_edital', 'tx_numero_chamada',
         ];
         $this->pathImagem = public_path().'/imagens/editais';
         $this->sizesImagem = [
@@ -53,7 +53,7 @@ class EditalController extends Controller
 
         $campos = explode(", ", $request->campos);
 
-        $editais = DB::table('editais')
+        $editais = DB::table('portal.td_edital')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
@@ -116,7 +116,7 @@ class EditalController extends Controller
     public function detalhar($id)
     {
         $edital = $this->edital->where([
-            ['id', '=', $id],
+            ['id_edital', '=', $id],
         ])->firstOrFail();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
@@ -184,7 +184,7 @@ class EditalController extends Controller
             }
         }
         $edital = $this->edital->where([
-            ['id', '=', $id],
+            ['id_edital', '=', $id],
         ])->firstOrFail();
 
 
@@ -244,7 +244,7 @@ class EditalController extends Controller
         //Auth::loginUsingId(2);
 
         $edital = $this->edital->where([
-            ['id', '=', $id],
+            ['id_edital', '=', $id],
         ])->firstOrFail();
 
         //remover imagens        

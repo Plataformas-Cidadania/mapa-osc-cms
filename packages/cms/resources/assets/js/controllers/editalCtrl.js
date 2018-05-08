@@ -7,11 +7,11 @@ cmsApp.controller('editalCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem";
-    $scope.campoPesquisa = "titulo";
+    $scope.campos = "id_edital, tx_programa";
+    $scope.campoPesquisa = "tx_programa";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
-    $scope.ordem = "titulo";
+    $scope.ordem = "tx_programa";
     $scope.sentidoOrdem = "asc";
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
@@ -30,7 +30,6 @@ cmsApp.controller('editalCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             listarEditais();
         }
     });
-
 
     var listarEditais = function(){
         $scope.processandoListagem = true;
