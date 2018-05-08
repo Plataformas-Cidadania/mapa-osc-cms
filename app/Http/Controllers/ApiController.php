@@ -182,10 +182,12 @@ class ApiController extends Controller
         foreach ($versoes as $versao) {
             $versoes = \App\Versao::select('id as versao_id','titulo as tx_titulo_versao', 'descricao as tx_descricao_itens')->where('status', 1)->orderBy('posicao')->get();
             foreach ($versoes as $versao) {
-                $coordenadores = \App\ItemVersao::select('integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 1)->get();
+                $coordenadores = \App\ItemVersao::select('integrantes.imagem as tx_imagem_equipe', 'integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 1)->get();
+                $coordenadores_equipe = \App\ItemVersao::select('integrantes.imagem as tx_imagem_equipe', 'integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 3)->get();
                 $equipe = \App\ItemVersao::select('integrantes.imagem as tx_imagem_equipe', 'integrantes.titulo as tx_nome_equipe', 'integrantes.url as tx_url_equipe')->join('integrantes', 'integrantes.id', '=', 'items_versoes.integrante_id')->where('status', 1)->where('versao_id', $versao->versao_id)->where('tipo_id', 2)->orderBy('integrantes.titulo')->get();
 
                 $versao->coordenadores = $coordenadores;
+                $versao->coordenadores_equipe = $coordenadores_equipe;
                 $versao->equipe = $equipe;
             }
 
@@ -201,7 +203,7 @@ class ApiController extends Controller
     }
 
     public function publicacoes(){
-        $publications = \App\Publication::select('data as dt_publicacao', 'id as cd_publicacao', 'titulo as tx_titulo_publicacao', 'resumida as tx_resumo_publicacao', 'descricao as tx_descricao_publicacao', 'imagem as tx_link_img_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->get();
+        $publications = \App\Publication::select('data as dt_publicacao', 'id as cd_publicacao', 'titulo as tx_titulo_publicacao', 'resumida as tx_resumo_publicacao', 'imagem as tx_link_img_publicacao', 'arquivo as tx_arquivo_publicacao')->where('status', 1)->get();
 
         foreach ($publications as $publication) {
             $publication->tx_descricao_publicacao = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $publication->tx_descricao_publicacao);
