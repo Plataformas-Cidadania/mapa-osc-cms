@@ -86,10 +86,10 @@
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="editalr:pointer;">
+                            <th ng-click="ordernarPor('id_edital')" style="editalr:pointer;">
                                 Id
-                                <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                                <i ng-if="ordem=='id_edital' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='id_edital' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                            {{-- <th>Imagem</th>--}}
                             <th ng-click="ordernarPor('edital')" style="editalr:pointer;">
@@ -104,7 +104,7 @@
                         <tr ng-repeat="edital in editais">
                             <td><% edital.id_edital %></td>
                             {{--<td><img ng-show="edital.imagem" ng-src="imagens/editais/xs-<% edital.imagem %>" width="60"></td>--}}
-                            <td><a href="cms/edital/<% edital.id %>"><% edital.tx_programa %></a></td>
+                            <td><a href="cms/edital/<% edital.id_edital %>"><% edital.tx_programa %></a></td>
                             <td class="text-right">
                                 <div>
                                     {{--<a href="cms/items/<% edital.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
