@@ -9,7 +9,7 @@
 
 {!! Form::label('dt_vencimento', 'Vencimento *') !!}<br>
 {!! Form::date('dt_vencimento', null, ['class'=>"form-control width-grande <% validar(edital.dt_vencimento) %>", 'ng-model'=>'edital.dt_vencimento', 'ng-required'=>'true', 'init-model'=>'edital.dt_vencimento', 'placeholder' => '']) !!}<br>
-
+<% edital.dt_vencimento %>
 {!! Form::label('tx_link_edital', 'Link *') !!}<br>
 {!! Form::text('tx_link_edital', null, ['class'=>"form-control width-grande <% validar(edital.tx_link_edital) %>", 'ng-model'=>'edital.tx_link_edital', 'ng-required'=>'true', 'init-model'=>'edital.tx_link_edital', 'placeholder' => '']) !!}<br>
 
