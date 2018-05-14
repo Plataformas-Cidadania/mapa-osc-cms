@@ -7,7 +7,7 @@ cmsApp.controller('editalCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id_edital, tx_programa";
+    $scope.campos = "id_edital, tx_programa, dt_vencimento";
     $scope.campoPesquisa = "tx_programa";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
@@ -59,7 +59,6 @@ cmsApp.controller('editalCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             $scope.processandoListagem = false;
         });
     };
-
 
 
     $scope.ordernarPor = function(ordem){

@@ -97,6 +97,11 @@
                                 <i ng-if="ordem=='edital' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
                                 <i ng-if="ordem=='edital' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
+                            <th ng-click="ordernarPor('dt_vencimento')" style="editalr:pointer;">
+                                Vencimento
+                                <i ng-if="ordem=='dt_vencimento' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='dt_vencimento' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -105,6 +110,7 @@
                             <td><% edital.id_edital %></td>
                             {{--<td><img ng-show="edital.imagem" ng-src="imagens/editais/xs-<% edital.imagem %>" width="60"></td>--}}
                             <td><a href="cms/edital/<% edital.id_edital %>"><% edital.tx_programa %></a></td>
+                            <td><a href="cms/edital/<% edital.id_edital %>"><% edital.dt_vencimento | date: 'dd/MM/yyyy' %></a></td>
                             <td class="text-right">
                                 <div>
                                     {{--<a href="cms/items/<% edital.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
