@@ -7,9 +7,14 @@
 {!! Form::label('tx_area_interesse_edital', 'Área interesse *') !!}<br>
 {!! Form::text('tx_area_interesse_edital', null, ['class'=>"form-control width-grande <% validar(edital.tx_area_interesse_edital) %>", 'ng-model'=>'edital.tx_area_interesse_edital', 'ng-required'=>'true', 'init-model'=>'edital.tx_area_interesse_edital', 'placeholder' => '']) !!}<br>
 
+{{--
 {!! Form::label('dt_vencimento', 'Vencimento *') !!}<br>
 {!! Form::date('dt_vencimento', null, ['class'=>"form-control width-grande <% validar(edital.dt_vencimento) %>", 'ng-model'=>'edital.dt_vencimento', 'ng-required'=>'true', 'init-model'=>'edital.dt_vencimento', 'placeholder' => '']) !!}<br>
-{{--<% edital.dt_vencimento %>--}}
+--}}
+<label for="dt_vencimento">Vencimento *</label><br>
+<input type="date" name="dt_vencimento" class="form-control width-medio <% validar(edital.dt_vencimento) %>" ng-model="edital.dt_vencimento" ng-required="true" @if(!empty($edital))ng-init="edital.dt_vencimento=stringToDate('{{$edital->dt_vencimento}}')"@endif ><br>
+
+
 {!! Form::label('tx_link_edital', 'Link *') !!}<br>
 {!! Form::text('tx_link_edital', null, ['class'=>"form-control width-grande <% validar(edital.tx_link_edital) %>", 'ng-model'=>'edital.tx_link_edital', 'ng-required'=>'true', 'init-model'=>'edital.tx_link_edital', 'placeholder' => '']) !!}<br>
 
