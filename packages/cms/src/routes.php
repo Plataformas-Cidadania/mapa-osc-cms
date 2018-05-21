@@ -20,6 +20,8 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-webdoor/{id}', 'Cms\Controllers\WebdoorController@alterar');
         Route::get('/cms/excluir-webdoor/{id}', 'Cms\Controllers\WebdoorController@excluir');
         Route::get('/cms/status-webdoor/{id}', 'Cms\Controllers\WebdoorController@status');
+        Route::get('/cms/positionUp-webdoor/{id}', 'Cms\Controllers\WebdoorController@positionUp');
+        Route::get('/cms/positionDown-webdoor/{id}', 'Cms\Controllers\WebdoorController@positionDown');
 
         //ITEMS
         Route::get('/cms/items/{modulo_id}', 'Cms\Controllers\ItemController@index');

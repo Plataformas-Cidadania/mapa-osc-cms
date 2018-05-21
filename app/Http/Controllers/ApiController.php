@@ -146,7 +146,7 @@ class ApiController extends Controller
 
 
     public function webdoors(){
-        $webdoors = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->where('status', 1)->get();
+        $webdoors = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor', 'legenda as tx_legenda_webdoor')->where('status', 1)->orderBy('posicao')->get();
 
         return $webdoors;
     }
@@ -154,7 +154,7 @@ class ApiController extends Controller
     public function webdoorByID($idWebdoor){
 
 
-        $webdoors = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor')->where('id', $idWebdoor)->where('status', 1)->first();
+        $webdoors = \App\Webdoor::select('id as cd_webdoor', 'titulo as tx_titulo_webdoor', 'descricao as tx_descricao_webdoor', 'imagem as tx_imagem_webdoor', 'link as tx_link_webdoor', 'legenda as tx_legenda_webdoor')->where('id', $idWebdoor)->where('status', 1)->first();
         //return $webdoors;
 
         $webdoors->tx_descricao_webdoor = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $webdoors->tx_descricao_webdoor);

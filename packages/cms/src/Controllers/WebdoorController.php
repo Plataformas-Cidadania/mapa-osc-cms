@@ -20,7 +20,7 @@ class WebdoorController extends Controller
     {
         $this->webdoor = new \App\Webdoor;
         $this->campos = [
-            'imagem', 'titulo', 'descricao', 'link', 'cmsuser_id',
+            'imagem', 'titulo', 'descricao', 'link', 'legenda', 'posicao', 'cmsuser_id',
         ];
         $this->pathImagem = public_path().'/imagens/webdoors';
         $this->sizesImagem = [
@@ -172,5 +172,34 @@ class WebdoorController extends Controller
 
     }
 
+    public function positionUp($id)
+    {
 
+        $posicao_atual = DB::table('webdoors')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao-1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('webdoors')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('webdoors')->where('id', $id)->update(['posicao' => $upPosicao]);
+
+
+    }
+
+    public function positionDown($id)
+    {
+
+        $posicao_atual = DB::table('webdoors')->where('id', $id)->first();
+        $upPosicao = $posicao_atual->posicao+1;
+        $posicao = $posicao_atual->posicao;
+
+        //Coloca com a posicao do anterior
+        DB::table('webdoors')->where('posicao', $upPosicao)->update(['posicao' => $posicao]);
+
+        //atualiza a posicao para o anterior
+        DB::table('webdoors')->where('id', $id)->update(['posicao' => $upPosicao]);
+
+    }
 }
