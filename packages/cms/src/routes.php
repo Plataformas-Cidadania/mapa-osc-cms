@@ -138,7 +138,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::post('/cms/alterar-edital/{id}', 'Cms\Controllers\EditalController@alterar');
         Route::get('/cms/excluir-edital/{id}', 'Cms\Controllers\EditalController@excluir');
         
-        //EDITAIS
+        //GRAFICOS
         Route::get('/cms/graficos', 'Cms\Controllers\GraficoController@index');
         Route::get('/cms/listar-graficos', 'Cms\Controllers\GraficoController@listar');
         Route::post('/cms/inserir-grafico', 'Cms\Controllers\GraficoController@inserir');

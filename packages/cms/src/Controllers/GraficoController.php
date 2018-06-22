@@ -119,10 +119,13 @@ class GraficoController extends Controller
 
     public function detalhar($id)
     {
-        $grafico = $this->grafico->where([
+        $grafico = $this->grafico->select(DB::Raw("id_analise, array_to_string(configuracao, ',', '*') as configuracao, array_to_string(titulo_colunas, ',', '*') as titulo_colunas, tipo_grafico, titulo, legenda, legenda_x, legenda_y"))
+            ->where([
             ['id_analise', '=', $id],
         ])->firstOrFail();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
+        $grafico->configuracao = str_replace("'", "", ($grafico->configuracao));
+        $grafico->titulo_colunas = str_replace("'", "", ($grafico->titulo_colunas));
 
         return view('cms::grafico.detalhar', ['grafico' => $grafico, 'idiomas' => $idiomas]);
     }
@@ -178,6 +181,10 @@ class GraficoController extends Controller
         //return $data;
 
         $data['grafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+
+
+        $data['grafico']['configuracao'] = "{'".str_replace(",", "','", $data['grafico']['configuracao'])."'}";
+        $data['grafico']['titulo_colunas'] = "{'".str_replace(",", "','", $data['grafico']['titulo_colunas'])."'}";
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
