@@ -137,6 +137,14 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/edital/{id}', 'Cms\Controllers\EditalController@detalhar');
         Route::post('/cms/alterar-edital/{id}', 'Cms\Controllers\EditalController@alterar');
         Route::get('/cms/excluir-edital/{id}', 'Cms\Controllers\EditalController@excluir');
+        
+        //EDITAIS
+        Route::get('/cms/graficos', 'Cms\Controllers\GraficoController@index');
+        Route::get('/cms/listar-graficos', 'Cms\Controllers\GraficoController@listar');
+        Route::post('/cms/inserir-grafico', 'Cms\Controllers\GraficoController@inserir');
+        Route::get('/cms/grafico/{id}', 'Cms\Controllers\GraficoController@detalhar');
+        Route::post('/cms/alterar-grafico/{id}', 'Cms\Controllers\GraficoController@alterar');
+        Route::get('/cms/excluir-grafico/{id}', 'Cms\Controllers\GraficoController@excluir');
 
         //MROSCS
         Route::get('/cms/mroscs', 'Cms\Controllers\MroscController@index');

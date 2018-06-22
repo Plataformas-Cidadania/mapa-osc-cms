@@ -86,7 +86,11 @@ elixir(function(mix) {
     
     //Editais
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/editalCtrl.js', 'public/assets-cms/js/controllers/editalCtrl.js');
-    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarEditalCtrl.js', 'public/assets-cms/js/controllers/alterarEditalCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarEditalCtrl.js', 'public/assets-cms/js/controllers/alterarEditalCtrl.js'); 
+    
+    //Graficos
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/graficoCtrl.js', 'public/assets-cms/js/controllers/graficoCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarGraficoCtrl.js', 'public/assets-cms/js/controllers/alterarGraficoCtrl.js');
 
     //Items Modulos
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/itemCtrl.js', 'public/assets-cms/js/controllers/itemCtrl.js');
