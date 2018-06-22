@@ -30,3 +30,4 @@ null, ['class'=>"form-control width-medio <% validar(grafico.tipo_grafico) %>", 
 {!! Form::label('titulo_colunas', 'Título Coluna*') !!}<br>
 {!! Form::text('titulo_colunas', null, ['class'=>"form-control width-grande <% validar(grafico.titulo_colunas) %>", 'ng-model'=>'grafico.titulo_colunas', 'ng-required'=>'true', 'init-model'=>'grafico.titulo_colunas', 'placeholder' => 'Ex.: Número de Empregados,Região,Quantidade de OSCs']) !!}<br>
 
+
