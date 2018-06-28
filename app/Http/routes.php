@@ -74,3 +74,6 @@ Route::get('publicacoes/', 'ApiController@publicacoes');
 
 Route::get('PublicacaoByID/{idPublication}', 'ApiController@publicacaoByID');
 Route::get('publicacaoByID/{idPublication}', 'ApiController@publicacaoByID');
+
+Route::get('Graficos/', 'ApiController@graficos');
+Route::get('graficos/', 'ApiController@graficos');

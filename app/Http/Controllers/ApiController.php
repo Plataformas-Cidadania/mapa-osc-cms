@@ -228,5 +228,13 @@ class ApiController extends Controller
         return $row;
     }
 
+    public function graficos(){
+
+
+        $graficos = \App\Grafico::select('tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas')->get();
+
+
+        return $graficos;
+    }
 
 }
