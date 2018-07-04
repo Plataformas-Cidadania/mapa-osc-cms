@@ -217,7 +217,6 @@ class ModuloController extends Controller
             }
         }
 
-
         $successFile = true;
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
