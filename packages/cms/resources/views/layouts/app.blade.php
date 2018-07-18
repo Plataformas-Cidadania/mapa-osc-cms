@@ -1,8 +1,9 @@
 <?php
-    $base_href = $_SERVER['HTTP_HOST'];
+    $base_href = config('app.url');
+    /*$base_href = $_SERVER['HTTP_HOST'];
     if(substr($base_href, 0,9)=='evbsb1052'){
         $base_href .= '/mapa-osc-cms/';
-    }
+    }*/
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,7 +17,7 @@
     <meta name="author" content="">
 
     <title>CMS - Nome do site</title>
-    <base href="http://{{$base_href}}">
+    <base href="{{$base_href}}">
 
     <!-- Bootstrap Core CSS -->
     <link href="assets-cms/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
