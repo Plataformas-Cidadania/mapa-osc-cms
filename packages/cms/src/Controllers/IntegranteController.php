@@ -162,7 +162,7 @@ class IntegranteController extends Controller
         if($data['removerImagem']){
             $data['integrante']['imagem'] = '';
             if(file_exists($this->pathImagem."/".$integrante->imagem)) {
-                unintegrante($this->pathImagem . "/" . $integrante->imagem);
+                unlink($this->pathImagem . "/" . $integrante->imagem);
             }
         }
 
@@ -200,7 +200,7 @@ class IntegranteController extends Controller
         if($data['removerImagem']){
             $data['integrante']['imagem'] = '';
             if(file_exists($this->pathImagem."/".$integrante->imagem)) {
-                unintegrante($this->pathImagem . "/" . $integrante->imagem);
+                unlink($this->pathImagem . "/" . $integrante->imagem);
             }
         }
 
@@ -208,7 +208,7 @@ class IntegranteController extends Controller
         if($data['removerArquivo']){
             $data['integrante']['arquivo'] = '';
             if(file_exists($this->pathArquivo."/".$integrante->arquivo)) {
-                unintegrante($this->pathArquivo . "/" . $integrante->arquivo);
+                unlink($this->pathArquivo . "/" . $integrante->arquivo);
             }
         }
 
@@ -262,7 +262,7 @@ class IntegranteController extends Controller
 
         if(!empty($integrante->arquivo)) {
             if (file_exists($this->pathArquivo . "/" . $integrante->arquivo)) {
-                unintegrante($this->pathArquivo . "/" . $integrante->arquivo);
+                unlink($this->pathArquivo . "/" . $integrante->arquivo);
             }
         }
 
