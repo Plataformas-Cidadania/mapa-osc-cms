@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTiposTable extends Migration
+class CreateTiposGraficosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateTiposTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos', function (Blueprint $table) {
+        Schema::create('tipos_graficos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('imagem');
             $table->string('titulo');
             $table->text('arquivo');
+            $table->integer('status')->default(0);
             $table->integer('cmsuser_id')->unsigned();
             $table->foreign('cmsuser_id')->references('id')->on('cms_users')->onDelete('restrict');
             $table->timestamps();
@@ -30,6 +31,6 @@ class CreateTiposTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tipos');
+        Schema::drop('tipos_graficos');
     }
 }

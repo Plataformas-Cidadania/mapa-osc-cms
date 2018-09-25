@@ -115,6 +115,7 @@
                                 <div>
                                     {{--<a href="cms/items/<% grafico.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
                                     <a href="cms/grafico/<% grafico.id_analise %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
+                                    <a  ng-class="<% grafico.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(grafico.id_analise);"></i></a>&nbsp;&nbsp;
                                     <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(grafico.id_analise, grafico.tx_programa, null)"></i></a>
                                 </div>
                             </td>

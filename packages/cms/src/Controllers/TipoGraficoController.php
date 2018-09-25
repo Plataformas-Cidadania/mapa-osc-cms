@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
-class TipoController extends Controller
+class TipoGraficoController extends Controller
 {
     
     
 
     public function __construct()
     {
-        $this->tipo = new \App\Tipo;
+        $this->tipoGrafico = new \App\TipoGrafico;
         $this->campos = [
             'imagem', 'titulo', 'arquivo', 'cmsuser_id',
         ];
-        $this->pathImagem = public_path().'/imagens/tipos';
+        $this->pathImagem = public_path().'/imagens/tipos-graficos';
         $this->sizesImagem = [
             'xs' => ['width' => 140, 'height' => 79],
             'sm' => ['width' => 480, 'height' => 270],
@@ -31,17 +31,17 @@ class TipoController extends Controller
         ];
         $this->widthOriginal = true;
 
-        $this->pathArquivo = public_path().'/arquivos/tipos';
+        $this->pathArquivo = public_path().'/arquivos/tipos-grafico';
     }
 
     function index()
     {
 
-        $tipos = \App\Tipo::all();
+        $tiposGraficos = \App\TipoGrafico::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
 
-        return view('cms::tipo.listar', ['tipos' => $tipos/*, 'idiomas' => $idiomas*/]);
+        return view('cms::tipo_grafico.listar', ['tipos' => $tiposGraficos/*, 'idiomas' => $idiomas*/]);
     }
 
     public function listar(Request $request)
@@ -53,14 +53,14 @@ class TipoController extends Controller
 
         $campos = explode(", ", $request->campos);
 
-        $tipos = DB::table('tipos')
+        $tiposGraficos = DB::table('tipos_graficos')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
             ])
             ->orderBy($request->ordem, $request->sentido)
             ->paginate($request->itensPorPagina);
-        return $tipos;
+        return $tiposGraficos;
     }
 
 
@@ -69,12 +69,14 @@ class TipoController extends Controller
 
         $data = $request->all();
 
-        $data['tipo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+
+
+        $data['tipoGrafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
-                $data['tipo'] += [$campo => ''];
+                $data['tipoGrafico'] += [$campo => ''];
             }
         }
 
@@ -88,7 +90,7 @@ class TipoController extends Controller
             $imagemCms = new ImagemCms();
             $successFile = $imagemCms->inserir($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal);
             if($successFile){
-                $data['tipo']['imagem'] = $filename;
+                $data['tipoGrafico']['imagem'] = $filename;
             }
         }
 
@@ -97,75 +99,32 @@ class TipoController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['tipo']['arquivo'] = $filenameArquivo;
+                $data['tipoGrafico']['arquivo'] = $filenameArquivo;
             }
         }
 
 
         if($successFile && $successArquivo){
-            return $this->tipo->create($data['tipo']);
+            return $this->tipoGrafico->create($data['tipoGrafico']);
         }else{
             return "erro";
         }
 
 
-        return $this->tipo->create($data['tipo']);
+        return $this->tipo->create($data['tipoGrafico']);
 
     }
 
     public function detalhar($id)
     {
-        $tipo = $this->tipo->where([
+        $tipoGrafico = $this->tipoGrafico->where([
             ['id', '=', $id],
         ])->firstOrFail();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
-        return view('cms::tipo.detalhar', ['tipo' => $tipo/*, 'idiomas' => $idiomas*/]);
+        return view('cms::tipo_grafico.detalhar', ['tipoGrafico' => $tipoGrafico/*, 'idiomas' => $idiomas*/]);
     }
 
-    /*public function alterar(Request $request, $id)
-    {
-        $data = $request->all();
-        $data['tipo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
-
-        //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
-        foreach($this->campos as $campo){
-            if(!array_key_exists($campo, $data)){
-                if($campo!='imagem'){
-                    $data['tipo'] += [$campo => ''];
-                }
-            }
-        }
-        $tipo = $this->tipo->where([
-            ['id', '=', $id],
-        ])->firstOrFail();
-
-        $file = $request->file('file');
-
-        if($file!=null){
-            $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
-            $imagemCms = new ImagemCms();
-            $success = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $tipo);
-            if($success){
-                $data['tipo']['imagem'] = $filename;
-                $tipo->update($data['tipo']);
-                return $tipo->imagem;
-            }else{
-                return "erro";
-            }
-        }
-
-        //remover imagem
-        if($data['removerImagem']){
-            $data['tipo']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$tipo->imagem)) {
-                unlink($this->pathImagem . "/" . $tipo->imagem);
-            }
-        }
-
-        $tipo->update($data['tipo']);
-        return "Gravado com sucesso";
-    }*/
 
     public function alterar(Request $request, $id)
     {
@@ -173,17 +132,17 @@ class TipoController extends Controller
 
         //return $data;
 
-        $data['tipo'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
+        $data['tipoGrafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem' && $campo!='arquivo'){
-                    $data['tipo'] += [$campo => ''];
+                    $data['tipoGrafico'] += [$campo => ''];
                 }
             }
         }
-        $tipo = $this->tipo->where([
+        $tipoGrafico = $this->tipoGrafico->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
@@ -193,17 +152,17 @@ class TipoController extends Controller
 
         //remover imagem
         if($data['removerImagem']){
-            $data['tipo']['imagem'] = '';
-            if(file_exists($this->pathImagem."/".$tipo->imagem)) {
-                unlink($this->pathImagem . "/" . $tipo->imagem);
+            $data['tipoGrafico']['imagem'] = '';
+            if(file_exists($this->pathImagem."/".$tipoGrafico->imagem)) {
+                unlink($this->pathImagem . "/" . $tipoGrafico->imagem);
             }
         }
 
 
         if($data['removerArquivo']){
-            $data['tipo']['arquivo'] = '';
-            if(file_exists($this->pathArquivo."/".$tipo->arquivo)) {
-                unlink($this->pathArquivo . "/" . $tipo->arquivo);
+            $data['tipoGrafico']['arquivo'] = '';
+            if(file_exists($this->pathArquivo."/".$tipoGrafico->arquivo)) {
+                unlink($this->pathArquivo . "/" . $tipoGrafico->arquivo);
             }
         }
 
@@ -212,9 +171,9 @@ class TipoController extends Controller
         if($file!=null){
             $filename = rand(1000,9999)."-".clean($file->getClientOriginalName());
             $imagemCms = new ImagemCms();
-            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $tipo);
+            $successFile = $imagemCms->alterar($file, $this->pathImagem, $filename, $this->sizesImagem, $this->widthOriginal, $tipoGrafico);
             if($successFile){
-                $data['tipo']['imagem'] = $filename;
+                $data['tipoGrafico']['imagem'] = $filename;
             }
         }
 
@@ -223,14 +182,14 @@ class TipoController extends Controller
             $filenameArquivo = rand(1000,9999)."-".clean($arquivo->getClientOriginalName());
             $successArquivo = $arquivo->move($this->pathArquivo, $filenameArquivo);
             if($successArquivo){
-                $data['tipo']['arquivo'] = $filenameArquivo;
+                $data['tipoGrafico']['arquivo'] = $filenameArquivo;
             }
         }
 
         if($successFile && $successArquivo){
 
-            $tipo->update($data['tipo']);
-            return $tipo->imagem;
+            $tipoGrafico->update($data['tipoGrafico']);
+            return $tipoGrafico->imagem;
         }else{
             return "erro";
         }
@@ -243,32 +202,32 @@ class TipoController extends Controller
     {
         //Auth::loginUsingId(2);
 
-        $tipo = $this->tipo->where([
+        $tipoGrafico = $this->tipo->where([
             ['id', '=', $id],
         ])->firstOrFail();
 
         //remover imagens        
-        if(!empty($tipo->imagem)){
+        if(!empty($tipoGrafico->imagem)){
             //remover imagens
             $imagemCms = new ImagemCms();
-            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $tipo);
+            $imagemCms->excluir($this->pathImagem, $this->sizesImagem, $tipoGrafico);
         }
 
 
-        if(!empty($tipo->arquivo)) {
-            if (file_exists($this->pathArquivo . "/" . $tipo->arquivo)) {
-                unlink($this->pathArquivo . "/" . $tipo->arquivo);
+        if(!empty($tipoGrafico->arquivo)) {
+            if (file_exists($this->pathArquivo . "/" . $tipoGrafico->arquivo)) {
+                unlink($this->pathArquivo . "/" . $tipoGrafico->arquivo);
             }
         }
 
-        $tipo->delete();
+        $tipoGrafico->delete();
 
     }
     public function status($id)
     {
-        $tipo_atual = DB::table('tipos')->where('id', $id)->first();
+        $tipo_atual = DB::table('tipos_graficos')->where('id', $id)->first();
         $status = $tipo_atual->status == 0 ? 1 : 0;
-        DB::table('tipos')->where('id', $id)->update(['status' => $status]);
+        DB::table('tipos_graficos')->where('id', $id)->update(['status' => $status]);
 
     }
 

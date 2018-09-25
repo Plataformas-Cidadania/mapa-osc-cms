@@ -230,9 +230,13 @@ class ApiController extends Controller
 
     public function graficos(){
 
-
         $graficos = \App\Grafico::select('tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas')->get();
 
+        return $graficos;
+    }
+    public function graficosSlug($slug){
+
+        $graficos = \App\Grafico::select('tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label')->where('slug', $slug)->where('status', 1)->get();
 
         return $graficos;
     }

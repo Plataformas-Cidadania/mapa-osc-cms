@@ -108,9 +108,20 @@
                 <li>
                     <a href="cms/publications"><i class="fa fa-fw fa-file-text-o"></i> Publicações</a>
                 </li>
+
                 <li>
-                    <a href="cms/graficos"><i class="fa fa-fw fa-file-text-o"></i> Gráficos</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Analise <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="cms/tipos-graficos">Tipo</a>
+                        </li>
+                        <li>
+                            <a href="cms/graficos"><i class="fa fa-fw fa-file-text-o"></i> Gráficos</a>
+                        </li>
+                    </ul>
                 </li>
+
+
                 {{--<li>
                     <a href="cms/equipe/1"><i class="fa fa-fw fa-user"></i> Equipe</a>
                 </li>--}}

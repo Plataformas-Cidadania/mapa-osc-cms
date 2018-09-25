@@ -11,6 +11,6 @@ class Grafico extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'configuracao', 'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'parametros', 'series', 'fontes',
+        'configuracao', 'tipo_grafico', 'titulo', 'legenda', 'titulo_colunas', 'legenda_x', 'legenda_y', 'parametros', 'series', 'fontes', 'inverter_label', 'slug',
     ];
 }

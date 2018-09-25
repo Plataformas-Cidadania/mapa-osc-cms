@@ -20,7 +20,7 @@ class GraficoController extends Controller
     {
         $this->grafico = new \App\Grafico;
         $this->campos = [
-            'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas',
+            'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label', 'slug',
         ];
         $this->pathImagem = public_path().'/imagens/graficos';
         $this->sizesImagem = [
@@ -36,12 +36,12 @@ class GraficoController extends Controller
 
     function index()
     {
-
+        $tiposGraficos = \App\TipoGrafico::pluck('titulo', 'id')->all();
         $graficos = \App\Grafico::all();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
 
-        return view('cms::grafico.listar', ['graficos' => $graficos, 'idiomas' => $idiomas]);
+        return view('cms::grafico.listar', ['graficos' => $graficos, 'idiomas' => $idiomas, 'tiposGraficos' => $tiposGraficos]);
     }
 
     public function listar(Request $request)
@@ -72,8 +72,12 @@ class GraficoController extends Controller
         $data['grafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
         //$data['grafico']['configuracao'] = json_encode(explode(',', $data['grafico']['configuracao']));
 
-        $data['grafico']['configuracao'] = "{'".str_replace(",", "','", $data['grafico']['configuracao'])."'}";
-        $data['grafico']['titulo_colunas'] = "{'".str_replace(",", "','", $data['grafico']['titulo_colunas'])."'}";
+        $data['grafico']['configuracao'] = "{'".str_replace("|", "','", $data['grafico']['configuracao'])."'}";
+        $data['grafico']['titulo_colunas'] = "{'".str_replace("|", "','", $data['grafico']['titulo_colunas'])."'}";
+
+        if(!array_key_exists('inverter_label', $data['grafico'])){
+            $data['grafico']['inverter_label'] = false;
+        }
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
@@ -119,15 +123,22 @@ class GraficoController extends Controller
 
     public function detalhar($id)
     {
-        $grafico = $this->grafico->select(DB::Raw("id_analise, array_to_string(configuracao, ',', '*') as configuracao, array_to_string(titulo_colunas, ',', '*') as titulo_colunas, tipo_grafico, titulo, legenda, legenda_x, legenda_y"))
+        $grafico = $this->grafico->select(DB::Raw("id_analise, array_to_string(configuracao, ',', '*') as configuracao, array_to_string(titulo_colunas, ',', '*') as titulo_colunas, tipo_grafico, titulo, legenda, legenda_x, legenda_y, inverter_label, slug"))
             ->where([
             ['id_analise', '=', $id],
         ])->firstOrFail();
+
+
+        $tiposGraficos = \App\TipoGrafico::pluck('titulo', 'id')->all();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
+        $grafico->configuracao = str_replace(",", "|", ($grafico->configuracao));
         $grafico->configuracao = str_replace("'", "", ($grafico->configuracao));
+        $grafico->titulo_colunas = str_replace(",", "|", ($grafico->titulo_colunas));
         $grafico->titulo_colunas = str_replace("'", "", ($grafico->titulo_colunas));
 
-        return view('cms::grafico.detalhar', ['grafico' => $grafico, 'idiomas' => $idiomas]);
+
+
+        return view('cms::grafico.detalhar', ['grafico' => $grafico, 'idiomas' => $idiomas, 'tiposGraficos' => $tiposGraficos]);
     }
 
     /*public function alterar(Request $request, $id)
@@ -182,9 +193,14 @@ class GraficoController extends Controller
 
         $data['grafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
+        $data['grafico']['configuracao'] = "{'".str_replace("|", "','", $data['grafico']['configuracao'])."'}";
+        $data['grafico']['titulo_colunas'] = "{'".str_replace("|", "','", $data['grafico']['titulo_colunas'])."'}";
 
-        $data['grafico']['configuracao'] = "{'".str_replace(",", "','", $data['grafico']['configuracao'])."'}";
-        $data['grafico']['titulo_colunas'] = "{'".str_replace(",", "','", $data['grafico']['titulo_colunas'])."'}";
+
+
+        if(!array_key_exists('inverter_label', $data['grafico'])){
+            $data['grafico']['inverter_label'] = false;
+        }
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
         foreach($this->campos as $campo){
@@ -276,7 +292,13 @@ class GraficoController extends Controller
 
     }
 
-    
+    public function status($id)
+    {
+        $tipo_atual = DB::table('portal.tb_analise')->where('id_analise', $id)->first();
+        $status = $tipo_atual->status == 0 ? 1 : 0;
+        DB::table('portal.tb_analise')->where('id_analise', $id)->update(['status' => $status]);
+
+    }
 
 
 }

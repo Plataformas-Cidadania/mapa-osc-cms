@@ -37,11 +37,11 @@
 | 
 | -------------------------------------------------------------------*/
 
-	
-	$config['img_path'] = '/'.env('DIRECTORY_FOLDER').'/imagens/geral'; // Relative to domain name
+	//$config['img_path'] = '/mapa-osc-cms/imagens/geral'; // Relative to domain name
+	$config['img_path'] = env('APP_DIRECTORY', '').'/imagens/geral'; // Relative to domain name
 	$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . $config['img_path']; // Physical path. [Usually works fine like this]
 
-
+//log_message('info', $config['img_path']);
 /*-------------------------------------------------------------------
 | 
 | Allowed image filetypes. Specifying something other, than image types will result in error. 

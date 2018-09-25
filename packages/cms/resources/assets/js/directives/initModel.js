@@ -14,11 +14,13 @@ cmsApp.directive('initModel', ['$compile', function($compile) {
                     element.attr('ng-init', attrs.ngModel+"='"+element[0].value+"'");
                 }
             }else if(element.context.type=='checkbox'){
+                console.log(element.context.checked);
                 element.attr('ng-init', attrs.ngModel+"="+element.context.checked);
             }else if(element.context.type=='number'){
                 element.attr('ng-init', attrs.ngModel+"="+element[0].value);
             }else{
                 //outro tipo diferente de radio
+                console.log(element[0].value);
                 element.attr('ng-init', attrs.ngModel+"='"+element[0].value+"'");
             }
             element.attr('ng-model', attrs.initModel);
@@ -27,3 +29,4 @@ cmsApp.directive('initModel', ['$compile', function($compile) {
         }
     };
 }]);
+

@@ -2,8 +2,6 @@
 
 
 @section('content')
-<?php echo basename(__DIR__);?>
-
     {!! Html::script('assets-cms/js/controllers/alterarSettingCtrl.js') !!}
     <div ng-controller="alterarSettingCtrl">
         <div class="box-padrao text-center">
