@@ -7,7 +7,7 @@ cmsApp.controller('graficoCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id_analise, titulo";
+    $scope.campos = "id_analise, titulo, status";
     $scope.campoPesquisa = "titulo";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
@@ -184,6 +184,29 @@ cmsApp.controller('graficoCtrl', ['$scope', '$http', 'Upload', '$timeout', funct
         });
     };
     //////////////////////////////////
+    //////////////////////////////////
+    $scope.status = function(id){
+        console.log(id);
+        $scope.mensagemStatus = '';
+        $scope.idStatus = '';
+        $scope.processandoStatus = true;
+        $http({
+            url: 'cms/status-grafico/'+id,
+            method: 'GET'
+        }).success(function(data, status, headers, config){
+            //console.log(data);
+            $scope.processandoStatus = false;
+            //$scope.excluido = true;
+            $scope.mensagemStatus = 'color-success';
+            $scope.idStatus = id;
+            listarGraficos();
+        }).error(function(data){
+            $scope.message = "Ocorreu um erro: "+data;
+            $scope.processandoStatus = false;
+            $scope.mensagemStatus = "Erro ao tentar status!";
+        });
+    };
+
 
 
 }]);

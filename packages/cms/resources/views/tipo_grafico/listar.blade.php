@@ -1,50 +1,46 @@
 @extends('cms::layouts.app')
 
 @section('content')
-    {!! Html::script('assets-cms/js/controllers/graficoCtrl.js') !!}
+    {!! Html::script('assets-cms/js/controllers/tipoGraficoCtrl.js') !!}
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-    <div ng-controller="graficoCtrl">
+    <div ng-controller="tipoGraficoCtrl">
         <div class="box-padrao">
-            <h1><i class="fa fa-grafico" aria-hidden="true"></i>&nbsp;Graficos</h1>
-            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo Grafico</button>
+            <h1><i class="fa fa-tipo" aria-hidden="true"></i>&nbsp;Tipos de Gráficos</h1>
+            <button class="btn btn-primary" ng-click="mostrarForm=!mostrarForm" ng-show="!mostrarForm">Novo tipo de gráfico</button>
             <button class="btn btn-warning" ng-click="mostrarForm=!mostrarForm" ng-show="mostrarForm">Cancelar</button>
             <br><br>
             <div ng-show="mostrarForm">
                 <span class="texto-obrigatorio" ng-show="form.$invalid">* campos obrigatórios</span><br><br>
                 {!! Form::open(['name' =>'form']) !!}
-
-
-                <div style="display: none;">
-                    <div class="container-thumb">
-                        <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
-                             ng-show="!picFile" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
-                        <img  ngf-thumbnail="picFile" class="thumb">
-                    </div>
-                    <br>
-                    <span class="btn btn-primary btn-file" ng-show="!picFile">
-                        Escolher imagem <input  type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
-                    </span>
-                    <button class="btn btn-danger" ng-click="picFile = null" ng-show="picFile" type="button">Remover Imagem</button>
-                    <i ng-show="form.file.$error.maxSize || form.fileDrop.$error.maxSize" style="margin-left: 10px;">
-                        Arquivo muito grande <% errorFile.size / 1000000|number:1 %>MB: máximo 2MB
-                        <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
-                    </i>
-
-                    <br><br>
-
-                    <span class="btn btn-primary btn-file" ng-show="!fileArquivo">
-                        Escolher Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
-                    </span>
-                    <a ng-show="fileArquivo"><% fileArquivo.name %></a>
-
-
-                    <br><br>
+                <div class="container-thumb" style="display: none;">
+                    <div class="box-thumb" name="fileDrop" ngf-drag-over-class="'box-thumb-hover'" ngf-drop ngf-select ng-model="picFile"
+                         ng-show="!picFile" accept="image/*" ngf-max-size="2MB">Solte uma imagem aqui!</div>
+                    <img  ngf-thumbnail="picFile" class="thumb">
                 </div>
-                @include('cms::grafico._form')
+                {{--<br>--}}
+                <span class="btn btn-primary btn-file" ng-show="!picFile" style="display: none;">
+                    Escolher imagem <input  type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+                </span>
+                <button class="btn btn-danger" ng-click="picFile = null" ng-show="picFile" type="button">Remover Imagem</button>
+                <i ng-show="form.file.$error.maxSize || form.fileDrop.$error.maxSize" style="margin-left: 10px;">
+                    Arquivo muito grande <% errorFile.size / 1000000|number:1 %>MB: máximo 2MB
+                    <div class="btn btn-danger" ng-click="limparImagem()">Cancelar</div>
+                </i>
+
+                {{--<br><br>--}}
+
+                <span class="btn btn-primary btn-file" ng-show="!fileArquivo" style="display: none;">
+                    Escolher Arquivo <input  type="file" ngf-select ng-model="fileArquivo" name="fileArquivo" accept="application/pdf,.zip,.rar,.doc,.docx,.xlsx,.xls" ngf-max-size="100MB" ngf-model-invalid="errorFile">
+                </span>
+                <a ng-show="fileArquivo"><% fileArquivo.name %></a>
+
+
+                {{--<br><br>--}}
+                @include('cms::tipo_grafico._form')
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
@@ -80,47 +76,42 @@
                         <input class="form-control" type="text" ng-model="dadoPesquisa" placeholder="Faça sua busca"/>
                     </div>
                     <br>
-                    <div><% mensagemGraficor %></div>
+                    <div><% mensagemError %></div>
                     <div ng-show="processandoListagem"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                     <h2 class="tabela_vazia" ng-show="!processandoListagem && totalItens==0">Nenhum registro encontrado!</h2>
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id_analise')" style="graficor:pointer;">
+                            <th ng-click="ordernarPor('id')" style="tipor:pointer;">
                                 Id
-                                <i ng-if="ordem=='id_analise' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='id_analise' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                                <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
-                           {{-- <th>Imagem</th>--}}
-                            <th ng-click="ordernarPor('grafico')" style="graficor:pointer;">
-                                Título
-                                <i ng-if="ordem=='grafico' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='grafico' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                            {{--<th>Imagem</th>--}}
+                            <th ng-click="ordernarPor('tipo')" style="tipor:pointer;">
+                                Tipo
+                                <i ng-if="ordem=='tipo' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='tipo' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
-                            {{--<th ng-click="ordernarPor('dt_vencimento')" style="graficor:pointer;">
-                                Vencimento
-                                <i ng-if="ordem=='dt_vencimento' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='dt_vencimento' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
-                            </th>--}}
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="grafico in graficos">
-                            <td><% grafico.id_analise %></td>
-                            {{--<td><img ng-show="grafico.imagem" ng-src="imagens/graficos/xs-<% grafico.imagem %>" width="60"></td>--}}
-                            <td><a href="cms/grafico/<% grafico.id_analise %>"><% grafico.titulo %></a></td>
-                            {{--<td><a href="cms/grafico/<% grafico.id_analise %>"><% grafico.dt_vencimento | date: 'dd/MM/yyyy' %></a></td>--}}
+                        <tr ng-repeat="tipoGrafico in tiposGraficos">
+                            <td><% tipoGrafico.id %></td>
+                           {{-- <td><img ng-show="tipo.imagem" ng-src="imagens/tipos/xs-<% tipo.imagem %>" width="60"></td>--}}
+                            <td><a href="cms/tipo-grafico/<% tipoGrafico.id %>"><% tipoGrafico.titulo %></a></td>
                             <td class="text-right">
                                 <div>
-                                    {{--<a href="cms/items/<% grafico.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
-                                    <a href="cms/grafico/<% grafico.id_analise %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;
-                                    <a  ng-class="<% grafico.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(grafico.id_analise);"></i></a>&nbsp;&nbsp;
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(grafico.id_analise, grafico.tx_programa, null)"></i></a>
+                                    {{--<a href="cms/items/<% tipo.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
+                                    <a href="cms/tipo/<% tipoGrafico.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;{{--<% mensagemStatus %><% idStatus %>--}}
+                                    <a  ng-class="<% tipoGrafico.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(tipoGrafico.id);"></i></a>&nbsp;&nbsp;
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(tipoGrafico.id, tipoGrafico.titulo, tipoGrafico.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -159,8 +150,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-3" ng-if="imagemExcluir">
-                                <img  ng-src="imagens/graficos/xs-<% imagemExcluir %>" width="100">
+                            <div class="col-md-3">
+                                <img  ng-src="imagens/tipos-graficos/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
                                 <p><% tituloExcluir %></p>

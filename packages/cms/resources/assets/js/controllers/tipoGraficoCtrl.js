@@ -1,6 +1,6 @@
-cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
+cmsApp.controller('tipoGraficoCtrl', ['$scope', '$http', 'Upload', '$timeout', function($scope, $http, Upload, $timeout){
     
-    $scope.modulos = [];
+    $scope.tiposGraficos = [];
     $scope.currentPage = 1;
     $scope.lastPage = 0;
     $scope.totalItens = 0;
@@ -17,25 +17,25 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
 
     $scope.$watch('currentPage', function(){
         if($listar){
-            listarModulos();
+            listarTiposGraficos();
         }
     });
     $scope.$watch('itensPerPage', function(){
         if($listar){
-            listarModulos();
+            listarTiposGraficos();
         }
     });
     $scope.$watch('dadoPesquisa', function(){
         if($listar){
-            listarModulos();
+            listarTiposGraficos();
         }
     });
 
 
-    var listarModulos = function(){
+    var listarTiposGraficos = function(){
         $scope.processandoListagem = true;
         $http({
-            url: 'cms/listar-modulos',
+            url: 'cms/listar-tipos-graficos',
             method: 'GET',
             params: {
                 page: $scope.currentPage,
@@ -47,7 +47,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
                 sentido: $scope.sentidoOrdem
             }
         }).success(function(data, status, headers, config){
-            $scope.modulos = data.data;
+            $scope.tiposGraficos = data.data;
             $scope.lastPage = data.last_page;
             $scope.totalItens = data.total;
             $scope.primeiroDaPagina = data.from;
@@ -72,7 +72,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             $scope.sentidoOrdem = "asc";
         }
 
-        listarModulos();
+        listarTiposGraficos();
     };
 
     $scope.validar = function(){
@@ -80,7 +80,7 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     };
     
 
-    listarModulos();
+    listarTiposGraficos();
 
     //INSERIR/////////////////////////////
 
@@ -95,10 +95,10 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
         if(file==null && arquivo==null){
             $scope.processandoInserir = true;
 
-            //console.log($scope.modulo);
-            $http.post("cms/inserir-modulo", {modulo: $scope.modulo}).success(function (data){
-                 listarModulos();
-                 delete $scope.modulo;//limpa o form
+            //console.log($scope.tipo);
+            $http.post("cms/inserir-tipo-grafico", {tipoGrafico: $scope.tipoGrafico}).success(function (data){
+                listarTiposGraficos();
+                 delete $scope.tipoGrafico;//limpa o form
                 $scope.mensagemInserir =  "Gravado com sucesso!";
                 $scope.processandoInserir = false;
              }).error(function(data){
@@ -109,17 +109,17 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
 
 
             Upload.upload({
-                url: 'cms/inserir-modulo',
-                data: {modulo: $scope.modulo, file: file, arquivo: arquivo},
+                url: 'cms/inserir-tipo-grafico',
+                data: {tipoGrafico: $scope.tipoGrafico, file: file, arquivo: arquivo},
             }).then(function (response) {
                 $timeout(function () {
                     $scope.result = response.data;
                 });
-                console.log(response.data);
-                delete $scope.modulo;//limpa o form
+                //console.log(response.data);
+                delete $scope.tipoGrafico;//limpa o form
                 $scope.picFile = null;//limpa o file
                 $scope.fileArquivo = null;//limpa o file
-                listarModulos();
+                listarTiposGraficos();
                 $scope.mensagemInserir =  "Gravado com sucesso!";
             }, function (response) {
                 console.log(response.data);
@@ -161,28 +161,28 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     $scope.excluir = function(id){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-modulo/'+id,
+            url: 'cms/excluir-tipo-grafico/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);
             $scope.processandoExcluir = false;
             $scope.excluido = true;
             $scope.mensagemExcluido = "Excluído com sucesso!";
-            listarModulos();
+            listarTiposGraficos();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoExcluir = false;
             $scope.mensagemExcluido = "Erro ao tentar excluir!";
         });
     };
-    //////////////////////////////////
+
     $scope.status = function(id){
         //console.log(id);
         $scope.mensagemStatus = '';
         $scope.idStatus = '';
         $scope.processandoStatus = true;
         $http({
-            url: 'cms/status-modulo/'+id,
+            url: 'cms/status-tipo-grafico/'+id,
             method: 'GET'
         }).success(function(data, status, headers, config){
             //console.log(data);
@@ -190,13 +190,13 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
             //$scope.excluido = true;
             $scope.mensagemStatus = 'color-success';
             $scope.idStatus = id;
-            listarModulos();
+            listarTiposGraficos();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;
             $scope.processandoStatus = false;
             $scope.mensagemStatus = "Erro ao tentar status!";
         });
     };
+    //////////////////////////////////
 
 }]);
-

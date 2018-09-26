@@ -74,6 +74,15 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/excluir-tipo/{id}', 'Cms\Controllers\TipoController@excluir');
         Route::get('/cms/status-tipo/{id}', 'Cms\Controllers\TipoController@status');
 
+        //TIPOS GRAFICOS
+        Route::get('/cms/tipos-graficos', 'Cms\Controllers\TipoGraficoController@index');
+        Route::get('/cms/listar-tipos-graficos', 'Cms\Controllers\TipoGraficoController@listar');
+        Route::post('/cms/inserir-tipo-grafico', 'Cms\Controllers\TipoGraficoController@inserir');
+        Route::get('/cms/tipo-grafico/{id}', 'Cms\Controllers\TipoGraficoController@detalhar');
+        Route::post('/cms/alterar-tipo-grafico/{id}', 'Cms\Controllers\TipoGraficoController@alterar');
+        Route::get('/cms/excluir-tipo-grafico/{id}', 'Cms\Controllers\TipoGraficoController@excluir');
+        Route::get('/cms/status-tipo-grafico/{id}', 'Cms\Controllers\TipoGraficoController@status');
+
         //NOTICIAS
         Route::get('/cms/noticias', 'Cms\Controllers\NoticiaController@index');
         Route::get('/cms/listar-noticias', 'Cms\Controllers\NoticiaController@listar');
@@ -145,6 +154,7 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/grafico/{id}', 'Cms\Controllers\GraficoController@detalhar');
         Route::post('/cms/alterar-grafico/{id}', 'Cms\Controllers\GraficoController@alterar');
         Route::get('/cms/excluir-grafico/{id}', 'Cms\Controllers\GraficoController@excluir');
+        Route::get('/cms/status-grafico/{id}', 'Cms\Controllers\GraficoController@status');
 
         //MROSCS
         Route::get('/cms/mroscs', 'Cms\Controllers\MroscController@index');
