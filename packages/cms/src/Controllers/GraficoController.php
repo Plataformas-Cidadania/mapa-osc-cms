@@ -20,7 +20,15 @@ class GraficoController extends Controller
     {
         $this->grafico = new \App\Grafico;
         $this->campos = [
-            'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label', 'slug',
+            'tipo_grafico' => '',
+            'titulo' => '',
+            'legenda' => '',
+            'legenda_x' => '',
+            'legenda_y' => '',
+            'configuracao' => null,
+            'titulo_colunas' => null,
+            'inverter_label' => '',
+            'slug' => '',
         ];
         $this->pathImagem = public_path().'/imagens/graficos';
         $this->sizesImagem = [
@@ -72,17 +80,20 @@ class GraficoController extends Controller
         $data['grafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
         //$data['grafico']['configuracao'] = json_encode(explode(',', $data['grafico']['configuracao']));
 
-        $data['grafico']['configuracao'] = "{'".str_replace("|", "','", $data['grafico']['configuracao'])."'}";
-        $data['grafico']['titulo_colunas'] = "{'".str_replace("|", "','", $data['grafico']['titulo_colunas'])."'}";
-
+        if(array_key_exists('configuracao', $data['grafico'])) {
+            $data['grafico']['configuracao'] = "{'" . str_replace("|", "','", $data['grafico']['configuracao']) . "'}";
+        }
+        if(array_key_exists('titulo_colunas', $data['grafico'])) {
+            $data['grafico']['titulo_colunas'] = "{'" . str_replace("|", "','", $data['grafico']['titulo_colunas']) . "'}";
+        }
         if(!array_key_exists('inverter_label', $data['grafico'])){
             $data['grafico']['inverter_label'] = false;
         }
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
-        foreach($this->campos as $campo){
+        foreach($this->campos as $campo => $value){
             if(!array_key_exists($campo, $data)){
-                $data['grafico'] += [$campo => ''];
+                $data['grafico'] += [$campo => $value];
             }
         }
 
@@ -193,9 +204,14 @@ class GraficoController extends Controller
 
         $data['grafico'] += ['cmsuser_id' => auth()->guard('cms')->user()->id];//adiciona id do usuario
 
-        $data['grafico']['configuracao'] = "{'".str_replace("|", "','", $data['grafico']['configuracao'])."'}";
-        $data['grafico']['titulo_colunas'] = "{'".str_replace("|", "','", $data['grafico']['titulo_colunas'])."'}";
-
+        //$data['grafico']['configuracao'] = "{'".str_replace("|", "','", $data['grafico']['configuracao'])."'}";
+        //$data['grafico']['titulo_colunas'] = "{'".str_replace("|", "','", $data['grafico']['titulo_colunas'])."'}";
+        if(array_key_exists('configuracao', $data['grafico'])) {
+            $data['grafico']['configuracao'] = "{'" . str_replace("|", "','", $data['grafico']['configuracao']) . "'}";
+        }
+        if(array_key_exists('titulo_colunas', $data['grafico'])) {
+            $data['grafico']['titulo_colunas'] = "{'" . str_replace("|", "','", $data['grafico']['titulo_colunas']) . "'}";
+        }
 
 
         if(!array_key_exists('inverter_label', $data['grafico'])){
@@ -203,10 +219,10 @@ class GraficoController extends Controller
         }
 
         //verifica se o index do campo existe no array e caso não exista inserir o campo com valor vazio.
-        foreach($this->campos as $campo){
+        foreach($this->campos as $campo => $value){
             if(!array_key_exists($campo, $data)){
                 if($campo!='imagem' && $campo!='arquivo'){
-                    $data['grafico'] += [$campo => ''];
+                    $data['grafico'] += [$campo => $value];
                 }
             }
         }
