@@ -142,9 +142,9 @@ class GraficoController extends Controller
 
         $tiposGraficos = \App\TipoGrafico::pluck('titulo', 'id')->all();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
-        $grafico->configuracao = str_replace(",", "|", ($grafico->configuracao));
+        $grafico->configuracao = str_replace("','", "'|'", ($grafico->configuracao));
         $grafico->configuracao = str_replace("'", "", ($grafico->configuracao));
-        $grafico->titulo_colunas = str_replace(",", "|", ($grafico->titulo_colunas));
+        $grafico->titulo_colunas = str_replace("','", "'|'", ($grafico->titulo_colunas));
         $grafico->titulo_colunas = str_replace("'", "", ($grafico->titulo_colunas));
 
 
