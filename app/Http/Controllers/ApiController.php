@@ -236,7 +236,7 @@ class ApiController extends Controller
     }
     public function graficosSlug($slug){
 
-        $graficos = \App\Grafico::select('tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label')->where('slug', $slug)->where('status', 1)->get();
+        $graficos = \App\Grafico::select('id_analise', 'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label')->where('slug', $slug)->where('status', 1)->get();
 
         return $graficos;
     }
