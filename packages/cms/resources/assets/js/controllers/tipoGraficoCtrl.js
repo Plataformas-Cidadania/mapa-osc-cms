@@ -7,11 +7,11 @@ cmsApp.controller('tipoGraficoCtrl', ['$scope', '$http', 'Upload', '$timeout', f
     $scope.maxSize = 5;
     $scope.itensPerPage = 10;
     $scope.dadoPesquisa = '';
-    $scope.campos = "id, titulo, imagem, status";
-    $scope.campoPesquisa = "titulo";
+    $scope.campos = "id_grafico, nome_tipo_grafico, status";
+    $scope.campoPesquisa = "nome_tipo_grafico";
     $scope.processandoListagem = false;
     $scope.processandoExcluir = false;
-    $scope.ordem = "titulo";
+    $scope.ordem = "nome_tipo_grafico";
     $scope.sentidoOrdem = "asc";
     var $listar = false;//para impedir de carregar o conteúdo dos watchs no carregamento da página.
 
@@ -150,18 +150,18 @@ cmsApp.controller('tipoGraficoCtrl', ['$scope', '$http', 'Upload', '$timeout', f
     /////////////////////////////////
 
     //EXCLUIR/////////////////////////
-    $scope.perguntaExcluir = function (id, titulo, imagem){
-        $scope.idExcluir = id;
-        $scope.tituloExcluir = titulo;
+    $scope.perguntaExcluir = function (id_grafico, nome_tipo_grafico, imagem){
+        $scope.idExcluir = id_grafico;
+        $scope.nome_tipo_graficoExcluir = nome_tipo_grafico;
         $scope.imagemExcluir = imagem;
         $scope.excluido = false;
         $scope.mensagemExcluido = "";
     }
 
-    $scope.excluir = function(id){
+    $scope.excluir = function(id_grafico){
         $scope.processandoExcluir = true;
         $http({
-            url: 'cms/excluir-tipo-grafico/'+id,
+            url: 'cms/excluir-tipo-grafico/'+id_grafico,
             method: 'GET'
         }).success(function(data, status, headers, config){
             console.log(data);
@@ -176,13 +176,13 @@ cmsApp.controller('tipoGraficoCtrl', ['$scope', '$http', 'Upload', '$timeout', f
         });
     };
 
-    $scope.status = function(id){
+    $scope.status = function(id_grafico){
         //console.log(id);
         $scope.mensagemStatus = '';
         $scope.idStatus = '';
         $scope.processandoStatus = true;
         $http({
-            url: 'cms/status-tipo-grafico/'+id,
+            url: 'cms/status-tipo-grafico/'+id_grafico,
             method: 'GET'
         }).success(function(data, status, headers, config){
             //console.log(data);

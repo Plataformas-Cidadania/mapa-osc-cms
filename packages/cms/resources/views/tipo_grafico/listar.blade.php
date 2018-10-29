@@ -98,15 +98,15 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="tipoGrafico in tiposGraficos">
-                            <td><% tipoGrafico.id %></td>
+                            <td><% tipoGrafico.id_grafico %></td>
                            {{-- <td><img ng-show="tipo.imagem" ng-src="imagens/tipos/xs-<% tipo.imagem %>" width="60"></td>--}}
-                            <td><a href="cms/tipo-grafico/<% tipoGrafico.id %>"><% tipoGrafico.titulo %></a></td>
+                            <td><a href="cms/tipo-grafico/<% tipoGrafico.id_grafico %>"><% tipoGrafico.nome_tipo_grafico %></a></td>
                             <td class="text-right">
                                 <div>
                                     {{--<a href="cms/items/<% tipo.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
-                                    <a href="cms/tipo/<% tipoGrafico.id %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;{{--<% mensagemStatus %><% idStatus %>--}}
-                                    <a  ng-class="<% tipoGrafico.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(tipoGrafico.id);"></i></a>&nbsp;&nbsp;
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(tipoGrafico.id, tipoGrafico.titulo, tipoGrafico.imagem)"></i></a>
+                                    <a href="cms/tipo/<% tipoGrafico.id_grafico %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;{{--<% mensagemStatus %><% idStatus %>--}}
+                                    <a  ng-class="<% tipoGrafico.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(tipoGrafico.id_grafico);"></i></a>&nbsp;&nbsp;
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(tipoGrafico.id, tipoGrafico.nome_tipo_grafico, tipoGrafico.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -154,7 +154,7 @@
                                 <img  ng-src="imagens/tipos-graficos/xs-<% imagemExcluir %>" width="100">
                             </div>
                             <div class="col-md-9">
-                                <p><% tituloExcluir %></p>
+                                <p><% nome_tipo_graficoExcluir %></p>
                             </div>
                         </div>
                         <div ng-show="processandoExcluir"><i class="fa fa-spinner fa-spin"></i> Processando...</div>

@@ -20,7 +20,8 @@ class TipoGraficoController extends Controller
     {
         $this->tipoGrafico = new \App\TipoGrafico;
         $this->campos = [
-            'imagem', 'titulo', 'arquivo', 'cmsuser_id',
+            //'imagem', 'titulo', 'arquivo', 'cmsuser_id',
+            'nome_tipo_grafico',
         ];
         $this->pathImagem = public_path().'/imagens/tipos-graficos';
         $this->sizesImagem = [
@@ -53,7 +54,7 @@ class TipoGraficoController extends Controller
 
         $campos = explode(", ", $request->campos);
 
-        $tiposGraficos = DB::table('tipos_graficos')
+        $tiposGraficos = DB::table('syst.tb_tipo_grafico')
             ->select($campos)
             ->where([
                 [$request->campoPesquisa, 'ilike', "%$request->dadoPesquisa%"],
@@ -115,10 +116,10 @@ class TipoGraficoController extends Controller
 
     }
 
-    public function detalhar($id)
+    public function detalhar($id_grafico)
     {
         $tipoGrafico = $this->tipoGrafico->where([
-            ['id', '=', $id],
+            ['id_grafico', '=', $id_grafico],
         ])->firstOrFail();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
@@ -126,7 +127,7 @@ class TipoGraficoController extends Controller
     }
 
 
-    public function alterar(Request $request, $id)
+    public function alterar(Request $request, $id_grafico)
     {
         $data = $request->all();
 
@@ -143,7 +144,7 @@ class TipoGraficoController extends Controller
             }
         }
         $tipoGrafico = $this->tipoGrafico->where([
-            ['id', '=', $id],
+            ['id_grafico', '=', $id_grafico],
         ])->firstOrFail();
 
 
@@ -198,12 +199,12 @@ class TipoGraficoController extends Controller
         //return "Gravado com sucesso";
     }
 
-    public function excluir($id)
+    public function excluir($id_grafico)
     {
         //Auth::loginUsingId(2);
 
         $tipoGrafico = $this->tipo->where([
-            ['id', '=', $id],
+            ['id_grafico', '=', $id_grafico],
         ])->firstOrFail();
 
         //remover imagens        
@@ -223,11 +224,11 @@ class TipoGraficoController extends Controller
         $tipoGrafico->delete();
 
     }
-    public function status($id)
+    public function status($id_grafico)
     {
-        $tipo_atual = DB::table('tipos_graficos')->where('id', $id)->first();
+        $tipo_atual = DB::table('syst.tb_tipo_grafico')->where('id_grafico', $id_grafico)->first();
         $status = $tipo_atual->status == 0 ? 1 : 0;
-        DB::table('tipos_graficos')->where('id', $id)->update(['status' => $status]);
+        DB::table('tipos_graficos')->where('id_grafico', $id_grafico)->update(['status' => $status]);
 
     }
 
