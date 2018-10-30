@@ -228,7 +228,7 @@ class TipoGraficoController extends Controller
     {
         $tipo_atual = DB::table('syst.tb_tipo_grafico')->where('id_grafico', $id_grafico)->first();
         $status = $tipo_atual->status == 0 ? 1 : 0;
-        DB::table('tipos_graficos')->where('id_grafico', $id_grafico)->update(['status' => $status]);
+        DB::table('syst.tb_tipo_grafico')->where('id_grafico', $id_grafico)->update(['status' => $status]);
 
     }
 

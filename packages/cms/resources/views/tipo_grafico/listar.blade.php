@@ -82,10 +82,10 @@
                     <table ng-show="totalItens>0" class="table table-striped">
                         <thead>
                         <tr>
-                            <th ng-click="ordernarPor('id')" style="tipor:pointer;">
+                            <th ng-click="ordernarPor('id_grafico')" style="tipor:pointer;">
                                 Id
-                                <i ng-if="ordem=='id' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
-                                <i ng-if="ordem=='id' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
+                                <i ng-if="ordem=='id_grafico' && sentidoOrdem=='asc'" class="fa fa-angle-double-down"></i>
+                                <i ng-if="ordem=='id_grafico' && sentidoOrdem=='desc'" class="fa fa-angle-double-up"></i>
                             </th>
                             {{--<th>Imagem</th>--}}
                             <th ng-click="ordernarPor('tipo')" style="tipor:pointer;">
@@ -106,7 +106,7 @@
                                     {{--<a href="cms/items/<% tipo.id %>"><i class="fa fa-sitemap fa-2x" title="Itens"></i></a>&nbsp;&nbsp;--}}
                                     <a href="cms/tipo/<% tipoGrafico.id_grafico %>"><i class="fa fa-edit fa-2x" title="Editar"></i></a>&nbsp;&nbsp;{{--<% mensagemStatus %><% idStatus %>--}}
                                     <a  ng-class="<% tipoGrafico.status %> == 1 ? 'color-success' : 'color-success-inactive'"  style="cursor: pointer;"><i class="fa fa-check-circle fa-2x" aria-hidden="true" ng-click="status(tipoGrafico.id_grafico);"></i></a>&nbsp;&nbsp;
-                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(tipoGrafico.id, tipoGrafico.nome_tipo_grafico, tipoGrafico.imagem)"></i></a>
+                                    <a><i data-toggle="modal" data-target="#modalExcluir" class="fa fa-remove fa-2x" ng-click="perguntaExcluir(tipoGrafico.id_grafico, tipoGrafico.nome_tipo_grafico, tipoGrafico.imagem)"></i></a>
                                 </div>
                             </td>
                         </tr>

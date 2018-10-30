@@ -189,7 +189,7 @@ cmsApp.controller('tipoGraficoCtrl', ['$scope', '$http', 'Upload', '$timeout', f
             $scope.processandoStatus = false;
             //$scope.excluido = true;
             $scope.mensagemStatus = 'color-success';
-            $scope.idStatus = id;
+            $scope.idStatus = id_grafico;
             listarTiposGraficos();
         }).error(function(data){
             $scope.message = "Ocorreu um erro: "+data;

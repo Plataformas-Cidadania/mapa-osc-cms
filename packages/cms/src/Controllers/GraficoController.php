@@ -44,7 +44,7 @@ class GraficoController extends Controller
 
     function index()
     {
-        $tiposGraficos = \App\TipoGrafico::pluck('titulo', 'id')->all();
+        $tiposGraficos = \App\TipoGrafico::pluck('nome_tipo_grafico', 'id_grafico')->all();
         $graficos = \App\Grafico::all();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
@@ -140,7 +140,7 @@ class GraficoController extends Controller
         ])->firstOrFail();
 
 
-        $tiposGraficos = \App\TipoGrafico::pluck('titulo', 'id')->all();
+        $tiposGraficos = \App\TipoGrafico::pluck('nome_tipo_grafico', 'id_grafico')->all();
         $idiomas = \App\Idioma::lists('titulo', 'id')->all();
         $grafico->configuracao = str_replace("','", "'|'", ($grafico->configuracao));
         $grafico->configuracao = str_replace("'", "", ($grafico->configuracao));
