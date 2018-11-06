@@ -34,7 +34,7 @@
 
                 <br><br>
                 @include('cms::tipo_grafico._form')
-                <input type="hidden" name="id" ng-model="id" ng-init="id='{{$tipoGrafico->id}}'"/>
+                <input type="hidden" name="id" ng-model="id" ng-init="id='{{$tipoGrafico->id_grafico}}'"/>
                 <div class="row">
                     <div class="col-md-1 col-lg-1 col-xs-3">
                         <button class="btn btn-info" type="button" ng-click="alterar(picFile, fileArquivo)" ng-disabled="form.$invalid && form.tipoGrafico.$dirty">Salvar</button>

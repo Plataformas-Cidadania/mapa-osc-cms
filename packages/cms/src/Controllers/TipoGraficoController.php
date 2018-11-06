@@ -203,7 +203,9 @@ class TipoGraficoController extends Controller
     {
         //Auth::loginUsingId(2);
 
-        $tipoGrafico = $this->tipo->where([
+        //Log::info($id_grafico);
+
+        $tipoGrafico = $this->tipoGrafico->where([
             ['id_grafico', '=', $id_grafico],
         ])->firstOrFail();
 

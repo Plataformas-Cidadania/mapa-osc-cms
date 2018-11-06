@@ -79,7 +79,7 @@
                     <a href="cms/idiomas"><i class="fa fa-fw fa-building"></i> Idiomas</a>
                 </li>--}}
                 <li>
-                    <a href="cms/tipos"><i class="fa fa-fw fa-building"></i> Tipo</a>
+                    <a href="cms/tipos"><i class="fa fa-cubes" aria-hidden="true"></i> Tipo</a>
                 </li>
                 <li>
                     <a href="cms/modulos"><i class="fa fa-fw fa-book"></i> Modulos</a>
@@ -113,7 +113,7 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Analise <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="cms/tipos-graficos">Tipo</a>
+                            <a href="cms/tipos-graficos"><i class="fa fa-cubes" aria-hidden="true"></i> Tipo</a>
                         </li>
                         <li>
                             <a href="cms/graficos"><i class="fa fa-fw fa-file-text-o"></i> Gráficos</a>

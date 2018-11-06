@@ -194,7 +194,7 @@ class NoticiaController extends Controller
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
 
-	Log::info($request);
+
 
         //remover imagem
         if($data['removerImagem']){
