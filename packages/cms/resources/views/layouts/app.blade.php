@@ -1,8 +1,9 @@
 <?php
-    $base_href = $_SERVER['HTTP_HOST'];
+    $base_href = config('app.url');
+    /*$base_href = $_SERVER['HTTP_HOST'];
     if(substr($base_href, 0,9)=='evbsb1052'){
         $base_href .= '/mapa-osc-cms/';
-    }
+    }*/
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,7 +17,7 @@
     <meta name="author" content="">
 
     <title>CMS - Nome do site</title>
-    <base href="http://{{$base_href}}">
+    <base href="{{$base_href}}">
 
     <!-- Bootstrap Core CSS -->
     <link href="assets-cms/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -107,12 +108,26 @@
                 <li>
                     <a href="cms/publications"><i class="fa fa-fw fa-file-text-o"></i> Publicações</a>
                 </li>
+
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Analise <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="cms/tipos-graficos">Tipo</a>
+                        </li>
+                        <li>
+                            <a href="cms/graficos"><i class="fa fa-fw fa-file-text-o"></i> Gráficos</a>
+                        </li>
+                    </ul>
+                </li>
+
+
                 {{--<li>
                     <a href="cms/equipe/1"><i class="fa fa-fw fa-user"></i> Equipe</a>
                 </li>--}}
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Equipe <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse">
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-user"></i> Equipe <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo1" class="collapse">
                         <li>
                             <a href="cms/equipe/1">Descrição</a>
                         </li>

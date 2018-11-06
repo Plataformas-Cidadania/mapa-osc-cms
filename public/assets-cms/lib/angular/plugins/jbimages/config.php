@@ -1,4 +1,16 @@
 <?php
+require 'vendor/autoload.php';
+
+$log = new CI_Log();
+
+
+$dotenv = new \Dotenv\Dotenv(substr($_SERVER["DOCUMENT_ROOT"], 0, strlen($_SERVER["DOCUMENT_ROOT"])-7));
+$dotenv->load();
+
+
+//$log->write_log('error', getenv('APP_DIRECTORY'));
+
+
 /**
  * Justboil.me - a TinyMCE image upload plugin
  * jbimages/config.php
@@ -6,7 +18,7 @@
  * Released under Creative Commons Attribution 3.0 Unported License
  *
  * License: http://creativecommons.org/licenses/by/3.0/
- * Plugin info: http://justboil.me/
+ * Plugin info: http://justboil.me/v
  * Author: Viktor Kuzhelnyi
  *
  * Version: 2.3 released 23/06/2013
@@ -37,8 +49,9 @@
 | 
 | -------------------------------------------------------------------*/
 
-	
-	$config['img_path'] = '/imagens/geral'; // Relative to domain name
+	$config['img_path'] = getenv('APP_DIRECTORY').'/imagens/geral'; // Relative to domain name
+	//$config['img_path'] = '/imagens/geral'; // Relative to domain name
+	//log_message('info', $config['img_path']);
 	$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . $config['img_path']; // Physical path. [Usually works fine like this]
 
 

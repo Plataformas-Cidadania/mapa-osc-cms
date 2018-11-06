@@ -162,7 +162,7 @@ class ApoioController extends Controller
         if($data['removerImagem']){
             $data['apoio']['imagem'] = '';
             if(file_exists($this->pathImagem."/".$apoio->imagem)) {
-                unapoio($this->pathImagem . "/" . $apoio->imagem);
+                unlink($this->pathImagem . "/" . $apoio->imagem);
             }
         }
 
@@ -194,13 +194,13 @@ class ApoioController extends Controller
         $file = $request->file('file');
         $arquivo = $request->file('arquivo');
 
-	Log::info($request);
+
 
         //remover imagem
         if($data['removerImagem']){
             $data['apoio']['imagem'] = '';
             if(file_exists($this->pathImagem."/".$apoio->imagem)) {
-                unapoio($this->pathImagem . "/" . $apoio->imagem);
+                unlink($this->pathImagem . "/" . $apoio->imagem);
             }
         }
 
@@ -208,7 +208,7 @@ class ApoioController extends Controller
         if($data['removerArquivo']){
             $data['apoio']['arquivo'] = '';
             if(file_exists($this->pathArquivo."/".$apoio->arquivo)) {
-                unapoio($this->pathArquivo . "/" . $apoio->arquivo);
+                unlink($this->pathArquivo . "/" . $apoio->arquivo);
             }
         }
 
@@ -262,7 +262,7 @@ class ApoioController extends Controller
 
         if(!empty($apoio->arquivo)) {
             if (file_exists($this->pathArquivo . "/" . $apoio->arquivo)) {
-                unapoio($this->pathArquivo . "/" . $apoio->arquivo);
+                unlink($this->pathArquivo . "/" . $apoio->arquivo);
             }
         }
 

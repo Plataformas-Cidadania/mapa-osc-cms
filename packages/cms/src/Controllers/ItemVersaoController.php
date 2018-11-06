@@ -37,7 +37,7 @@ class ItemVersaoController extends Controller
     function index($versao_id)
     {
 
-        $integrantes = \App\Integrante::pluck('titulo', 'id')->all();
+        $integrantes = \App\Integrante::orderBy('titulo')->pluck('titulo', 'id')->all();
         $items = \App\ItemVersao::all();
         //$idiomas = \App\Idioma::lists('titulo', 'id')->all();
 
@@ -114,7 +114,7 @@ class ItemVersaoController extends Controller
 
     public function detalhar($id)
     {
-        $integrantes = \App\Integrante::pluck('titulo', 'id')->all();
+        $integrantes = \App\Integrante::orderBy('titulo')->pluck('titulo', 'id')->all();
         $item = $this->item->where([
             ['id', '=', $id],
         ])->firstOrFail();

@@ -228,5 +228,36 @@ class ApiController extends Controller
         return $row;
     }
 
+    public function graficos(){
+
+        $graficos = \App\Grafico::select('id_analise', 'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label')->where('status', 1)->get();
+
+        foreach($graficos as $grafico){
+            $grafico->configuracao = str_replace('{', '[', $grafico->configuracao);
+            $grafico->configuracao = str_replace('}', ']', $grafico->configuracao);
+        }
+
+        return $graficos;
+    }
+    /*public function graficosSlug($slug){
+
+        $graficos = \App\Grafico::select('id_analise', 'tipo_grafico', 'titulo', 'legenda', 'legenda_x', 'legenda_y', 'configuracao', 'titulo_colunas', 'inverter_label')->where('slug', $slug)->where('status', 1)->get();
+
+        return $graficos;
+    }*/
+    public function graficosSlug($slug)
+    {
+
+        $graficos = \App\Grafico::select('id_analise')->where('slug', $slug)->where('status', 1)->get();
+
+        $graficosId = [];
+
+        //return [$graficos];
+        foreach ($graficos as $grafico){
+           array_push($graficosId, $grafico->id_analise);
+        }
+
+        return $graficosId;
+    }
 
 }

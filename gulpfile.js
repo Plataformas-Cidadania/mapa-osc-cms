@@ -60,6 +60,10 @@ elixir(function(mix) {
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/tipoCtrl.js', 'public/assets-cms/js/controllers/tipoCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarTipoCtrl.js', 'public/assets-cms/js/controllers/alterarTipoCtrl.js');
 
+    //Tipos Graficos
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/tipoGraficoCtrl.js', 'public/assets-cms/js/controllers/tipoGraficoCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarTipoGraficoCtrl.js', 'public/assets-cms/js/controllers/alterarTipoGraficoCtrl.js');
+
     //Noticias
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/noticiaCtrl.js', 'public/assets-cms/js/controllers/noticiaCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarNoticiaCtrl.js', 'public/assets-cms/js/controllers/alterarNoticiaCtrl.js');
@@ -86,7 +90,11 @@ elixir(function(mix) {
     
     //Editais
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/editalCtrl.js', 'public/assets-cms/js/controllers/editalCtrl.js');
-    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarEditalCtrl.js', 'public/assets-cms/js/controllers/alterarEditalCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarEditalCtrl.js', 'public/assets-cms/js/controllers/alterarEditalCtrl.js'); 
+    
+    //Graficos
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/graficoCtrl.js', 'public/assets-cms/js/controllers/graficoCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarGraficoCtrl.js', 'public/assets-cms/js/controllers/alterarGraficoCtrl.js');
 
     //Items Modulos
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/itemCtrl.js', 'public/assets-cms/js/controllers/itemCtrl.js');

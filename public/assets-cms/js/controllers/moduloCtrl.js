@@ -199,3 +199,4 @@ cmsApp.controller('moduloCtrl', ['$scope', '$http', 'Upload', '$timeout', functi
     };
 
 }]);
+
