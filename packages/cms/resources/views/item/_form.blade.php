@@ -15,6 +15,6 @@ null, ['class'=>"form-control width-medio <% validar(item.idioma_id) %>", 'ng-mo
 {!! Form::textarea('descricao', null, ['class'=>"form-control width-grande <% validar(item.descricao) %>", 'ui-tinymce'=>'tinymceOptions', 'ng-model'=>'item.descricao', 'init-model'=>'item.descricao']) !!}<br>
 
 {!! Form::label('posicao', 'Posição ') !!}<br>
-{!! Form::text('posicao', null, ['class'=>"form-control width-grande <% validar(item.posicao) %>", 'ng-model'=>'item.posicao',  'init-model'=>'item.posicao', 'placeholder' => '']) !!}<br>
+{!! Form::text('posicao', null, ['class'=>"form-control width-grande <% validar(item.posicao) %>", 'ng-required'=>'true', 'ng-model'=>'item.posicao',  'init-model'=>'item.posicao', 'placeholder' => '']) !!}<br>
 
 
