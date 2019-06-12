@@ -68,6 +68,10 @@ elixir(function(mix) {
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/noticiaCtrl.js', 'public/assets-cms/js/controllers/noticiaCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarNoticiaCtrl.js', 'public/assets-cms/js/controllers/alterarNoticiaCtrl.js');
 
+    //Analises
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/analiseCtrl.js', 'public/assets-cms/js/controllers/analiseCtrl.js');
+    mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarAnaliseCtrl.js', 'public/assets-cms/js/controllers/alterarAnaliseCtrl.js');
+
     //Publications
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/publicationCtrl.js', 'public/assets-cms/js/controllers/publicationCtrl.js');
     mix.scripts('../../../packages/cms/resources/assets/js/controllers/alterarPublicationCtrl.js', 'public/assets-cms/js/controllers/alterarPublicationCtrl.js');

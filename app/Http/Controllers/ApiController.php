@@ -260,4 +260,18 @@ class ApiController extends Controller
         return $graficosId;
     }
 
+
+    public function analises(){
+        return \App\Analise::select('data as dt_analise', 'id as cd_analise', 'titulo as tx_titulo_analise', 'resumida as tx_resumo_analise', 'imagem as tx_link_img_analise', 'arquivo as tx_arquivo_analise', 'status')->where('status', 1)->get();
+    }
+
+    public function analiseByID($idAnalise){
+
+        $row = \App\Analise::select('titulo as tx_titulo_analise', 'descricao as tx_descricao_analise', 'data as dt_analise', 'arquivo as tx_arquivo_analise')->where('status', 1)->find($idAnalise);
+
+        $row->tx_descricao_analise = str_replace('/imagens/geral', env('APP_URL').'/imagens/geral', $row->tx_descricao_analise);
+
+        return $row;
+    }
+
 }

@@ -92,6 +92,15 @@ Route::group(['middleware' => 'cms'], function () {
         Route::get('/cms/excluir-noticia/{id}', 'Cms\Controllers\NoticiaController@excluir');
         Route::get('/cms/status-noticia/{id}', 'Cms\Controllers\NoticiaController@status');
 
+        //ANALISES
+        Route::get('/cms/analises', 'Cms\Controllers\AnaliseController@index');
+        Route::get('/cms/listar-analises', 'Cms\Controllers\AnaliseController@listar');
+        Route::post('/cms/inserir-analise', 'Cms\Controllers\AnaliseController@inserir');
+        Route::get('/cms/analise/{id}', 'Cms\Controllers\AnaliseController@detalhar');
+        Route::post('/cms/alterar-analise/{id}', 'Cms\Controllers\AnaliseController@alterar');
+        Route::get('/cms/excluir-analise/{id}', 'Cms\Controllers\AnaliseController@excluir');
+        Route::get('/cms/status-analise/{id}', 'Cms\Controllers\AnaliseController@status');
+
         //PUBLICATIONS
         Route::get('/cms/publications', 'Cms\Controllers\PublicationController@index');
         Route::get('/cms/listar-publications', 'Cms\Controllers\PublicationController@listar');

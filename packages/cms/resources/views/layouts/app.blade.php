@@ -97,6 +97,9 @@
                     <a href="cms/editais"><i class="fa fa-fw fa-file"></i> Editais</a>
                 </li>
                 <li>
+                    <a href="cms/analises"><i class="fa fa-fw fa-newspaper-o"></i> Análises</a>
+                </li>
+                <li>
                     <a href="cms/videos"><i class="fa fa-fw fa-video-camera"></i> Vídeos</a>
                 </li>
                 <li>
