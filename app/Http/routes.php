@@ -81,5 +81,6 @@ Route::get('graficos/', 'ApiController@graficos');
 Route::get('GraficosSlug/{slug}', 'ApiController@graficosSlug');
 Route::get('graficosSlug/{slug}', 'ApiController@graficosSlug');
 
-Route::get('analises', 'ApiController@analises');
+Route::get('Analises/', 'ApiController@analises');
+Route::get('analises/', 'ApiController@analises');
 Route::get('analiseByID/{idAnalise}', 'ApiController@analiseByID');
