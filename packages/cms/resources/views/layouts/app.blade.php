@@ -97,7 +97,7 @@
                     <a href="cms/editais"><i class="fa fa-fw fa-file"></i> Editais</a>
                 </li>
                 <li>
-                    <a href="cms/analises"><i class="fa fa-fw fa-newspaper-o"></i> Análises</a>
+                    <a href="cms/analises"><i class="fa fa-fw fa-newspaper-o"></i> Análises </a>
                 </li>
                 <li>
                     <a href="cms/videos"><i class="fa fa-fw fa-video-camera"></i> Vídeos</a>
@@ -113,7 +113,7 @@
                 </li>
 
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Analise <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-user"></i> Analise perfil<i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
                             <a href="cms/tipos-graficos"><i class="fa fa-cubes" aria-hidden="true"></i> Tipo</a>
