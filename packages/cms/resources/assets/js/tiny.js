@@ -5,7 +5,7 @@ var tinymceOptions = {
     selector: 'textarea',
     language : 'pt_BR',
     height: 400,
-    fullpage_default_encoding: 'UTF-8',
+    //fullpage_default_encoding: 'UTF-8',
     plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
