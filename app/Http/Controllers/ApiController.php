@@ -248,7 +248,7 @@ class ApiController extends Controller
     public function graficosSlug($slug)
     {
 
-        $graficos = \App\Grafico::select('id_analise')->where('slug', $slug)->where('status', 1)->get();
+        $graficos = \App\Grafico::select('id_analise')->where('slug', $slug)->where('status', 1)->orderBy('id_analise')->get();
 
         $graficosId = [];
 

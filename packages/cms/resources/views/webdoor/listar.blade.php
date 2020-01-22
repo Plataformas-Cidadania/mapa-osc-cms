@@ -100,7 +100,7 @@
                         <tbody>
                         <tr ng-repeat="webdoor in webdoors">
                             <td><% webdoor.id %></td>
-                            <td><img ng-show="webdoor.imagem" ng-src="/imagens/webdoors/xs-<% webdoor.imagem %>" width="60"></td>
+                            <td><img ng-show="webdoor.imagem" ng-src="imagens/webdoors/xs-<% webdoor.imagem %>" width="60"></td>
                             <td><a href="cms/webdoor/<% webdoor.id %>"><% webdoor.titulo %></a></td>
                             <td><a href="cms/webdoor/<% webdoor.id %>"><% webdoor.posicao %></a></td>
                             <td class="text-right">
