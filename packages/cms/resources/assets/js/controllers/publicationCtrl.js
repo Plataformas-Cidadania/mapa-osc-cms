@@ -91,9 +91,10 @@ cmsApp.controller('publicationCtrl', ['$scope', '$http', 'Upload', '$timeout', f
     $scope.inserir = function (file, arquivo){
 
         $scope.mensagemInserir = "";
+        $scope.processandoInserir = true;
 
         if(file==null && arquivo==null){
-            $scope.processandoInserir = true;
+
 
             //console.log($scope.publication);
             $http.post("cms/inserir-publication", {publication: $scope.publication}).success(function (data){
@@ -131,6 +132,7 @@ cmsApp.controller('publicationCtrl', ['$scope', '$http', 'Upload', '$timeout', f
                 $scope.fileArquivo = null;//limpa o file
                 listarPublications();
                 $scope.mensagemInserir =  "Gravado com sucesso!";
+                $scope.processandoInserir = false;
             }, function (response) {
                 console.log(response.data);
                 if (response.status > 0){

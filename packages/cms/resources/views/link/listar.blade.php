@@ -46,8 +46,8 @@
                         <button class="btn btn-info" type="button" ng-click="inserir(picFile, fileArquivo)" ng-disabled="form.$invalid">Salvar</button>
                     </div>
                     <div class="col-md-2 col-lg-2 col-xs-6">
-                        <span class="progress" ng-show="picFile.progress >= 0">
-                            <div style="width: <% picFile.progress %>%" ng-bind="picFile.progress + '%'"></div>
+                        <span class="progress" ng-show="progress >= 0">
+                            <div style="width: <% progress %>%" ng-bind="progress + '%'"></div>
                         </span>
                         <div ng-show="processandoInserir"><i class="fa fa-spinner fa-spin"></i> Processando...</div>
                         <div><% mensagemInserir %></div>
