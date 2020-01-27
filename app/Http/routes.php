@@ -19,6 +19,12 @@ Route::get('info123', function(){
     return view('info');
 });
 
+$proxy_url = getenv('PROXY_URL');
+
+if (!empty($proxy_url)) {
+    URL::forceRootUrl($proxy_url);
+}
+
 Route::get('Imprensa', 'ApiController@imprensa');
 Route::get('imprensa', 'ApiController@imprensa');
 
@@ -84,3 +90,4 @@ Route::get('graficosSlug/{slug}', 'ApiController@graficosSlug');
 Route::get('Analises/', 'ApiController@analises');
 Route::get('analises/', 'ApiController@analises');
 Route::get('analiseByID/{idAnalise}', 'ApiController@analiseByID');
+
